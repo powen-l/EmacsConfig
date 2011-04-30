@@ -161,3 +161,8 @@
                     :inherit 'tabbar-default
                     :box '(:line-width 2 :color "gray70")
                     )
+
+
+
+;; grep custom on window
+(setq grep-find-command '("e:/tools/emacs-23.3/bin/find.exe . -type f -exec grep -nH -e  {} NUL \";\"" . 62 ) )
