@@ -200,3 +200,8 @@
 	try-expand-line
 	try-complete-lisp-symbol-partially
 	try-complete-lisp-symbol))
+
+
+;; show column number in mode line
+(setq column-number-mode t)
+(setq global-mode-string (append global-mode-string  '("  [" default-directory "]") ))
