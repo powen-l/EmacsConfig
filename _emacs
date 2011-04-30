@@ -91,7 +91,7 @@
 (setq time-stamp-format "%:y-%02m-%02d %02H:%02M:%02S winterTTr")
 
 ;; encoding
-(set-language-environment 'Chinese-GB)
+(set-language-environment 'UTF-8)
 
 ;; change C-m and enter
 (global-set-key "\C-m" 'newline-and-indent)
@@ -166,3 +166,37 @@
 
 ;; grep custom on window
 (setq grep-find-command '("e:/tools/emacs-23.3/bin/find.exe . -type f -exec grep -nH -e  {} NUL \";\"" . 62 ) )
+
+
+;; setup startup window size
+(defun w32-restore-frame ()
+  "Restore a minimized frame"
+  (interactive)
+  (w32-send-sys-command 61728))
+
+(defun w32-maximize-frame ()
+  "Maximize the current frame"
+  (interactive)
+  (w32-send-sys-command 61488))
+
+(run-with-idle-timer 0.2 nil 'w32-send-sys-command 61488)
+
+
+;; using ibuffer
+(require 'ibuffer)
+(global-set-key (kbd "C-x C-b") 'ibuffer)
+
+;;
+(global-set-key [(meta ?/)] 'hippie-expand)
+(setq hippie-expand-try-functions-list 
+      '(try-expand-dabbrev
+	try-expand-dabbrev-visible
+	try-expand-dabbrev-all-buffers
+	try-expand-dabbrev-from-kill
+	try-complete-file-name-partially
+	try-complete-file-name
+	try-expand-all-abbrevs
+	try-expand-list
+	try-expand-line
+	try-complete-lisp-symbol-partially
+	try-complete-lisp-symbol))
