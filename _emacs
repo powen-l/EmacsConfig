@@ -73,7 +73,10 @@
 (setq next-line-add-newline t)
 
 ;; make the title infomation more useful
-(setq frame-title-format "%F@%f")
+(setq frame-title-format
+      '( (:eval (system-name) )
+        " >> "
+        "%f") )
 
 ;; setup up a big kill-ring, so i will never miss anything:-)
 (setq kill-ring-max 100)
@@ -165,7 +168,8 @@
 
 
 ;; grep custom on window
-(setq grep-find-command '("e:/tools/emacs-23.3/bin/find.exe . -type f -exec grep -nH -e  {} NUL \";\"" . 62 ) )
+(setq grep-find-command '("E:/Tools/emacs-23.3/bin/find.exe . -type f -exec E:/Tools/emacs-23.3/bin/grep.exe -nH -e  {} NUL \";\"" . 90 ) )
+(setq grep-command "E:/Tools/emacs-23.3/bin/grep.exe -nH -e ")
 
 
 ;; setup startup window size
@@ -205,3 +209,22 @@
 ;; show column number in mode line
 (setq column-number-mode t)
 (setq global-mode-string (append global-mode-string  '("  [" default-directory "]") ))
+;(setq-default mode-line-format
+;      '( "%e"
+;         " "
+;         mode-line-mule-info
+;         mode-line-client
+;         mode-line-modified
+;         mode-line-remote
+;         mode-line-frame-identification
+;         mode-line-buffer-identification
+;         mode-line-position
+;         (vc-mode vc-mode)
+;         "which func:"
+;         which-func-mode
+;         "   "
+;         mode-line-modes
+;         "   "
+;         global-mode-string
+;         "-%-" ) )
+
