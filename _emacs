@@ -106,11 +106,13 @@
 (global-set-key "\C-ca" 'org-agenda)
 (global-set-key "\C-cb" 'org-iswitchb)
 
+;; undo tree
+(require 'undo-tree)
+(global-undo-tree-mode)
 ;; viper-mode
 (setq viper-mode t)
 (require 'viper)
 (require 'vimpulse)
-
 
 (load "E:/Tools/ccl-quicklisp/quicklisp/slime-helper.el")
 ;; Replace "sbcl" with the path to your implementation
@@ -208,23 +210,22 @@
 
 ;; show column number in mode line
 (setq column-number-mode t)
-(setq global-mode-string (append global-mode-string  '("  [" default-directory "]") ))
-;(setq-default mode-line-format
-;      '( "%e"
-;         " "
-;         mode-line-mule-info
-;         mode-line-client
-;         mode-line-modified
-;         mode-line-remote
-;         mode-line-frame-identification
-;         mode-line-buffer-identification
-;         mode-line-position
-;         (vc-mode vc-mode)
-;         "which func:"
-;         which-func-mode
-;         "   "
-;         mode-line-modes
-;         "   "
-;         global-mode-string
-;         "-%-" ) )
+;(setq global-mode-string (append global-mode-string  '("  [" default-directory "]") ))
+(setq-default mode-line-format
+      '( "%e"
+         "-"
+         ("[" (:eval (format "%s" buffer-file-coding-system)) ":")   ;mode-line-mule-info, use more readable format
+         ;mode-line-client, remove
+         ("" mode-line-modified "]") ; change format to be together with encoding
+         ;mode-line-remote, remove
+         ;mode-line-frame-identification, remove
+         mode-line-buffer-identification
+         mode-line-position
+         (vc-mode vc-mode)
+         mode-line-modes
+         ("" viper-mode-string)    ;global-mode-string, disable time show
+         ("[" default-directory "]")
+         "-%-" ) )
+
+
 
