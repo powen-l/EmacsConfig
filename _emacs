@@ -115,7 +115,6 @@
 (require 'vimpulse)
 
 (load "E:/Tools/ccl-quicklisp/quicklisp/slime-helper.el")
-;; Replace "sbcl" with the path to your implementation
 (setq inferior-lisp-program
       (if (getenv "PROGRAMW6432") "wx86cl64.exe" "wx86cl.exe") )
 
