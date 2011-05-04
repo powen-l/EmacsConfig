@@ -1,3 +1,5 @@
+;; -*- coding: utf-8 -*-
+
 ;;;; global
 (setq viper-expert-level 5)
 (setq viper-always t)
