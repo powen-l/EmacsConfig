@@ -1,4 +1,4 @@
-;; -*- coding=utf8 -*-
+;; -*- encoding=utf8 -*-
 
 
 ;; set user information
@@ -278,3 +278,49 @@
 
 ;; c setting
 (setq-default c-basic-offset 4)
+
+;; python
+(setq-default py-indent-offset 4)
+
+;; auto complete
+(add-to-list 'load-path "~/.emacs.d/plugins/auto-complete-1.3.1")
+(require 'auto-complete)
+(require 'auto-complete-config)
+(add-to-list 'ac-dictionary-directories "~/.emacs.d/plugins/auto-complete-1.3.1/dict")
+(ac-config-default)
+
+
+(setq ac-auto-show-menu t)
+(setq ac-auto-show-menu 0.8)
+(setq ac-use-quick-help t)
+(setq ac-quick-help-delay 1.0)          ;default is 1.5
+(setq ac-dwim t)                        ;behavior of completion by TAB will be changed as a behavior of completion by RET
+
+
+;(global-auto-complete-mode t)
+;(setq-default ac-sources '(ac-source-words-in-same-mode-buffers))
+;(add-hook 'emacs-lisp-mode-hook (lambda () (add-to-list 'ac-sources 'ac-source-symbols)))
+;(add-hook 'auto-complete-mode-hook (lambda () (add-to-list 'ac-sources 'ac-source-filename)))
+;(set-face-background 'ac-candidate-face "lightgray")
+;(set-face-underline 'ac-candidate-face "darkgray")
+;(set-face-background 'ac-selection-face "steelblue")
+
+
+;; yasnippet
+(add-to-list 'load-path "~/.emacs.d/plugins/yasnippet-0.6.1c")
+(require 'yasnippet)
+(yas/initialize)
+(yas/load-directory "~/.emacs.d/plugins/yasnippet-0.6.1c/snippets")
+
+
+;(add-to-list 'load-path "~/.emacs.d/plugins/pymacs")
+;(autoload 'pymacs-apply "pymacs")
+;(autoload 'pymacs-call "pymacs")
+;(autoload 'pymacs-eval "pymacs" nil t)
+;(autoload 'pymacs-exec "pymacs" nil t)
+;(autoload 'pymacs-load "pymacs" nil t)
+; 
+;;; Initialize Rope                                                                                             
+;(pymacs-load "ropemacs" "rope-")
+;(setq ropemacs-enable-autoimport t)
+
