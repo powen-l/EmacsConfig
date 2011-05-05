@@ -146,6 +146,14 @@
 (setq-default py-indent-offset 4)
 
 
+;; server
+(server-start)
+(add-hook 'kill-emacs-hook
+          (lambda ()
+            (if (file-exists-p "~/.emacs.d/server/server")
+                (delete-file "~/.emacs.d/server/server"))))
+
+
 ;(add-to-list 'load-path "~/.emacs.d/plugins/pymacs")
 ;(autoload 'pymacs-apply "pymacs")
 ;(autoload 'pymacs-call "pymacs")
