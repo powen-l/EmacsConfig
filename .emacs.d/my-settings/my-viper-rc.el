@@ -55,6 +55,7 @@
 ;;;; key map
 ; normal mode
 (define-key viper-vi-global-user-map (kbd "zf") 'ido-find-file)
+(define-key viper-vi-global-user-map (kbd "zc") 'server-edit)
 (define-key viper-vi-global-user-map (kbd "zk") 'ido-kill-buffer)
 (define-key viper-vi-global-user-map (kbd "zo") 'other-window)
 (define-key viper-vi-global-user-map (kbd "zw") 'ido-write-file)
