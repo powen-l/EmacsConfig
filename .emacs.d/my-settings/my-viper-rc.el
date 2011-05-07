@@ -55,11 +55,14 @@
 ;;;; key map
 ; normal mode
 (define-key viper-vi-global-user-map (kbd "zf") 'ido-find-file)
+(define-key viper-vi-global-user-map (kbd "zr") 'revert-buffer-with-coding-system)
 (define-key viper-vi-global-user-map (kbd "zc") 'server-edit)
 (define-key viper-vi-global-user-map (kbd "zk") 'ido-kill-buffer)
 (define-key viper-vi-global-user-map (kbd "zo") 'other-window)
 (define-key viper-vi-global-user-map (kbd "zw") 'ido-write-file)
 (define-key viper-vi-global-user-map (kbd "zb") 'ido-switch-buffer)
+(define-key viper-vi-global-user-map (kbd "zn") 'next-buffer)
+(define-key viper-vi-global-user-map (kbd "zp") 'previous-buffer)
 (define-key viper-vi-global-user-map (kbd "C-s") 'save-buffer)
 ; insert-global
 (define-key viper-insert-global-user-map (kbd "C-s") 'save-buffer)

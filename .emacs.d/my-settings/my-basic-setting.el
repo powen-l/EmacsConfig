@@ -153,16 +153,9 @@
             (if (file-exists-p "~/.emacs.d/server/server")
                 (delete-file "~/.emacs.d/server/server"))))
 
+;; auto-load mode
+(global-auto-revert-mode 1)
+(setq global-auto-revert-mode-text " GARev ")
 
-;(add-to-list 'load-path "~/.emacs.d/plugins/pymacs")
-;(autoload 'pymacs-apply "pymacs")
-;(autoload 'pymacs-call "pymacs")
-;(autoload 'pymacs-eval "pymacs" nil t)
-;(autoload 'pymacs-exec "pymacs" nil t)
-;(autoload 'pymacs-load "pymacs" nil t)
-; 
-;;; Initialize Rope                                                                                             
-;(pymacs-load "ropemacs" "rope-")
-;(setq ropemacs-enable-autoimport t)
 
 (provide 'my-basic-setting)
