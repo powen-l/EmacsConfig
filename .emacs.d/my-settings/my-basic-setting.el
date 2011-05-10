@@ -144,6 +144,11 @@
 
 ;; python
 (setq-default py-indent-offset 4)
+(add-to-list 'load-path "~/.emacs.d/plugins/python-enhance/")
+(add-to-list 'auto-mode-alist '("\\.py\\'" . python-mode))
+(add-to-list 'interpreter-mode-alist '("python" . python-mode))
+(autoload 'python-mode "python-mode" "Python Mode." t)
+(require 'pycomplete)
 
 
 ;; server
@@ -155,7 +160,7 @@
 
 ;; auto-load mode
 (global-auto-revert-mode 1)
-(setq global-auto-revert-mode-text " GARev ")
+(setq global-auto-revert-mode-text " GARev")
 
 
 (provide 'my-basic-setting)
