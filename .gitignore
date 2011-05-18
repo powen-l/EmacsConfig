@@ -3,6 +3,7 @@
 .emacs.d/server/
 .ido.last
 .slime-history.eld
+.eshell/
 BUGS
 COPYING
 INSTALL
