@@ -164,5 +164,8 @@
 (global-auto-revert-mode 1)
 (setq global-auto-revert-mode-text " GARev")
 
+;; always split window vertically
+(setq split-width-threshold nil)
+
 
 (provide 'my-basic-setting)
