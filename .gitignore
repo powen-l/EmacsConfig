@@ -33,3 +33,4 @@ leim/
 lisp/
 pyvim.log
 site-lisp/
+.emacs.d/plugins/js2-mode-20090723/js2.elc
