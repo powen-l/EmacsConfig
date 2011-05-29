@@ -25,7 +25,7 @@
 
 ;; close toolbar and menu bar
 (tool-bar-mode nil)
-(menu-bar-mode nil)
+;(menu-bar-mode nil)
 
 ;; move mouse when cursor is close to it
 (mouse-avoidance-mode 'animate)
@@ -166,6 +166,21 @@
 
 ;; always split window vertically
 (setq split-width-threshold nil)
+
+
+;;js2 mode
+(add-to-list 'load-path "~/.emacs.d/plugins/js2-mode-20090723/")
+(autoload 'js2-mode "js2" nil t)
+(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+
+
+;; ecb
+(add-to-list 'load-path "~/.emacs.d/plugins/ecb-2.40/")
+;(require 'ecb)
+;(setq ecb-auto-activate t
+;      ecb-tip-of-the-day nil)
+
+
 
 
 (provide 'my-basic-setting)
