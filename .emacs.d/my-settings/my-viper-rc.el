@@ -57,8 +57,8 @@
 (defun my-kill-buffer ()
   (interactive)
   (if server-buffer-clients
-      (server-edit)
-    (kill-buffer (current-buffer))))
+      (server-kill-buffer))
+  (kill-buffer (current-buffer)))
 
 (define-key viper-vi-global-user-map (kbd "zf") 'ido-find-file)
 (define-key viper-vi-global-user-map (kbd "zr") 'revert-buffer-with-coding-system)
