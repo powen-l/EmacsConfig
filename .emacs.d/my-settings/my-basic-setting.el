@@ -175,12 +175,15 @@
 
 
 ;; ecb
-(add-to-list 'load-path "~/.emacs.d/plugins/ecb-2.40/")
+;(add-to-list 'load-path "~/.emacs.d/plugins/ecb-2.40/")
 ;(require 'ecb)
 ;(setq ecb-auto-activate t
 ;      ecb-tip-of-the-day nil)
 
-
-
+;; sr-speedbar
+;(add-to-list 'load-path "~/.emacs.d/plugins/sr-speedbar-0.1.8/")
+;(require 'sr-speedbar)
+;(setq sr-speedbar-right-side nil)
+;(setq speedbar-show-unknown-files nil)
 
 (provide 'my-basic-setting)

@@ -54,9 +54,15 @@
 
 ;;;; key map
 ; normal mode
+(defun my-kill-buffer ()
+  (interactive)
+  (if server-buffer-clients
+      (server-edit)
+    (kill-buffer (current-buffer))))
+
 (define-key viper-vi-global-user-map (kbd "zf") 'ido-find-file)
 (define-key viper-vi-global-user-map (kbd "zr") 'revert-buffer-with-coding-system)
-(define-key viper-vi-global-user-map (kbd "zc") 'server-edit)
+(define-key viper-vi-global-user-map (kbd "zc") 'my-kill-buffer)
 (define-key viper-vi-global-user-map (kbd "zk") 'ido-kill-buffer)
 (define-key viper-vi-global-user-map (kbd "zo") 'other-window)
 (define-key viper-vi-global-user-map (kbd "zw") 'ido-write-file)
