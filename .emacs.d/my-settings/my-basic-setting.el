@@ -142,17 +142,6 @@
 ;; c setting
 (setq-default c-basic-offset 4)
 
-;; python
-(setq-default py-indent-offset 4)
-(add-to-list 'load-path "~/.emacs.d/plugins/python-enhance/")
-(add-to-list 'auto-mode-alist '("\\.py\\'" . python-mode))
-(add-to-list 'interpreter-mode-alist '("python" . python-mode))
-(autoload 'python-mode "python-mode" "Python Mode." t)
-(setq python-mode-hook nil)
-(add-to-list 'python-mode-hook
-             (lambda () (require 'pycomplete)))
-
-
 ;; server
 (server-start)
 (add-hook 'kill-emacs-hook
@@ -162,7 +151,7 @@
 
 ;; auto-load mode
 (global-auto-revert-mode 1)
-(setq global-auto-revert-mode-text " GARev")
+;(setq global-auto-revert-mode-text " GARev")
 
 ;; always split window vertically
 (setq split-width-threshold nil)
@@ -191,5 +180,9 @@
 (autoload 'dos-mode "dos" "Edit Dos scripts." t)
 (add-to-list 'auto-mode-alist '("\\.bat$" . dos-mode))
 (add-to-list 'auto-mode-alist '("\\.cmd$" . dos-mode))
+
+
+;; occur specific setting
+(setq list-matching-lines-default-context-lines 3)
 
 (provide 'my-basic-setting)
