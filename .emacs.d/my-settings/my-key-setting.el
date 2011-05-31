@@ -51,8 +51,9 @@
 (global-set-key (kbd "<C-f6>") 'w32-open-shell-from-current-file-directory)
 
 
-
-
+;; replace M-x
+(global-set-key "\C-x\C-m" 'execute-extended-command)
+(global-set-key "\C-c\C-m" 'execute-extended-command)
 
 
 (provide 'my-key-setting)
