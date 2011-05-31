@@ -186,4 +186,10 @@
 ;(setq sr-speedbar-right-side nil)
 ;(setq speedbar-show-unknown-files nil)
 
+;; dos mode
+(add-to-list 'load-path "~/.emacs.d/plugins/dos-2.16/")
+(autoload 'dos-mode "dos" "Edit Dos scripts." t)
+(add-to-list 'auto-mode-alist '("\\.bat$" . dos-mode))
+(add-to-list 'auto-mode-alist '("\\.cmd$" . dos-mode))
+
 (provide 'my-basic-setting)
