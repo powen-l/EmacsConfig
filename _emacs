@@ -10,6 +10,7 @@
 (require 'my-key-setting)
 (require 'my-font-setting)
 (require 'my-color-theme-setting)
+(require 'my-dired-setting)
 (require 'my-linum-mode-setting)
 (require 'my-org-mode-setting)
 (require 'my-undo-tree-mode-setting)

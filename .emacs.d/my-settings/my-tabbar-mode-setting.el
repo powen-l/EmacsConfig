@@ -27,5 +27,4 @@
                     :box '(:line-width 2 :color "gray70")
                     )
 
-
 (provide 'my-tabbar-mode-setting)
