@@ -81,9 +81,23 @@
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 4)
 
-;; grep custom on window
-(setq grep-find-command '("E:/Tools/emacs-23.3/bin/find.exe . -type f -exec E:/Tools/emacs-23.3/bin/grep.exe -nH -e  {} NUL \";\"" . 90 ) )
-(setq grep-command "E:/Tools/emacs-23.3/bin/grep.exe -nH -e ")
+;; grep customize
+(eval-after-load 'grep
+    '(progn
+       (grep-apply-setting 
+		 'grep-find-command
+		 '("E:/Tools/emacs-23.3/bin/find.exe . -type f -exec E:/Tools/emacs-23.3/bin/grep.exe -nH -e  {} NUL \";\"" . 90 ) )
+       (grep-apply-setting 
+		 'grep-command
+		 "E:/Tools/emacs-23.3/bin/grep.exe -nH -e ")
+       (grep-apply-setting 
+		 'grep-find-template
+		 "E:/Tools/emacs-23.3/bin/find.exe . <X> -type f <F> -exec E:/Tools/emacs-23.3/bin/grep.exe <C> -nH -e <R> {} NUL \";\"" )
+       (add-to-list 'grep-files-aliases '("js" . "*.js"))
+       ;; fix for in windows shell auto extension machanisum
+       (dolist (item grep-files-aliases)
+         (setcdr item (replace-regexp-in-string "\\." "\\\\\." (cdr item))))
+       )) 
 
 ;; setup startup window size
 (defun w32-restore-frame ()
@@ -193,6 +207,21 @@
 (global-set-key [f3] 'highlight-symbol-next)
 (global-set-key [(shift f3)] 'highlight-symbol-prev)
 (global-set-key [(meta f3)] 'highlight-symbol-prev)
+
+
+; (when (string-equal system-type "windows-nt")
+;   (progn
+;     (setq exec-path
+;           '(
+;             "E:/Tools/emacs-23.3/bin" 
+;             "C:/Python27/"
+;             "c:/Program Files/Windows Resource Kits/Tools/"
+;             "C:/windows/system32"
+;             "C:/windows"
+;             "C:/Windows/System32/WindowsPowerShell/v1.0/"
+;             "c:/Program Files/Git/cmd"
+;             "E:/Tools/ccl-1.6-windowsx86")))
+
 
 
 (provide 'my-basic-setting)

@@ -71,6 +71,7 @@
 (define-key viper-vi-global-user-map (kbd "zn") 'next-buffer)
 (define-key viper-vi-global-user-map (kbd "zp") 'previous-buffer)
 (define-key viper-vi-global-user-map (kbd "C-s") 'save-buffer)
+(define-key viper-vi-global-user-map (kbd "zg") 'rgrep)
 ; insert-global
 ;(define-key viper-insert-global-user-map (kbd "C-s") 'save-buffer)
 
