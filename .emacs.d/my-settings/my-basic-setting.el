@@ -94,9 +94,14 @@
 		 'grep-find-template
 		 "E:/Tools/emacs-23.3/bin/find.exe . <X> -type f <F> -exec E:/Tools/emacs-23.3/bin/grep.exe <C> -nH -e <R> {} NUL \";\"" )
        (add-to-list 'grep-files-aliases '("js" . "*.js"))
+       (add-to-list 'grep-files-aliases '("all" . "*.*"))
        ;; fix for in windows shell auto extension machanisum
        (dolist (item grep-files-aliases)
-         (setcdr item (replace-regexp-in-string "\\." "\\\\\." (cdr item))))
+         (setcdr item (replace-regexp-in-string "\\*\\." "*\\\\\." (cdr item))))
+       (setq grep-find-ignored-files 
+             (let ( fixed-grep-find-ignored-files )
+               (dolist (item grep-find-ignored-files fixed-grep-find-ignored-files)
+                 (add-to-list 'fixed-grep-find-ignored-files (replace-regexp-in-string "\\*\\." "*\\\\\." item)))) )
        )) 
 
 ;; setup startup window size
