@@ -227,6 +227,10 @@
 ;             "c:/Program Files/Git/cmd"
 ;             "E:/Tools/ccl-1.6-windowsx86")))
 
+;; nXML
+(setq nxml-slash-auto-complete-flag t)
+(setq nxml-child-indent 2)
+(setq nxml-attribute-indent 4)
 
 
 (provide 'my-basic-setting)
