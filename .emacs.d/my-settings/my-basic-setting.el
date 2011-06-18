@@ -39,6 +39,8 @@
 
 ;; no backup file
 (setq-default make-backup-files nil)
+;; no auto save
+(setq auto-save-default nil)
 
 ;; use y --> yes
 (fset 'yes-or-no-p 'y-or-n-p)

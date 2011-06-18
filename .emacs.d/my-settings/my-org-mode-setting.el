@@ -10,6 +10,7 @@
        "E:/My Dropbox/Material/Org/gomez.org") )
 (setq org-log-done t)
 (setq org-insert-mode-line-in-empty-file t)
+(setq org-hierarchical-todo-statistics t)
 
 
 (setq org-todo-keyword-faces
@@ -17,11 +18,11 @@
         ;; bug workflow
         ("OPEN" . (:foreground "PeachPuff" ) )
         ("REOPEN" . (:foreground "PeachPuff" ) )
-        ("INVESTIGATE" . (:foreground "blue") )
-        ("BLOCK" .  org-warning)
-        ("PENDING" . (:foreground "GreenYellow"))
-        ("FIXED" . (:foreground "green" :weight bold))
-        ("WAD" .  (:foreground "green" :weight bold) )
+        ("STEPPING" . (:foreground "LawnGreen") )
+        ("BLOCK" .  (:foreground "IndianRed" ) )
+        ("PENDING" . (:foreground "DarkGreen"))
+        ("FIXED" . (:foreground "DeepSkyBlue" :weight bold))
+        ("WAD" .  (:foreground "DeepSkyBlue" :weight bold) )
         ;; type workflow
         ("Paul"   (:foreground "DarkSlateGray" ) )
         ("Hunter"   (:foreground "DarkSlateGray" ) )
@@ -30,7 +31,7 @@
         ("Kirill"   (:foreground "DarkSlateGray" ) )
         ;; todo workflow
         ("TODO" . (:foreground "PeachPuff") )
-        ("DONE" . (:foreground "green" :weight bold) )
+        ("DONE" . (:foreground "DeepSkyBlue" :weight bold) )
         )) 
 
 (provide 'my-org-mode-setting)
