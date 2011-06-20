@@ -4,6 +4,9 @@
 (require 'linum)
 (setq linum-format "%4d| ")
 
+(custom-set-faces
+ '(linum ((t :foreground "CadetBlue" :inherit (shadow default))))) 
+
 (setq linum-mode-inhibit-modes-list
       '(help-mode
         eshell-mode
