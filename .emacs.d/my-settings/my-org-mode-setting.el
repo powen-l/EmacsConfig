@@ -22,7 +22,9 @@
         ("BLOCK" .  (:foreground "IndianRed" ) )
         ("PENDING" . (:foreground "DarkGreen"))
         ("FIXED" . (:foreground "DeepSkyBlue" :weight bold))
+        ("DUPLICATE" . (:foreground "DeepSkyBlue" :weight bold))
         ("WAD" .  (:foreground "DeepSkyBlue" :weight bold) )
+        ("IRREPRODUCIBLE" .  (:foreground "DeepSkyBlue" :weight bold) )
         ;; type workflow
         ("Paul"   (:foreground "DarkSlateGray" ) )
         ("Hunter"   (:foreground "DarkSlateGray" ) )
