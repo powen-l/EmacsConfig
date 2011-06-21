@@ -235,9 +235,9 @@
 (setq nxml-attribute-indent 4)
 
 
-;(add-to-list 'load-path "~/.emacs.d/plugins/browser-king-ring-1.3a/")
-;(require 'browse-kill-ring)
-;(browse-kill-ring-default-keybindings)
+(add-to-list 'load-path "~/.emacs.d/plugins/browser-king-ring-1.3a/")
+(require 'browse-kill-ring)
+(browse-kill-ring-default-keybindings)
 
 
 (provide 'my-basic-setting)
