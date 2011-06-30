@@ -38,9 +38,17 @@
   ;;(define-key gsl-mode-map key command)
   )
 
+(defvar gsl-summary-region-begin nil
+  "The marker for begin of summary region")
 
-(defvar gsl-xml-root nil
-  "local buffer variable to store the xml root node")
+(defvar gsl-summary-region-end nil
+  "The marker for end of summary region")
+
+(defconst gsl-summary-indent-txn-config 4
+  "indend for txn config")
+
+(defconst gsl-summary-indent-step 2
+  "indent for each step")
 
 
 (defun gsl-mode ()
@@ -48,19 +56,97 @@
   (interactive)
   (kill-all-local-variables)
   (text-mode)
+
+  ;; setup major mode
   (setq major-mode 'gsl-mode)
   (setq mode-name "GSLv2")
   (use-local-map gsl-mode-map)
-  (gsl-analyze-buffer)
+
+  ;; create local variable
+  (make-local-variable 'gsl-summary-region-begin)
+  (make-local-variable 'gsl-summary-region-end)
+
+  (gsl-summary-from-buffer)
   (run-hooks 'gsl-mode-hook) )
 
-(defun gsl-analyze-buffer ()
+
+(defun gsl-summary-from-buffer ()
   "we analyze the buffer to generate information"
-  (make-local-variable 'gsl-xml-root)
-  (setq gsl-xml-root
-        (car (xml-parse-region (point-min) (point-max))))
+  ; clear former summary first
+  (interactive)
+  (widen)
+  (when (not (null gsl-summary-region-begin))
+      (delete-region gsl-summary-region-begin gsl-summary-region-end))
+  ; make new summary
+  (let ( (txn (car (xml-parse-region (point-min) (point-max)))) )
+    (if (null txn)
+        (error "not a valid xml format"))
+    (goto-char (point-max))
+    (setq gsl-summary-region-begin (point-marker))
+    (gsl-insert-summary-content txn)
+    (goto-char (point-max))
+    (setq gsl-summary-region-end (point-marker))
+    (narrow-to-region gsl-summary-region-begin gsl-summary-region-end) )
   nil)
 
 
+(defun gsl-insert-summary-content ( txn )
+  "insert the summary content based on the xml txn node"
+  (insert "[Transaction]\n")
+  ; insert config for this transaction
+  (let ((configs (gsl-txn-configs txn))
+        (indent (make-string gsl-summary-indent-txn-config ?\ )))
+    (dolist (config configs)
+      (dolist (param (gsl-config-params config))
+        (insert (format "%s%-50s: [%s]\n"
+                        indent
+                        (gsl-param-name param)
+                        (gsl-param-value param)))
+        ))
+    )
+  ; insert step for this transaction
+  (let ((steps (gsl-txn-steps txn))
+        (indent (make-string gsl-summary-indent-step ?\ ))
+        (step-index 1) )
+    (dolist (step steps)
+      (insert (format "%s[%s%2d]\n"
+                      indent
+                      "Step"
+                      step-index))
+      ))
+  )
 
-(provide 'gsl-mode)
+(defun gsl-config-params( config )
+  (nthcdr 2 config))
+
+(defun gsl-param-name(param)
+  (if (not (eq (car param) 'Param))
+      (error "Not invalid param item"))
+  (let ((name-cons (first (nth 1 param))))
+    (cdr name-cons)))
+        
+(defun gsl-param-value(param)
+  (if (not (eq (car param) 'Param))
+      (error "Not invalid param item"))
+  (let ((value-cons (second (nth 1 param))))
+    (cdr value-cons)))
+
+(defun gsl-txn-properties( txn )
+  (nth 1 txn))
+
+(defun gsl-txn-configs( txn )
+  (remove-if-not (lambda(e)
+                   (eq (car e) 'Configuration) )
+                 (cdr txn)))
+
+
+(defun gsl-txn-step( txn )
+  (remove-if-not (lambda(e)
+                   (eq (car e) 'PageRequest) )
+                 (cdr txn)))
+
+
+
+
+
+;(provide 'gsl-mode)
