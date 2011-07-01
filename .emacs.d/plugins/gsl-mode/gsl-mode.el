@@ -27,6 +27,7 @@
 
 
 (require 'xml)
+(require 'json)
 
 
 (defvar gsl-mode-hook nil
@@ -47,12 +48,41 @@
 (defvar gsl-summary-region-end nil
   "The marker for end of summary region")
 
-(defconst gsl-summary-indent-txn-config 4
-  "indend for txn config")
-
 (defconst gsl-summary-indent-step 2
   "indent for each step")
 
+(defconst gsl-header-configuration-name "http://www.gomez.com/headers"
+  "the configuration with `name' attribute to this is a header configuration")
+
+(defconst gsl-summary-format-config-flag "C"
+  "flag for configuration")
+
+(defconst gsl-summary-format-config-name-length 50
+  "the format length used to configuration")
+
+(defconst gsl-summary-format-config-delimiter ":"
+  "delimiter for config
+such as `name' : `value' ")
+
+(defconst gsl-summary-format-header-flag "H"
+  "flag for header")
+
+(defconst gsl-summary-format-header-length 30
+  "the format length used to configuration")
+
+(defconst gsl-summary-format-header-delimiter ":"
+  "delimiter for config
+such as `header-name' : `header-value' ")
+
+(defconst gsl-summary-format-property-flag "P"
+  "flag for header")
+
+(defconst gsl-summary-format-property-length 20
+  "the format length used to configuration")
+
+(defconst gsl-summary-format-property-delimiter ":"
+  "delimiter for config
+such as `header-name' : `header-value' ")
 
 (defun gsl-mode ()
   "major mode for edit gsl file"
@@ -80,7 +110,7 @@
   (widen)
   ; delete old summary 
   (when (not (null gsl-summary-region-begin))
-      (delete-region gsl-summary-region-begin gsl-summary-region-end))
+    (delete-region gsl-summary-region-begin gsl-summary-region-end))
   ; make new summary
   (let ( (txn (car (xml-parse-region (point-min) (point-max)))) )
     (if (null txn)
@@ -90,37 +120,61 @@
     (gsl-insert-summary-content txn)
     (goto-char (point-max))
     (setq gsl-summary-region-end (point-marker))
-    (narrow-to-region gsl-summary-region-begin gsl-summary-region-end)))
+    ;(narrow-to-region gsl-summary-region-begin gsl-summary-region-end)))
+    ))
 
 
 (defun gsl-insert-summary-content ( txn )
   "insert the summary content based on the xml txn node"
+  ; insert txn part : property , configuration, header
   (insert "[Transaction]\n")
+  ; insert properties
+  (let ((fmt (gsl-gen-insert-fmt "property")))
+    (dolist (attrib (xml-node-attributes txn))
+      (insert (format fmt
+                      (symbol-name (car attrib))
+                      (cdr attrib)))
+      (insert "\n"))))
   ; insert configuration of transaction
-  (gsl-insert-configurations txn gsl-summary-indent-txn-config)
-  ; insert step of transaction
-  (gsl-insert-steps txn gsl-summary-indent-step))
+  ;(gsl-insert-configurations txn)
+  ;(insert "\n"))
+  ;; insert step of transaction
+  ;(gsl-insert-steps-section txn))
 
 
-(defun gsl-insert-configurations (node indent-size)
+(defmacro gsl-gen-insert-fmt(type)
+  `(concat ,(intern (concat "gsl-summary-format-" type "-flag"))
+           "| %-"
+           (number-to-string
+            ,(intern (concat "gsl-summary-format-" type "-length")))
+           "s"
+           ,(intern (concat "gsl-summary-format-" type "-delimiter"))
+           "[%s]"))
+
+
+
+(defun gsl-insert-configurations (node)
   "insert configuration of current node"
-  (let ((configs (xml-get-children node 'Configuration))
-        (indent (make-string indent-size ?\ )))
+  (let ((configs (xml-get-children node 'Configuration)))
     (dolist (config configs)
-      (dolist (param (xml-node-children config))
-        (insert (format "%s%-50s: [%s]\n"
-                        indent
-                        (xml-get-attribute param 'name)
-                        (xml-get-attribute param 'value)))))))
+      (let ((flag nil))
+        (if (string= (xml-get-attribute config 'name)
+                     gsl-header-configuration-name)
+            (setq flag "H")
+          (setq flag "C"))
+        (dolist (param (xml-node-children config))
+          (insert (format "%s| %-50s: [%s]\n"
+                          flag
+                          (xml-get-attribute param 'name)
+                          (xml-get-attribute param 'value))))))))
 
-(defun gsl-insert-steps (txn indent-size)
+(defun gsl-insert-steps-section (txn)
   "insert step for txn"
   (let ((steps (xml-get-children txn 'PageRequest))
-        (indent (make-string indent-size ?\ ))
-        (step-index 1) )
+        ;(indent (make-string indent-size ?\ ))
+        (step-index 1))
     (dolist (step steps)
-      (insert (format "%s[%s%2d]\n"
-                      indent
+      (insert (format "[%s%2d]\n"
                       "Step"
                       step-index)))))
 
