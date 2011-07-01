@@ -26,6 +26,9 @@
 ;; the suffix as gsl
 
 
+(require 'xml)
+
+
 (defvar gsl-mode-hook nil
   "*List of the functions called when enter gsl-mode")
 
@@ -75,6 +78,7 @@
   ; clear former summary first
   (interactive)
   (widen)
+  ; delete old summary 
   (when (not (null gsl-summary-region-begin))
       (delete-region gsl-summary-region-begin gsl-summary-region-end))
   ; make new summary
@@ -86,66 +90,39 @@
     (gsl-insert-summary-content txn)
     (goto-char (point-max))
     (setq gsl-summary-region-end (point-marker))
-    (narrow-to-region gsl-summary-region-begin gsl-summary-region-end) )
-  nil)
+    (narrow-to-region gsl-summary-region-begin gsl-summary-region-end)))
 
 
 (defun gsl-insert-summary-content ( txn )
   "insert the summary content based on the xml txn node"
   (insert "[Transaction]\n")
-  ; insert config for this transaction
-  (let ((configs (gsl-txn-configs txn))
-        (indent (make-string gsl-summary-indent-txn-config ?\ )))
+  ; insert configuration of transaction
+  (gsl-insert-configurations txn gsl-summary-indent-txn-config)
+  ; insert step of transaction
+  (gsl-insert-steps txn gsl-summary-indent-step))
+
+
+(defun gsl-insert-configurations (node indent-size)
+  "insert configuration of current node"
+  (let ((configs (xml-get-children node 'Configuration))
+        (indent (make-string indent-size ?\ )))
     (dolist (config configs)
-      (dolist (param (gsl-config-params config))
+      (dolist (param (xml-node-children config))
         (insert (format "%s%-50s: [%s]\n"
                         indent
-                        (gsl-param-name param)
-                        (gsl-param-value param)))
-        ))
-    )
-  ; insert step for this transaction
-  (let ((steps (gsl-txn-steps txn))
-        (indent (make-string gsl-summary-indent-step ?\ ))
+                        (xml-get-attribute param 'name)
+                        (xml-get-attribute param 'value)))))))
+
+(defun gsl-insert-steps (txn indent-size)
+  "insert step for txn"
+  (let ((steps (xml-get-children txn 'PageRequest))
+        (indent (make-string indent-size ?\ ))
         (step-index 1) )
     (dolist (step steps)
       (insert (format "%s[%s%2d]\n"
                       indent
                       "Step"
-                      step-index))
-      ))
-  )
-
-(defun gsl-config-params( config )
-  (nthcdr 2 config))
-
-(defun gsl-param-name(param)
-  (if (not (eq (car param) 'Param))
-      (error "Not invalid param item"))
-  (let ((name-cons (first (nth 1 param))))
-    (cdr name-cons)))
-        
-(defun gsl-param-value(param)
-  (if (not (eq (car param) 'Param))
-      (error "Not invalid param item"))
-  (let ((value-cons (second (nth 1 param))))
-    (cdr value-cons)))
-
-(defun gsl-txn-properties( txn )
-  (nth 1 txn))
-
-(defun gsl-txn-configs( txn )
-  (remove-if-not (lambda(e)
-                   (eq (car e) 'Configuration) )
-                 (cdr txn)))
-
-
-(defun gsl-txn-step( txn )
-  (remove-if-not (lambda(e)
-                   (eq (car e) 'PageRequest) )
-                 (cdr txn)))
-
-
+                      step-index)))))
 
 
 
