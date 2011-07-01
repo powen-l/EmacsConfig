@@ -31,6 +31,7 @@
         ("STEPPING" . (:foreground "LawnGreen") )
         ("BLOCK" .  (:foreground "IndianRed" ) )
         ("PENDING" . (:foreground "DarkGreen"))
+        ("MOVE" . (:foreground "DeepSkyBlue" :weight bold))
         ("FIXED" . (:foreground "DeepSkyBlue" :weight bold))
         ("DUPLICATE" . (:foreground "DeepSkyBlue" :weight bold))
         ("WAD" .  (:foreground "DeepSkyBlue" :weight bold) )
