@@ -53,15 +53,19 @@
 
 ;;;; summary format settings
 (defconst gsl-summary-format-config
-  '(:flag "C" :align 50 :delimiter "=> ")
+  '(:flag "C> " :align 50 :delimiter "=> ")
   "format for configuration")
 
 (defconst gsl-summary-format-header
-  '(:flag "H" :align 20 :delimiter "=> ")
+  '(:flag "H> " :align 20 :delimiter "=> ")
   "format  for header")
 
 (defconst gsl-summary-format-property
-  '(:flag "P" :align 20 :delimiter "=> ")
+  '(:flag "P> " :align 20 :delimiter "=> ")
+  "format for header")
+
+(defconst gsl-summary-format-action-item
+  '(:flag ":" :align 20 :delimiter "=> ")
   "format for header")
 
 (defconst gsl-summary-step-base 1
@@ -109,6 +113,7 @@
     (setq gsl-summary-region (cons region-begin  (point-marker) ) )
     (narrow-to-region (car gsl-summary-region)
                       (cdr gsl-summary-region))
+    (set-buffer-modified-p nil)
     ))
 
 
@@ -148,34 +153,40 @@
 
 (defun gsl-summary-insert-action (action action-indent)
   "insert specific action content based on the :type"
-  (let ( (type (plist-get action :type))
-         (action-indent-str (make-string action-indent ?\ )) )
+  (let* ( (type (cdr (assq 'type action)) )
+         (action-title-indent (make-string action-indent ?\ ))
+         (fmt (gsl-summary-gen-fmt
+               gsl-summary-format-action-item
+               (+ action-indent 2))) )
     (insert (format "%s[Action%2d:%s]\n"
-                    action-indent-str
+                    action-title-indent
                     action-base
                     type) )
-    ;(insert "\n")
-    ) )
+    (dolist (item action)
+      (insert (format fmt
+                      (symbol-name (car item))
+                      (cdr item)))
+      (insert "\n"))))
 
 (defun gsl-summary-b64-decode( b64-script )
   "decode base64-encoded script section"
-  (let ((json-object-type 'plist)
+  (let ((json-object-type 'alist)
         (json-array-type 'list))
     (json-read-from-string (base64-decode-string b64-script))))
 
-(defun gsl-summary-gen-fmt ( fmt-plist )
+(defun gsl-summary-gen-fmt ( fmt-plist &optional indent )
   "generate the format based on the paramerter fmt-plist"
-  (concat (plist-get fmt-plist :flag)
-          "::"
+  (concat (if (null indent)
+              ""
+            (make-string indent ?\ ))
+          (plist-get fmt-plist :flag)
           "%-" (number-to-string (plist-get fmt-plist :align)) "s"
           (plist-get fmt-plist :delimiter)
           "[%s]"))
 
 (defun gsl-summary-insert-properties ( node &optional indent-length exclude-items )
   "insert the property of the node based on `gsl-summary-format-property'"
-  (let ((fmt (gsl-summary-gen-fmt gsl-summary-format-property)))
-    (if (not (null indent-length))
-        (setq fmt (concat (make-string indent-length ?\ ) fmt)))
+  (let ((fmt (gsl-summary-gen-fmt gsl-summary-format-property indent-length)))
     ; we do not output such 'pre_script property as normal
     (dolist (attrib (remove-if (lambda (x) (memq (car x) exclude-items))
                                (xml-node-attributes node)))
@@ -190,13 +201,12 @@
   (dolist (config (xml-get-children node 'Configuration))
     (let (fmt)
       ; distinguish the header config and txn config
-      (if (string= (xml-get-attribute config 'name)
-                   gsl-header-configuration-name)
-          (setq fmt (gsl-summary-gen-fmt gsl-summary-format-header))
-        (setq fmt (gsl-summary-gen-fmt gsl-summary-format-config)))
-      ; process indent
-      (if (not (null indent-length))
-          (setq fmt (concat (make-string indent-length ?\ ) fmt)))
+      (setq fmt (gsl-summary-gen-fmt
+                 (if (string= (xml-get-attribute config 'name)
+                              gsl-header-configuration-name)
+                     gsl-summary-format-header
+                   gsl-summary-format-config)
+                 indent-length))
         ; we need to skip the text-node
       (dolist (param
                (remove-if-not (lambda (x) (listp x))

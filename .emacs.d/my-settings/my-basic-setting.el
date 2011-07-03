@@ -240,4 +240,11 @@
 (browse-kill-ring-default-keybindings)
 
 
+;; use gsl-mode
+(add-to-list 'load-path "~/.emacs.d/plugins/gsl-mode/")
+(add-to-list 'auto-mode-alist '("\\.gsl$" . gsl-mode))
+(autoload 'gsl-mode "gsl-mode" "my gsl mode" t)
+
+
+
 (provide 'my-basic-setting)
