@@ -107,8 +107,8 @@
     ;; after update buffer remember the update concent region
     (goto-char (point-max))
     (setq gsl-summary-region (cons region-begin  (point-marker) ) )
-    ;(narrow-to-region gsl-summary-region-begin
-    ;gsl-summary-region-end)))
+    (narrow-to-region (car gsl-summary-region)
+                      (cdr gsl-summary-region))
     ))
 
 
@@ -120,31 +120,48 @@
   (gsl-summary-insert-properties txn)
   ; insert configuration of transaction
   (gsl-summary-insert-configurations txn)
-  ; insert step of transaction
   (insert "\n")
+  ; insert step of transaction
   (let ((step-index gsl-summary-step-base))
     (dolist (step (xml-get-children txn 'PageRequest))
       (insert (format "  [Step%2d]\n"
                       step-index))
       (gsl-summary-insert-properties step 2 '(pre_script post_script) )
       (gsl-summary-insert-configurations step 2)
-      (gsl-summary-insert-action step 2)
+      (gsl-summary-insert-json-script step 2)
       (insert "\n")))
   )
 
-(defun gsl-summary-insert-action ( step-node step-indent )
+(defun gsl-summary-insert-json-script ( step-node step-indent )
   "insert the action in current step-node"
   (let ( (pre-script (xml-get-attribute-or-nil step-node 'pre_script))
          (post-script (xml-get-attribute-or-nil step-node 'post_script)))
     (when (not (null pre-script))
       (insert (substring pre-script 0 5))
       (insert "\n") )
-    (when (not (null post-script))
-      (let* ( (post-script-decode (base64-decode-string post-script))
-              (json-script (json-read-from-string post-script-decode)) )
-        (print json-script)
-        ;(insert post-script-decode)
-        (insert "\n")) ) ) )
+    (if (not (null post-script))
+      (let ( (action-base gsl-summary-action-base)
+             (action-indent (+ step-indent 2)) )
+        (dolist (action (gsl-summary-b64-decode post-script))
+          (gsl-summary-insert-action action action-indent)
+          (incf action-base)))) ) )
+
+(defun gsl-summary-insert-action (action action-indent)
+  "insert specific action content based on the :type"
+  (let ( (type (plist-get action :type))
+         (action-indent-str (make-string action-indent ?\ )) )
+    (insert (format "%s[Action%2d:%s]\n"
+                    action-indent-str
+                    action-base
+                    type) )
+    ;(insert "\n")
+    ) )
+
+(defun gsl-summary-b64-decode( b64-script )
+  "decode base64-encoded script section"
+  (let ((json-object-type 'plist)
+        (json-array-type 'list))
+    (json-read-from-string (base64-decode-string b64-script))))
 
 (defun gsl-summary-gen-fmt ( fmt-plist )
   "generate the format based on the paramerter fmt-plist"
