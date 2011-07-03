@@ -8,7 +8,8 @@
  '(linum ((t :foreground "CadetBlue" :inherit (shadow default))))) 
 
 (setq linum-mode-inhibit-modes-list
-      '(help-mode
+      '(fundamental-mode
+        help-mode
         eshell-mode
         shell-mode
         erc-mode

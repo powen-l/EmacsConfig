@@ -42,47 +42,33 @@
   ;;(define-key gsl-mode-map key command)
   )
 
-(defvar gsl-summary-region-begin nil
-  "The marker for begin of summary region")
-
-(defvar gsl-summary-region-end nil
-  "The marker for end of summary region")
-
-(defconst gsl-summary-indent-step 2
-  "indent for each step")
-
+;;;; gsl specific const
 (defconst gsl-header-configuration-name "http://www.gomez.com/headers"
   "the configuration with `name' attribute to this is a header configuration")
 
-(defconst gsl-summary-format-config-flag "C"
-  "flag for configuration")
 
-(defconst gsl-summary-format-config-name-length 50
-  "the format length used to configuration")
+;;;; gsl-mode specific vairable
+(defvar gsl-summary-region nil
+  "The marker for summary region")
 
-(defconst gsl-summary-format-config-delimiter ":"
-  "delimiter for config
-such as `name' : `value' ")
+;;;; summary format settings
+(defconst gsl-summary-format-config
+  '(:flag "C" :align 50 :delimiter "=> ")
+  "format for configuration")
 
-(defconst gsl-summary-format-header-flag "H"
-  "flag for header")
+(defconst gsl-summary-format-header
+  '(:flag "H" :align 20 :delimiter "=> ")
+  "format  for header")
 
-(defconst gsl-summary-format-header-length 30
-  "the format length used to configuration")
+(defconst gsl-summary-format-property
+  '(:flag "P" :align 20 :delimiter "=> ")
+  "format for header")
 
-(defconst gsl-summary-format-header-delimiter ":"
-  "delimiter for config
-such as `header-name' : `header-value' ")
+(defconst gsl-summary-step-base 1
+  "from which the step is start")
 
-(defconst gsl-summary-format-property-flag "P"
-  "flag for header")
-
-(defconst gsl-summary-format-property-length 20
-  "the format length used to configuration")
-
-(defconst gsl-summary-format-property-delimiter ":"
-  "delimiter for config
-such as `header-name' : `header-value' ")
+(defconst gsl-summary-action-base 1
+  "from which the action is start")
 
 (defun gsl-mode ()
   "major mode for edit gsl file"
@@ -96,8 +82,7 @@ such as `header-name' : `header-value' ")
   (use-local-map gsl-mode-map)
 
   ;; create local variable
-  (make-local-variable 'gsl-summary-region-begin)
-  (make-local-variable 'gsl-summary-region-end)
+  (make-local-variable 'gsl-summary-region)
 
   (gsl-summary-from-buffer)
   (run-hooks 'gsl-mode-hook) )
@@ -105,78 +90,104 @@ such as `header-name' : `header-value' ")
 
 (defun gsl-summary-from-buffer ()
   "we analyze the buffer to generate information"
-  ; clear former summary first
   (interactive)
   (widen)
   ; delete old summary 
-  (when (not (null gsl-summary-region-begin))
-    (delete-region gsl-summary-region-begin gsl-summary-region-end))
+  (if (not (null gsl-summary-region))
+    (delete-region
+     (car gsl-summary-region)
+     (cdr gsl-summary-region)) )
   ; make new summary
-  (let ( (txn (car (xml-parse-region (point-min) (point-max)))) )
+  (goto-char (point-max))
+  (let* ( (region-begin (point-marker) )
+         (txn (car (xml-parse-region (point-min) (point-max)))) )
     (if (null txn)
         (error "not a valid xml format"))
+    (gsl-summary-generate-content txn)
+    ;; after update buffer remember the update concent region
     (goto-char (point-max))
-    (setq gsl-summary-region-begin (point-marker))
-    (gsl-insert-summary-content txn)
-    (goto-char (point-max))
-    (setq gsl-summary-region-end (point-marker))
-    ;(narrow-to-region gsl-summary-region-begin gsl-summary-region-end)))
+    (setq gsl-summary-region (cons region-begin  (point-marker) ) )
+    ;(narrow-to-region gsl-summary-region-begin
+    ;gsl-summary-region-end)))
     ))
 
 
-(defun gsl-insert-summary-content ( txn )
+(defun gsl-summary-generate-content ( txn )
   "insert the summary content based on the xml txn node"
   ; insert txn part : property , configuration, header
   (insert "[Transaction]\n")
   ; insert properties
-  (let ((fmt (gsl-gen-insert-fmt "property")))
-    (dolist (attrib (xml-node-attributes txn))
+  (gsl-summary-insert-properties txn)
+  ; insert configuration of transaction
+  (gsl-summary-insert-configurations txn)
+  ; insert step of transaction
+  (insert "\n")
+  (let ((step-index gsl-summary-step-base))
+    (dolist (step (xml-get-children txn 'PageRequest))
+      (insert (format "  [Step%2d]\n"
+                      step-index))
+      (gsl-summary-insert-properties step 2 '(pre_script post_script) )
+      (gsl-summary-insert-configurations step 2)
+      (gsl-summary-insert-action step 2)
+      (insert "\n")))
+  )
+
+(defun gsl-summary-insert-action ( step-node step-indent )
+  "insert the action in current step-node"
+  (let ( (pre-script (xml-get-attribute-or-nil step-node 'pre_script))
+         (post-script (xml-get-attribute-or-nil step-node 'post_script)))
+    (when (not (null pre-script))
+      (insert (substring pre-script 0 5))
+      (insert "\n") )
+    (when (not (null post-script))
+      (let* ( (post-script-decode (base64-decode-string post-script))
+              (json-script (json-read-from-string post-script-decode)) )
+        (print json-script)
+        ;(insert post-script-decode)
+        (insert "\n")) ) ) )
+
+(defun gsl-summary-gen-fmt ( fmt-plist )
+  "generate the format based on the paramerter fmt-plist"
+  (concat (plist-get fmt-plist :flag)
+          "::"
+          "%-" (number-to-string (plist-get fmt-plist :align)) "s"
+          (plist-get fmt-plist :delimiter)
+          "[%s]"))
+
+(defun gsl-summary-insert-properties ( node &optional indent-length exclude-items )
+  "insert the property of the node based on `gsl-summary-format-property'"
+  (let ((fmt (gsl-summary-gen-fmt gsl-summary-format-property)))
+    (if (not (null indent-length))
+        (setq fmt (concat (make-string indent-length ?\ ) fmt)))
+    ; we do not output such 'pre_script property as normal
+    (dolist (attrib (remove-if (lambda (x) (memq (car x) exclude-items))
+                               (xml-node-attributes node)))
       (insert (format fmt
                       (symbol-name (car attrib))
                       (cdr attrib)))
       (insert "\n"))))
-  ; insert configuration of transaction
-  ;(gsl-insert-configurations txn)
-  ;(insert "\n"))
-  ;; insert step of transaction
-  ;(gsl-insert-steps-section txn))
 
 
-(defmacro gsl-gen-insert-fmt(type)
-  `(concat ,(intern (concat "gsl-summary-format-" type "-flag"))
-           "| %-"
-           (number-to-string
-            ,(intern (concat "gsl-summary-format-" type "-length")))
-           "s"
-           ,(intern (concat "gsl-summary-format-" type "-delimiter"))
-           "[%s]"))
-
-
-
-(defun gsl-insert-configurations (node)
+(defun gsl-summary-insert-configurations (node &optional indent-length )
   "insert configuration of current node"
-  (let ((configs (xml-get-children node 'Configuration)))
-    (dolist (config configs)
-      (let ((flag nil))
-        (if (string= (xml-get-attribute config 'name)
-                     gsl-header-configuration-name)
-            (setq flag "H")
-          (setq flag "C"))
-        (dolist (param (xml-node-children config))
-          (insert (format "%s| %-50s: [%s]\n"
-                          flag
-                          (xml-get-attribute param 'name)
-                          (xml-get-attribute param 'value))))))))
-
-(defun gsl-insert-steps-section (txn)
-  "insert step for txn"
-  (let ((steps (xml-get-children txn 'PageRequest))
-        ;(indent (make-string indent-size ?\ ))
-        (step-index 1))
-    (dolist (step steps)
-      (insert (format "[%s%2d]\n"
-                      "Step"
-                      step-index)))))
+  (dolist (config (xml-get-children node 'Configuration))
+    (let (fmt)
+      ; distinguish the header config and txn config
+      (if (string= (xml-get-attribute config 'name)
+                   gsl-header-configuration-name)
+          (setq fmt (gsl-summary-gen-fmt gsl-summary-format-header))
+        (setq fmt (gsl-summary-gen-fmt gsl-summary-format-config)))
+      ; process indent
+      (if (not (null indent-length))
+          (setq fmt (concat (make-string indent-length ?\ ) fmt)))
+        ; we need to skip the text-node
+      (dolist (param
+               (remove-if-not (lambda (x) (listp x))
+                              (xml-node-children config)))
+        (insert (format fmt
+                        (xml-get-attribute param 'name)
+                        (xml-get-attribute param 'value)))
+        (insert "\n")))))
 
 
 
