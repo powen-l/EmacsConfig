@@ -38,12 +38,9 @@
 (defvar easy-motion-overlays nil
   "store all the overlay that created by easy motion
 The first one is background overlay, and the cdr is forground overlay")
-(defvar easy-motion-candidate-list nil
-  "record the possible candidate position of the query char")
 
 (make-variable-buffer-local 'easy-motion-mode)
 (make-variable-buffer-local 'easy-motion-overlays)
-(make-variable-buffer-local 'easy-motion-candidate-list)
 
 (defconst easy-motion-move-keys
   (nconc (loop for i from ?a to ?z collect i)
@@ -92,17 +89,20 @@ The first one is background overlay, and the cdr is forground overlay")
   "enter easy motion mode, init easy motion settings"
   (let* ((current-window (selected-window))
          (start-point (window-start current-window))
-         (end-point   (window-end   current-window)) )
+         (end-point   (window-end   current-window))
+         (candicate-position-list nil) )
     ;; search candidate position
     (save-excursion
       (goto-char start-point)
       (let ((case-fold-search nil)) ;; use case sensitive search
-        (setq easy-motion-candidate-list
+        (setq candicate-position-list
               (loop while (search-forward (char-to-string query-char) end-point t)
                     collect (match-beginning 0)))))
 
-    (when (null easy-motion-candidate-list)
+    (when (null candicate-position-list)
       (error "There is no such character in current window"))
+
+    ;(when (> (length candicate-position-list) 
 
     ;; create background overlay
     (setq easy-motion-overlays
@@ -114,11 +114,13 @@ The first one is background overlay, and the cdr is forground overlay")
     ;; make foreground overlay
     (setq easy-motion-overlays
           (nconc easy-motion-overlays
-                 (loop for pos in easy-motion-candidate-list
+                 (loop for pos in candicate-position-list
                        collect (let ( (ol (make-overlay pos (1+ pos) (current-buffer))) )
                                  (overlay-put ol 'face 'easy-motion-face-foreground)
-                                 (overlay-put ol 'display (concat "X"))
+                                 ;(overlay-put ol 'display (concat "X"))
                                  ol)))))
+
+  (easy-motion-update nil)
 
   ;; do minor mode configuration
   (setq easy-motion-mode " EasyMotion")
@@ -130,6 +132,28 @@ The first one is background overlay, and the cdr is forground overlay")
 
   (add-hook 'mouse-leave-buffer-hook 'easy-motion-done)
   (add-hook 'kbd-macro-termination-hook 'easy-motion-done))
+
+(defun easy-motion-update ( query-char )
+  "update the overlay based on the easy-motion-move-keys setting and input query"
+  (if (not (null query-char))
+    ;; filter the query-char item
+    (let* ((query-string (make-string 1 query-char))
+           (retain-ols (loop for ol in (cdr easy-motion-overlays)
+                              if (string= (overlay-get ol 'display) query-string)
+                              collect ol))
+           (discard-ols (loop for ol in (cdr easy-motion-overlays)
+                              if (not (memq ol retain-ols))
+                              collect ol)) )
+      (mapcar #'delete-overlay discard-ols)
+      (setq easy-motion-overlays
+            (cons (car easy-motion-overlays) retain-ols))))
+
+  ;; update the display property based on the user input
+  (let* ( (ols (cdr easy-motion-overlays))
+          (ols-length (length ols)) )
+    nil)
+    )
+
 
 (defun easy-motion-mode ( query-char )
   "EasyMotion mode"
