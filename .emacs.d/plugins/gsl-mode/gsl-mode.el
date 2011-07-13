@@ -134,8 +134,8 @@
       (gsl-summary-insert-properties step 2 '(pre_script post_script) )
       (gsl-summary-insert-configurations step 2)
       (gsl-summary-insert-json-script step 2)
-      (insert "\n")))
-  )
+      (insert "\n")
+      (setq step-index (+ 1 step-index))))) 
 
 (defun gsl-summary-insert-json-script ( step-node step-indent )
   "insert the action in current step-node"
