@@ -246,5 +246,16 @@
 (autoload 'gsl-mode "gsl-mode" "my gsl mode" t)
 
 
+;; use easy-motion-mode
+(add-to-list 'load-path "~/.emacs.d/plugins/easy-motion-mode/")
+(autoload
+  'easy-motion-mode
+  "easy-motion-mode"
+  "Emacs quick move minor mode"
+  t)
+;; I also use SPC in viper mode to direct start this mode
+(define-key global-map (kbd "C-c SPC") 'easy-motion-mode)
+
+
 
 (provide 'my-basic-setting)
