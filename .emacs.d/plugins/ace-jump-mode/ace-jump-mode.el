@@ -83,6 +83,38 @@
     (nconc minor-mode-alist
           (list '(ace-jump-mode ace-jump-mode))))
 
+;; custoize variable
+(defvar ace-jump-word-mode-use-query-char t
+  "If we need to ask for the query char before enter `ace-jump-word-mode'")
+
+(defvar ace-jump-mode-submode-list
+  (list #'ace-jump-word-mode
+        #'ace-jump-char-mode
+        #'ace-jump-line-mode)
+  "The mode list when start ace jump mode.
+The sequence is the calling sequence when give prefix argument.
+
+Such as:
+  If you use the default sequence, which is
+  (list #'ace-jump-word-mode
+        #'ace-jump-char-mode
+        #'ace-jump-line-mode)
+and using key to start up ace jump mode, such as 'C-c SPC',
+then the usage to start each mode is as below:
+
+   C-c SPC           ==> ace-jump-word-mode
+   C-u C-c SPC       ==> ace-jump-char-mode
+   C-u C-u C-c SPC   ==> ace-jump-line-mode
+
+Currently, the valid submode is:
+   `ace-jump-word-mode'
+   `ace-jump-char-mode'
+   `ace-jump-line-mode'
+
+")
+
+
+
 
 ;;; some buffer specific global variable
 (defvar ace-jump-mode nil
@@ -292,28 +324,45 @@ and call `leaf-func' on each leaf node"
       (add-hook 'kbd-macro-termination-hook 'ace-jump-done)))))
 
 
-(defun ace-jump-char-mode ( query-char )
+(defun ace-jump-char-mode ()
   "AceJump char mode"
-  (interactive "cQuery Char:")
-  (if (ace-jump-query-char-p query-char)
-      (ace-jump-do (regexp-quote (make-string 1 query-char)))
-      (error "Non-printable char")))
+  (interactive)
+  (let ((query-char (read-char "Query Char:")))
+    (if (ace-jump-query-char-p query-char)
+        (ace-jump-do (regexp-quote (make-string 1 query-char)))
+      (error "Non-printable char"))))
 
-(defun ace-jump-word-mode ( head-char )
-  "AceJump word mode.
-Under this mode, the word with HEAD-CHAR as first character will be searched"
-  (interactive "cHead Char:")
-  (if (ace-jump-query-char-p head-char)
+(defun ace-jump-word-mode ()
+  "AceJump word mode."
+  (interactive)
+  (let ((head-char (if ace-jump-word-mode-use-query-char
+                       (read-char "Head Char:")
+                     nil)))
+    (cond
+     ((null head-char)
+      (ace-jump-do "\\b\\sw"))
+     ((ace-jump-query-char-p head-char)
       (ace-jump-do (concat "\\b"
-                              (regexp-quote (make-string 1 head-char))))
-      (error "Non-printable char")))
+                           (regexp-quote (make-string 1 head-char)))))
+     (t
+      (error "Non-printable char")))))
 
-(defun ace-jump-line-mode ( &rest not-use )
+
+(defun ace-jump-line-mode ()
   "AceJump line mode.
 Marked each no empty line and move there"
   (interactive)
   (ace-jump-do "^."))
 
+(defun ace-jump-mode(&optional c)
+  (interactive "p")
+  (let ((index (/ c 4))
+        (submode-list-length (length ace-jump-mode-submode-list)))
+    (if (< index 0)
+        (error "Invalid prefix command"))
+    (if (>= index submode-list-length)
+        (setq index (1- submode-list-length)))
+    (funcall (nth index ace-jump-mode-submode-list))))
 
 (defun ace-jump-move ()
   "move cursor based on user input"
