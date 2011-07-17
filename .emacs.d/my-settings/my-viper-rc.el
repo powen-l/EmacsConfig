@@ -72,7 +72,7 @@
 (define-key viper-vi-global-user-map (kbd "zp") 'previous-buffer)
 (define-key viper-vi-global-user-map (kbd "C-s") 'save-buffer)
 (define-key viper-vi-global-user-map (kbd "zg") 'rgrep)
-(define-key viper-vi-global-user-map (kbd "SPC") 'ace-jump-line-mode)
+(define-key viper-vi-global-user-map (kbd "SPC") 'ace-jump-mode)
 ; insert-global
 ;(define-key viper-insert-global-user-map (kbd "C-s") 'save-buffer)
 

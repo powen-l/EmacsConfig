@@ -249,12 +249,12 @@
 ;; use easy-motion-mode
 (add-to-list 'load-path "~/.emacs.d/plugins/ace-jump-mode/")
 (autoload
-  'ace-jump-char-mode
+  'ace-jump-mode
   "ace-jump-mode"
   "Emacs quick move minor mode"
   t)
 ;; I also use SPC in viper mode to direct start this mode
-(define-key global-map (kbd "C-c SPC") 'ace-jump-char-mode)
+(define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
 
 
 
