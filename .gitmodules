@@ -1,0 +1,3 @@
+[submodule ".emacs.d/plugins/ace-jump-mode"]
+	path = .emacs.d/plugins/ace-jump-mode
+	url = git@github.com:winterTTr/ace-jump-mode.git
