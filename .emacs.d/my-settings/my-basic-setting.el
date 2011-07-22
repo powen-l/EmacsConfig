@@ -256,6 +256,7 @@
 (require 'ace-jump-mode)
 ;; I also use SPC in viper mode to direct start this mode
 (define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
+(setq ace-jump-mode-case-sensitive-search nil)
 
 
 
