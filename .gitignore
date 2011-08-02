@@ -34,3 +34,5 @@
 /lisp/
 /pyvim.log
 /site-lisp/
+/.semanticdb/
+/.srecode/
