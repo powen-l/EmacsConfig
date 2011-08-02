@@ -28,7 +28,8 @@
 ;(menu-bar-mode nil)
 
 ;; move mouse when cursor is close to it
-(mouse-avoidance-mode 'animate)
+;(mouse-avoidance-mode 'animate)
+(mouse-avoidance-mode 'none)
 
 ;; show parent 
 (show-paren-mode t)
