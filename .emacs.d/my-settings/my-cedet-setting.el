@@ -1,11 +1,12 @@
 ;; -*- coding: utf-8 -*-
 
 (load-file "~/.emacs.d/plugins/cedet/common/cedet.el")
+(global-ede-mode 1)
 (semantic-load-enable-excessive-code-helpers)
+(global-srecode-minor-mode 1) 
 
 (setq senator-minor-mode-name "SN")
 (setq semantic-imenu-auto-rebuild-directory-indexes nil)
-(global-srecode-minor-mode 1)
 (global-semantic-mru-bookmark-mode 1)
 
 (require 'semantic-decorate-include)
@@ -77,7 +78,6 @@
 
 
 (require 'semantic-lex-spp)
-(global-ede-mode t)
 (ede-enable-generic-projects)
 
 
@@ -109,6 +109,11 @@
 ;semantic-mrub-switch-tag
 
 
+;; ecb
+(add-to-list 'load-path "~/.emacs.d/plugins/ecb-2.40/")
+(require 'ecb)
+;(setq ecb-auto-activate t
+;      ecb-tip-of-the-day nil)
 
 
 
