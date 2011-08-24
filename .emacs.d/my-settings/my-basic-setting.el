@@ -253,6 +253,7 @@
 (define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
 (setq ace-jump-mode-case-sensitive-search nil)
 
+(windmove-default-keybindings 'meta)
 
 
 (provide 'my-basic-setting)
