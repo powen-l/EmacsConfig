@@ -65,10 +65,10 @@
 (setq uniquify-buffer-name-style 'forward)
 
 ;; time stamp support
-(setq time-stamp-active t)
-(setq time-stamp-warn-inactive t)
-(add-hook 'write-file-hooks 'time-stamp)
-(setq time-stamp-format "%:y-%02m-%02d %02H:%02M:%02S winterTTr")
+;(setq time-stamp-active t)
+;(setq time-stamp-warn-inactive t)
+;(add-hook 'write-file-hooks 'time-stamp)
+;(setq time-stamp-format "%:y-%02m-%02d %02H:%02M:%02S winterTTr")
 
 ;; scroll one line at a time (less "jumpy" than defaults)
 (setq mouse-wheel-scroll-amount '(1 ((shift) . 3)))   ;; one line at a time
@@ -157,8 +157,9 @@
          mode-line-position
          (vc-mode vc-mode)
          mode-line-modes
-         ("" viper-mode-string)    ;global-mode-string, disable time show
-         ("[" default-directory "]")
+         ;("" viper-mode-string)    ;global-mode-string contains it
+         global-mode-string
+         ;("[" default-directory "]")
          "-%-" ) )
 
 ;; c setting
@@ -199,16 +200,17 @@
 
 
 ;; occur specific setting
-(setq list-matching-lines-default-context-lines 3)
+(setq list-matching-lines-default-context-lines 2)
 
 
 ;; hilight-symbol
 (add-to-list 'load-path "~/.emacs.d/plugins/highlight-symbol-1.1/")
-(require 'highlight-symbol)
-(global-set-key [(control f3)] 'highlight-symbol-at-point)
-(global-set-key [f3] 'highlight-symbol-next)
-(global-set-key [(shift f3)] 'highlight-symbol-prev)
-(global-set-key [(meta f3)] 'highlight-symbol-prev)
+;(require 'highlight-symbol) 
+(autoload 'highlight-symbol-at-point "highlight-symbol" nil t)
+(global-set-key [f3] 'highlight-symbol-at-point)
+;(global-set-key [(control f3)] 'highlight-symbol-at-point)
+;(global-set-key [(shift f3)] 'highlight-symbol-prev)
+;(global-set-key [(meta f3)] 'highlight-symbol-prev)
 
 
 ; (when (string-equal system-type "windows-nt")
@@ -243,12 +245,12 @@
 
 ;; use easy-motion-mode
 (add-to-list 'load-path "~/.emacs.d/plugins/ace-jump-mode/")
-;(autoload
-;  'ace-jump-mode
-;  "ace-jump-mode"
-;  "Emacs quick move minor mode"
-;  t)
-(require 'ace-jump-mode)
+(autoload
+  'ace-jump-mode
+  "ace-jump-mode"
+  "Emacs quick move minor mode"
+  t)
+;(require 'ace-jump-mode)
 ;; I also use SPC in viper mode to direct start this mode
 (define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
 (setq ace-jump-mode-case-sensitive-search nil)

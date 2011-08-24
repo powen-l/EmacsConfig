@@ -17,7 +17,7 @@
 (require 'my-viper-mode-setting)
 (require 'my-slime-mode-setting)
 (require 'my-ido-mode-setting)
-(require 'my-tabbar-mode-setting)
+;(require 'my-tabbar-mode-setting)
 (require 'my-auto-complete-mode-setting)
 (require 'my-yasnippet-mode-setting)
 (require 'my-python-setting)
