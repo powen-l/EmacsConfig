@@ -17,7 +17,7 @@
 
 (create-fontset-from-fontset-spec
  "-outline-Consolas-normal-normal-normal-mono-16-*-*-*-c-*-fontset-Consolas")
-(set-fontset-font "fontset-Consolas" 'ascii "Consolas-14" nil 'prepend)
+(set-fontset-font "fontset-Consolas" 'ascii "Consolas-12" nil 'prepend)
 (set-fontset-font "fontset-Consolas" 'han "YaHei Consolas Hybrid-12" nil 'prepend)
 (set-fontset-font "fontset-Consolas" 'kana "MS Gothic-12" nil 'prepend)
 (set-default-font "fontset-Consolas")
@@ -30,6 +30,19 @@
 ;; Chinese : 测试
 ;; Katakana: わたし
 ;; Hirakana: ワタシ
+
+;; background knowledge:
+;; =================================================
+;; http://stackoverflow.com/questions/7176276/what-is-script-name-symbol-means-for-emacs-set-fontset-font-function/7178821#7178821
+;; 
+;; what is "script name symbol" means for emacs set-fontset-font function?
+;; (char-table-extra-slot char-script-table 0)
+;; (list-character-sets)
+;;
+;; charset-script-alist
+;; script-representative-chars
+;; char-script-table
+;; =================================================
 
 (provide 'my-font-setting)
 
