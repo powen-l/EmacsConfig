@@ -20,13 +20,11 @@
                                      "C:/Program Files/Microsoft SDKs/Windows/v6.1/VC/Include"
                                      "C:/Program Files (x86)/Microsoft Visual Studio 8/VC/include"
                                      "C:/Program Files (x86)/Microsoft Visual Studio 8/VC/atlmfc/include"
-                                     "D:/_SRC_/boost_1_46_1"))
+                                     "D:/_SRC_/boost/include"))
                               ((string= (system-name) "WINTERTTR-PC")
-                               (list "C:/Program Files/Microsoft Visual Studio 8/VC/include"
-                                     "C:/Program Files/Microsoft Visual Studio 8/VC/atlmfc/include"
-                                     "C:/Program Files/Microsoft Visual Studio 8/VC/PlatformSDK/Include"
-                                     "C:/Program Files/Microsoft Visual Studio 8/SDK/v2.0/include"
-                                     "D:/_SRC_/boost_1_43_0"))
+                               (list "D:/Program Files/Microsoft Visual Studio 10.0/VC/include"
+                                     "D:/Program Files/Microsoft Visual Studio 10.0/VC/atlmfc/include"
+                                     "D:/_SRC_/boost/include"))
                               (t
                                nil))))
   (mapc (lambda (x) (semantic-add-system-include x 'c++-mode)) c++-include-path-list))
