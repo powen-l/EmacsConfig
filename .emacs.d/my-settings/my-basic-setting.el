@@ -257,4 +257,8 @@
 (windmove-default-keybindings 'meta)
 
 
+(add-to-list 'load-path "~/.emacs.d/plugins/gtags")
+(autoload 'gtags-mode "gtags" "" t)
+
+
 (provide 'my-basic-setting)
