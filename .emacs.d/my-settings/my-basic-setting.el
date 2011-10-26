@@ -89,13 +89,13 @@
     '(progn
        (grep-apply-setting 
 		 'grep-find-command
-		 '("E:/Tools/emacs-23.3/bin/find.exe . -type f -exec E:/Tools/emacs-23.3/bin/grep.exe -nH -e  {} NUL \";\"" . 90 ) )
+		 '("E:/Tools/emacs-23.3/bin/find.exe . -type f -exec E:/Tools/emacs-23.3/bin/grep.exe -nH -ie  {} NUL \";\"" . 91 ) )
        (grep-apply-setting 
 		 'grep-command
-		 "E:/Tools/emacs-23.3/bin/grep.exe -nH -e ")
+		 "E:/Tools/emacs-23.3/bin/grep.exe -nH -ie ")
        (grep-apply-setting 
 		 'grep-find-template
-		 "E:/Tools/emacs-23.3/bin/find.exe . <X> -type f <F> -exec E:/Tools/emacs-23.3/bin/grep.exe <C> -nH -e <R> {} NUL \";\"" )
+		 "E:/Tools/emacs-23.3/bin/find.exe . <X> -type f <F> -exec E:/Tools/emacs-23.3/bin/grep.exe <C> -nH -ie <R> {} NUL \";\"" )
        (add-to-list 'grep-files-aliases '("js" . "*.js"))
        (add-to-list 'grep-files-aliases '("all" . "*.*"))
        ;; fix for in windows shell auto extension machanisum
