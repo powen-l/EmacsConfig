@@ -24,7 +24,7 @@
 (setq display-time-interval 10)
 
 ;; close toolbar and menu bar
-(tool-bar-mode nil)
+(tool-bar-mode 0)
 ;(menu-bar-mode nil)
 
 ;; move mouse when cursor is close to it

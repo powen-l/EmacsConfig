@@ -35,3 +35,16 @@
 /site-lisp/
 /.semanticdb/
 /.srecode/
+/bin/jpeg62.dll
+/bin/libgcrypt-11.dll
+/bin/libgnutls-26.dll
+/bin/libgpg-error-0.dll
+/bin/libpng12.dll
+/bin/libtasn1-3.dll
+/bin/libtiff3.dll
+/bin/libungif4.dll
+/bin/xpm4.dll
+/bin/zlib1.dll
+/font-configuration-example.txt
+/popup-menu.reg
+/readme.txt
