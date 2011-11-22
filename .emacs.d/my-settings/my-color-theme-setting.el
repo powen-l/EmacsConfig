@@ -9,5 +9,6 @@
 
 (require 'color-theme-subdued)
 (color-theme-subdued)
+;(color-theme-sanityinc-solarized-dark)
 
 (provide 'my-color-theme-setting)
