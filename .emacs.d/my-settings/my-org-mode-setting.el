@@ -6,18 +6,18 @@
 (setq system-time-locale "C")
 
 ; add new path at the begining
-(setq load-path (cons "~/.emacs.d/plugins/org-7.5/lisp/" load-path) )
+(setq load-path (cons "~/.emacs.d/plugins/org-7.7/lisp/" load-path) )
 ; we also turn on contrib : htmlize.el
-(setq load-path (cons "~/.emacs.d/plugins/org-7.5/contrib/lisp/" load-path) )
+(setq load-path (cons "~/.emacs.d/plugins/org-7.7/contrib/lisp/" load-path) )
 
 
 (require 'org-install)
 (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
 (global-set-key "\C-cl" 'org-store-link)
 (global-set-key "\C-ca" 'org-agenda)
-(setq org-agenda-files
-      (list
-       "E:/My Dropbox/Material/Org/gomez.org") )
+;(setq org-agenda-files
+;      (list
+;       "E:/My Dropbox/Material/Org/gomez.org") )
 
 (setq org-insert-mode-line-in-empty-file t)
 (setq org-hierarchical-todo-statistics t)
