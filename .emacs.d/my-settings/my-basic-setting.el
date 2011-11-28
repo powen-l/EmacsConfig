@@ -89,13 +89,13 @@
     '(progn
        (grep-apply-setting 
 		 'grep-find-command
-		 '("E:/Tools/emacs-23.3/bin/find.exe . -type f -exec E:/Tools/emacs-23.3/bin/grep.exe -nH -ie  {} NUL \";\"" . 91 ) )
+		 '("E:/Tools/Emacs/bin/find.exe . -type f -exec E:/Tools/emacs-23.3/bin/grep.exe -nH -ie  {} NUL \";\"" . 86 ) )
        (grep-apply-setting 
 		 'grep-command
-		 "E:/Tools/emacs-23.3/bin/grep.exe -nH -ie ")
+		 "E:/Tools/Emacs/bin/grep.exe -nH -ie ")
        (grep-apply-setting 
 		 'grep-find-template
-		 "E:/Tools/emacs-23.3/bin/find.exe . <X> -type f <F> -exec E:/Tools/emacs-23.3/bin/grep.exe <C> -nH -ie <R> {} NUL \";\"" )
+		 "E:/Tools/Emacs/bin/find.exe . <X> -type f <F> -exec E:/Tools/Emacs/bin/grep.exe <C> -nH -ie <R> {} NUL \";\"" )
        (add-to-list 'grep-files-aliases '("js" . "*.js"))
        (add-to-list 'grep-files-aliases '("all" . "*.*"))
        ;; fix for in windows shell auto extension machanisum
@@ -264,5 +264,12 @@
 (setq package-archives '(("ELPA" . "http://tromey.com/elpa/") 
                           ("gnu" . "http://elpa.gnu.org/packages/")
                           ("marmalade" . "http://marmalade-repo.org/packages/")))
+
+
+;; powershell-mode
+(add-to-list 'load-path "~/.emacs.d/plugins/powershell-mode-0.5")
+(autoload 'powershell-mode "powershell-mode" nil t)
+(add-to-list 'auto-mode-alist '("\\.ps[12]?$" . powershell-mode))
+
 
 (provide 'my-basic-setting)
