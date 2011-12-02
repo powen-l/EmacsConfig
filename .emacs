@@ -22,6 +22,6 @@
 (require 'my-auto-complete-mode-setting)
 (require 'my-yasnippet-mode-setting)
 (require 'my-python-setting)
-(require 'my-cedet-setting)
+;(require 'my-cedet-setting)
 (require 'my-auctex-setting)
 

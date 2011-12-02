@@ -25,7 +25,10 @@
 
 ;; close toolbar and menu bar
 (tool-bar-mode 0)
-;(menu-bar-mode nil)
+;(menu-bar-mode 0)
+;; remove scroll bar
+;(set-scroll-bar-mode nil)
+
 
 ;; move mouse when cursor is close to it
 ;(mouse-avoidance-mode 'animate)
@@ -33,14 +36,13 @@
 
 ;; show parent 
 (show-paren-mode t)
-(setq show-paren-style 'parenthesis )
+(setq show-paren-style 'parenthesis)
 
 ;; hilight mark area
 (transient-mark-mode t)
 
-;; no backup file
+;; no backup file, and auto save
 (setq-default make-backup-files nil)
-;; no auto save
 (setq auto-save-default nil)
 
 ;; use y --> yes
@@ -77,9 +79,6 @@
 (setq scroll-step 1)                                  ;; keyboard scroll one line at a time
 (setq scroll-margin 3)
 
-;; remove scroll bar
-;(set-scroll-bar-mode nil)
-
 ;; not use tab, use space to indent
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 4)
@@ -89,23 +88,15 @@
     '(progn
        (grep-apply-setting 
 		 'grep-find-command
-		 '("E:/Tools/Emacs/bin/find.exe . -type f -exec E:/Tools/emacs-23.3/bin/grep.exe -nH -ie  {} NUL \";\"" . 86 ) )
+		 '("E:/Tools/Emacs/bin/find.exe . -type f -exec E:/Tools/Emacs/bin/grep.exe -nH -ie  {} NUL \";\"" . 80 ) )
        (grep-apply-setting 
 		 'grep-command
 		 "E:/Tools/Emacs/bin/grep.exe -nH -ie ")
        (grep-apply-setting 
 		 'grep-find-template
 		 "E:/Tools/Emacs/bin/find.exe . <X> -type f <F> -exec E:/Tools/Emacs/bin/grep.exe <C> -nH -ie <R> {} NUL \";\"" )
-       (add-to-list 'grep-files-aliases '("js" . "*.js"))
-       (add-to-list 'grep-files-aliases '("all" . "*.*"))
-       ;; fix for in windows shell auto extension machanisum
-       (dolist (item grep-files-aliases)
-         (setcdr item (replace-regexp-in-string "\\*\\." "*\\\\\." (cdr item))))
-       (setq grep-find-ignored-files 
-             (let ( fixed-grep-find-ignored-files )
-               (dolist (item grep-find-ignored-files fixed-grep-find-ignored-files)
-                 (add-to-list 'fixed-grep-find-ignored-files (replace-regexp-in-string "\\*\\." "*\\\\\." item)))) )
-       )) 
+       ;(add-to-list 'grep-files-aliases '("js" . "*.js"))
+       ))
 
 ;; setup startup window size
 (defun w32-restore-frame ()
