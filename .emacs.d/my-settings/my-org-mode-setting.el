@@ -23,6 +23,7 @@
 (setq org-hierarchical-todo-statistics t)
 
 
+;; work flow for the gomez
 (setq org-todo-keyword-faces
       '(
         ;; bug workflow

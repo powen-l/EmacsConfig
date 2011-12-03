@@ -1,11 +1,10 @@
 ;; -*- coding: utf-8 -*-
 
+(global-set-key [(meta ?/)] 'hippie-expand)
+
 ;; change C-m and enter
 (global-set-key "\C-m" 'newline-and-indent)
 (global-set-key "\C-j" 'newline )
-
-;; quick for use ibuffer
-(global-set-key (kbd "C-x C-b") 'ibuffer)
 
 ;; some useful key binding
 (global-set-key (kbd "M-1") 'delete-other-windows)
@@ -49,11 +48,6 @@
        "cmd.exe"
        (concat "/k cd /d" (file-name-directory file))))))
 (global-set-key (kbd "<C-f6>") 'w32-open-shell-from-current-file-directory)
-
-
-;; replace M-x
-;(global-set-key "\C-x\C-m" 'execute-extended-command)
-;(global-set-key "\C-c\C-m" 'execute-extended-command)
 
 
 (provide 'my-key-setting)

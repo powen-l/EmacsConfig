@@ -61,6 +61,7 @@
 (define-key evil-normal-state-map (kbd "C-s") 'save-buffer)
 (define-key evil-normal-state-map (kbd "zg") 'rgrep)
 (define-key evil-normal-state-map (kbd "SPC") 'ace-jump-mode)
+(define-key evil-normal-state-map (kbd "ZB") 'ibuffer)
 
 ;evil-insert-state-map [Variable]
 ;The global keymap for Insert state.
