@@ -4,3 +4,6 @@
 [submodule ".emacs.d/plugins/evil"]
 	path = .emacs.d/plugins/evil
 	url = git://gitorious.org/evil/evil.git
+[submodule ".emacs.d/plugins/color-theme-solarized"]
+	path = .emacs.d/plugins/color-theme-solarized
+	url = https://github.com/sellout/emacs-color-theme-solarized.git

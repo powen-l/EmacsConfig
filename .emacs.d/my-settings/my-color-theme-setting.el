@@ -3,12 +3,16 @@
 ;; Color Theme
 (add-to-list 'load-path "~/.emacs.d/plugins/color-theme-6.6.0")
 (require 'color-theme)
-;(add-to-list 'load-path "~/.emacs.d/plugins/emacs-color-theme-solarized")
+
+;; Color theme subdued
+(require 'color-theme-subdued)
+(color-theme-subdued)
+
+;; color theme solarized
+;(add-to-list 'load-path "~/.emacs.d/plugins/color-theme-solarized")
 ;(require 'color-theme-solarized)
 ;(color-theme-solarized-dark)
 
-(require 'color-theme-subdued)
-(color-theme-subdued)
 
 
 (provide 'my-color-theme-setting)
