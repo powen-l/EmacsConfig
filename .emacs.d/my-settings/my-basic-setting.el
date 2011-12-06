@@ -144,6 +144,34 @@
             (if (file-exists-p "~/.emacs.d/server/server")
                 (delete-file "~/.emacs.d/server/server"))))
 
+;; `load-path' is a list of directories where Emacs Lisp libraries
+;; (`.el' and `.elc' files) are installed.
+;;
+;; `exec-path' is different: it is a list of directories where
+;; executable programs are installed.
+;;
+;; Shouldn't be `exec-path' and `PATH' achieve the same goal under
+;; Emacs?
+;;
+;; No. `exec-path' is used by Emacs to search for programs it runs
+;; directly.  But `M-x grep' does not run `grep.exe' directly; it runs
+;; the shell passing it a command that invokes `grep'. So it's the
+;; shell that needs to find `grep.exe', and it uses PATH, of course,
+;; not `exec-path'.
+;;
+;; So the right thing to do when you install a new program, in order
+;; for Emacs to find it, is *both* to update `exec-path' *and* update
+;; `PATH'. This is because some Emacs features invoke programs
+;; directly, while others do that through the shell or some other
+;; intermediary programs.
+(when (string-equal system-type "windows-nt")
+  (setq exec-path
+        (append (list "E:/Tools/Emacs/extra-bin"
+                      "E:/Tools/Emacs/bin")
+                exec-path))
+  (setenv "PATH" (concat "E:\\Tools\\Emacs\\extra-bin;"
+                         "E:\\Tools\\Emacs\\bin;"
+                         (getenv "PATH"))))
 
 ;; time stamp support
 ;(setq time-stamp-active t)
@@ -156,19 +184,21 @@
 ; Some mode setting
 ;========================================
 ;; grep mode customize
-(if (string= system-type "windows-nt")
-    (eval-after-load 'grep
-      '(progn
-         (grep-apply-setting 
-          'grep-find-command
-          '("E:/Tools/Emacs/bin/find.exe . -type f -exec E:/Tools/Emacs/bin/grep.exe -nH -ie  {} NUL \";\"" . 80 ) )
-         (grep-apply-setting 
-          'grep-command
-          "E:/Tools/Emacs/bin/grep.exe -nH -ie ")
-         (grep-apply-setting 
-          'grep-find-template
-          "E:/Tools/Emacs/bin/find.exe . <X> -type f <F> -exec E:/Tools/Emacs/bin/grep.exe <C> -nH -ie <R> {} NUL \";\"" )
-         )))
+;;
+;; we do not need to setup the grep command, use the correct exec-path
+;; and "PATH" env is enough
+;;
+;(grep-apply-setting 
+; 'grep-find-command
+; '("E:/Tools/Emacs/bin/find.exe . -type f -exec E:/Tools/Emacs/bin/grep.exe -nH -ie  {} NUL \";\"" . 80 ) )
+;(grep-apply-setting 
+; 'grep-command
+; "E:/Tools/Emacs/bin/grep.exe -nH -ie ")
+;(grep-apply-setting 
+; 'grep-find-template
+; "E:/Tools/Emacs/bin/find.exe . <X> -type f <F> -exec E:/Tools/Emacs/bin/grep.exe <C> -nH -ie <R> {} NUL \";\"" )
+;(setq grep-program "grep.exe")
+;(setq find-program "find.exe")
 
 ;; quick for use ibuffer
 (require 'ibuffer)
@@ -196,19 +226,6 @@
 ;(global-set-key [(shift f3)] 'highlight-symbol-prev)
 ;(global-set-key [(meta f3)] 'highlight-symbol-prev)
 
-
-; (when (string-equal system-type "windows-nt")
-;   (progn
-;     (setq exec-path
-;           '(
-;             "E:/Tools/emacs-23.3/bin" 
-;             "C:/Python27/"
-;             "c:/Program Files/Windows Resource Kits/Tools/"
-;             "C:/windows/system32"
-;             "C:/windows"
-;             "C:/Windows/System32/WindowsPowerShell/v1.0/"
-;             "c:/Program Files/Git/cmd"
-;             "E:/Tools/ccl-1.6-windowsx86")))
 
 ;; nXML
 (setq nxml-slash-auto-complete-flag t)
