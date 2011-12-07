@@ -48,6 +48,15 @@
         ("DONE" . (:foreground "DeepSkyBlue" :weight bold) )
         )) 
 
+;; setting for the inline source code.
+;(setq org-src-lang-modes
+;      (append org-src-lang-modes
+;              '( ("latex" . latex-mode)
+;                 ("powershell" . powershell-mode))))
+(setq org-src-preserve-indentation t)
+(setq org-src-ask-before-returning-to-edit-buffer nil)
+(setq org-src-fontify-natively t)
+
 
 ;; export settings
 ;;;; prevent the _ to become a sub title
