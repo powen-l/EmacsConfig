@@ -280,6 +280,12 @@
 (require 'ido)
 (ido-mode t)
 
+;; tempbuf mode
+(add-to-list 'load-path "~/.emacs.d/plugins/tempbuf-mode")
+(require 'tempbuf)
+(add-hook 'help-mode-hook 'turn-on-tempbuf-mode)
+(add-hook 'grep-mode-hook 'turn-on-tempbuf-mode)
+
 ;; sr-speedbar
 ;(add-to-list 'load-path "~/.emacs.d/plugins/sr-speedbar-0.1.8/")
 ;(require 'sr-speedbar)
