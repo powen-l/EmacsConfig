@@ -138,11 +138,13 @@
 (setq split-width-threshold nil)
 
 ;; server
-(server-start)
-(add-hook 'kill-emacs-hook
-          (lambda ()
-            (if (file-exists-p "~/.emacs.d/server/server")
-                (delete-file "~/.emacs.d/server/server"))))
+(setq server-mode-forbidden-list '("WINTERTTR-WS"))
+(when (not (member (system-name) server-mode-forbidden-list))
+    (server-start)
+    (add-hook 'kill-emacs-hook
+              (lambda ()
+                (if (file-exists-p "~/.emacs.d/server/server")
+                    (delete-file "~/.emacs.d/server/server")))))
 
 ;; `load-path' is a list of directories where Emacs Lisp libraries
 ;; (`.el' and `.elc' files) are installed.

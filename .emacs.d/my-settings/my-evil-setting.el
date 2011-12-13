@@ -44,7 +44,8 @@
 ;The global keymap for Normal state.
 (defun my-kill-buffer ()
   (interactive)
-  (if server-buffer-clients
+  (if (and (boundp 'server-buffer-clients)
+           server-buffer-clients)
       (server-kill-buffer))
   (kill-buffer (current-buffer)))
 
