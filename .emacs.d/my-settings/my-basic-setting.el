@@ -81,6 +81,9 @@
 ;; don't ring at error
 (setq ring-bell-function 'ignore)
 
+;; can use the narrow to region
+(put 'narrow-to-region 'disabled nil)
+
 ;; move mouse when cursor is close to it
 ;(mouse-avoidance-mode 'animate)
 (mouse-avoidance-mode 'none)
@@ -138,7 +141,8 @@
 (setq split-width-threshold nil)
 
 ;; server
-(setq server-mode-forbidden-list '("WINTERTTR-WS"))
+;(setq server-mode-forbidden-list '("WINTERTTR-WS"))
+(setq server-mode-forbidden-list nil)
 (when (not (member (system-name) server-mode-forbidden-list))
     (server-start)
     (add-hook 'kill-emacs-hook
@@ -293,5 +297,9 @@
 ;(require 'sr-speedbar)
 ;(setq sr-speedbar-right-side nil)
 ;(setq speedbar-show-unknown-files nil)
+
+(add-to-list 'load-path "~/.emacs.d/plugins/csharp-mode")
+(autoload 'csharp-mode "csharp-mode-0.8.5" nil t)
+(add-to-list 'auto-mode-alist '("\\.cs$" . csharp-mode))
 
 (provide 'my-basic-setting)
