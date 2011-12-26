@@ -355,7 +355,8 @@ LIST consists of TeX dimensions in sp (1/65536 TeX point)."
   :group 'preview-gs
   :type 'string)
 
-(defcustom preview-gs-options '("-q" "-dSAFER" "-dNOPAUSE"
+;(defcustom preview-gs-options '("-q" "-dSAFER" "-dNOPAUSE"
+(defcustom preview-gs-options '("-q" "-dNOSAFER" "-dNOPAUSE"
 				"-DNOPLATFONTS" "-dPrinted"
 				"-dTextAlphaBits=4"
 				"-dGraphicsAlphaBits=4")

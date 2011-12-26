@@ -24,4 +24,7 @@
             (imenu-add-menubar-index)
             (define-key LaTeX-mode-map (kbd "TAB") 'TeX-complete-symbol)))
 
+(setq preview-image-type 'pnm)
+(require 'preview)
+
 (provide 'my-auctex-setting)
