@@ -1,10 +1,8 @@
 ;; -*- coding: utf-8 -*-
 
 
-(add-to-list 'load-path "~/.emacs.d/plugins/auctex-11.86-e23.3-msw/site-lisp/site-start.d")
-(add-to-list 'load-path "~/.emacs.d/plugins/auctex-11.86-e23.3-msw/site-lisp/auctex")
-(load "auctex.el" nil t t)
-(load "preview-latex.el" nil t t)
+(add-to-list 'load-path "~/.emacs.d/plugins/auctex-11.86-e23.3-msw/site-lisp")
+(load "site-start.el" nil t t)
 
 (if (string= system-type "windows-nt")
     (require 'tex-mik))
@@ -25,6 +23,7 @@
             (define-key LaTeX-mode-map (kbd "TAB") 'TeX-complete-symbol)))
 
 (setq preview-image-type 'pnm)
+(setq preview-scale-function 1.5)
 (require 'preview)
 
 (provide 'my-auctex-setting)

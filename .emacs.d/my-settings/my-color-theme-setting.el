@@ -11,7 +11,7 @@
 ;; color theme solarized
 ;(add-to-list 'load-path "~/.emacs.d/plugins/color-theme-solarized")
 ;(require 'color-theme-solarized)
-;(color-theme-solarized-dark)
+;(color-theme-solarized-light)
 
 
 
