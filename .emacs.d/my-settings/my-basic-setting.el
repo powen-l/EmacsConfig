@@ -302,4 +302,7 @@
 (autoload 'csharp-mode "csharp-mode-0.8.5" nil t)
 (add-to-list 'auto-mode-alist '("\\.cs$" . csharp-mode))
 
+(add-to-list 'load-path "~/.emacs.d/plugins/anything")
+(require 'anything-config)
+
 (provide 'my-basic-setting)
