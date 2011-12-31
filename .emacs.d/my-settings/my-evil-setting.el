@@ -42,6 +42,8 @@
 ;;;; key map 
 ;evil-normal-state-map [Variable]
 ;The global keymap for Normal state.
+(define-key evil-normal-state-map (kbd "C-s") 'save-buffer)
+
 (defun my-kill-buffer ()
   (interactive)
   (if (and (boundp 'server-buffer-clients)
@@ -49,20 +51,31 @@
       (server-kill-buffer))
   (kill-buffer (current-buffer)))
 
-(define-key evil-normal-state-map (kbd "zf") 'ido-find-file)
-(define-key evil-normal-state-map (kbd "zr") 'revert-buffer-with-coding-system)
-(define-key evil-normal-state-map (kbd "zc") 'my-kill-buffer)
-(define-key evil-normal-state-map (kbd "zk") 'ido-kill-buffer)
-(define-key evil-normal-state-map (kbd "zo") 'other-window)
-(define-key evil-normal-state-map (kbd "zw") 'ido-write-file)
-(define-key evil-normal-state-map (kbd "zb") 'ido-switch-buffer)
-(define-key evil-normal-state-map (kbd "zB") 'ido-switch-buffer-other-window)
-(define-key evil-normal-state-map (kbd "zn") 'next-buffer)
-(define-key evil-normal-state-map (kbd "zp") 'previous-buffer)
-(define-key evil-normal-state-map (kbd "C-s") 'save-buffer)
-(define-key evil-normal-state-map (kbd "zg") 'rgrep)
-(define-key evil-normal-state-map (kbd "SPC") 'ace-jump-mode)
-(define-key evil-normal-state-map (kbd "ZB") 'ibuffer)
+(define-prefix-command 'wttr/space-evil-normal-map)
+(define-key evil-normal-state-map (kbd "SPC") 'wttr/space-evil-normal-map)
+(mapc (lambda (info)
+        (define-key wttr/space-evil-normal-map
+          (read-kbd-macro (car info))
+          (cdr info)))
+      '(
+        ("f" . ido-find-file)
+        ("r" . revert-buffer-with-coding-system)
+        ("c" . my-kill-buffer)
+        ("k" . ido-kill-buffer)
+        ("o" . other-window)
+        ("w" . ido-write-file)
+        ("b" . ido-switch-buffer)
+        ("B" . ido-switch-buffer-other-window)
+        ("n" . next-buffer)
+        ("p" . previous-buffer)
+        ("s" . save-buffer)
+        ("g" . rgrep)
+        ("l" . ibuffer)
+        ("SPC" . ace-jump-mode)
+      ))
+
+;; replace the <c-e> to move-end-of-line
+(substitute-key-definition 'evil-copy-from-below 'move-end-of-line evil-insert-state-map)
 
 (add-to-list 'evil-emacs-state-modes 'dired-mode)
   
