@@ -64,6 +64,8 @@
 (define-key evil-normal-state-map (kbd "SPC") 'ace-jump-mode)
 (define-key evil-normal-state-map (kbd "ZB") 'ibuffer)
 
+(add-to-list 'evil-emacs-state-modes 'dired-mode)
+  
 ;evil-insert-state-map [Variable]
 ;The global keymap for Insert state.
 ;evil-visual-state-map [Variable]
