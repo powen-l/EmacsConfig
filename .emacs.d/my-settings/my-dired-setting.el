@@ -4,5 +4,8 @@
 (setq dired-recursive-deletes t)
 (setq dired-recursive-copies t)
 
+;; use the isearch only for filename
+(setq dired-isearch-filenames t)
+
 
 (provide 'my-dired-setting)

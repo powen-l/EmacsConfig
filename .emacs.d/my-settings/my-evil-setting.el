@@ -58,6 +58,7 @@
           (read-kbd-macro (car info))
           (cdr info)))
       '(
+        ("d" . ido-dired)
         ("f" . ido-find-file)
         ("r" . revert-buffer-with-coding-system)
         ("c" . my-kill-buffer)
@@ -71,6 +72,8 @@
         ("s" . save-buffer)
         ("g" . rgrep)
         ("l" . ibuffer)
+        ("j" . dired-jump )
+        ("J" . dired-jump-other-window )
         ("SPC" . ace-jump-mode)
       ))
 

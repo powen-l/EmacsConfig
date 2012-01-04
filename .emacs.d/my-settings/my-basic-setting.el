@@ -172,11 +172,13 @@
 ;; intermediary programs.
 (when (string-equal system-type "windows-nt")
   (setq exec-path
-        (append (list "E:/Tools/Emacs/extra-bin"
-                      "E:/Tools/Emacs/bin")
+        (append (list (expand-file-name "~/.emacs.d/extra-bin")
+                      (expand-file-name "~/.emacs.d/unix-utils-bin")
+                      (expand-file-name "~/bin"))
                 exec-path))
-  (setenv "PATH" (concat "E:\\Tools\\Emacs\\extra-bin;"
-                         "E:\\Tools\\Emacs\\bin;"
+  (setenv "PATH" (concat (expand-file-name "~/.emacs.d/extra-bin") path-separator
+                         (expand-file-name "~/.emacs.d/unix-utils-bin") path-separator
+                         (expand-file-name "~/bin") path-separator
                          (getenv "PATH"))))
 
 ;; time stamp support
