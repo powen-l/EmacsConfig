@@ -2,6 +2,7 @@
 
 ;;;; load base settings
 (add-to-list 'load-path "~/.emacs.d/wttr-config")
+(require 'wttr-utils)
 (require 'wttr-basic)
 (require 'wttr-key)
 ;(require 'wttr-viper)
