@@ -9,4 +9,4 @@
 (add-to-list 'python-mode-hook
              (lambda () (require 'pycomplete)))
 
-(provide 'my-python-setting)
+(provide 'wttr-python)

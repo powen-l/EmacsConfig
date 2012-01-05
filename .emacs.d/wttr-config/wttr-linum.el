@@ -28,4 +28,4 @@
 
 (global-linum-mode 1) 
 
-(provide 'my-linum-mode-setting)
+(provide 'wttr-linum)

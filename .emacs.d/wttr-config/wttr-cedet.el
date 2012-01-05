@@ -45,7 +45,7 @@
 (semantic-load-enable-primary-exuberent-ctags-support)
 
 
-(defun my-cedet-hook ()
+(defun wttr/cedet-hook ()
   (local-set-key [(control return)] 'semantic-ia-complete-symbol-menu)
   (local-set-key "\C-c?" 'semantic-ia-complete-symbol)
   ;;
@@ -57,13 +57,13 @@
   (local-set-key "\C-cs" 'semantic-ia-show-summary)
   (local-set-key "\C-cp" 'semantic-analyze-proto-impl-toggle))
 
-(add-hook 'c-mode-common-hook 'my-cedet-hook)
-(add-hook 'c++-mode-hook 'my-cedet-hook)
-(add-hook 'emacs-lisp-mode-hook 'my-cedet-hook)
-(add-hook 'lisp-mode-hook 'my-cedet-hook)
+(add-hook 'c-mode-common-hook 'wttr/cedet-hook)
+(add-hook 'c++-mode-hook 'wttr/cedet-hook)
+(add-hook 'emacs-lisp-mode-hook 'wttr/cedet-hook)
+(add-hook 'lisp-mode-hook 'wttr/cedet-hook)
 
 
-(defun my-c-mode-cedet-hook ()
+(defun wttr/c-mode-cedet-hook ()
   (local-set-key "." 'semantic-complete-self-insert)
   (local-set-key ">" 'semantic-complete-self-insert)
   (local-set-key "\C-ct" 'eassist-switch-h-cpp)
@@ -71,8 +71,8 @@
   (local-set-key "\C-ce" 'eassist-list-methods)
   (local-set-key "\C-c\C-r" 'semantic-symref))
 
-(add-hook 'c-mode-common-hook 'my-c-mode-cedet-hook)
-(add-hook 'c++-mode-hook 'my-c-mode-cedet-hook)
+(add-hook 'c-mode-common-hook 'wttr/c-mode-cedet-hook)
+(add-hook 'c++-mode-hook 'wttr/c-mode-cedet-hook)
 
 
 (require 'semantic-lex-spp)
@@ -115,4 +115,4 @@
 
 
 
-(provide 'my-cedet-setting)
+(provide 'wttr-cedet)

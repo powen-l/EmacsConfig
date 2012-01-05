@@ -62,4 +62,4 @@
 ;;;; prevent the _ to become a sub title
 (setq org-export-with-sub-superscripts nil)
 
-(provide 'my-org-mode-setting)
+(provide 'wttr-org)

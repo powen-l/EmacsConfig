@@ -44,7 +44,7 @@
 ;The global keymap for Normal state.
 (define-key evil-normal-state-map (kbd "C-s") 'save-buffer)
 
-(defun my-kill-buffer ()
+(defun wttr/kill-buffer ()
   (interactive)
   (if (and (boundp 'server-buffer-clients)
            server-buffer-clients)
@@ -61,7 +61,7 @@
         ("d" . ido-dired)
         ("f" . ido-find-file)
         ("r" . revert-buffer-with-coding-system)
-        ("c" . my-kill-buffer)
+        ("c" . wttr/kill-buffer)
         ("k" . ido-kill-buffer)
         ("o" . other-window)
         ("w" . ido-write-file)
@@ -139,4 +139,4 @@
 ;; evil-previous-state [Variable]
 ;; The state being switched from.
 
-(provide 'my-evil-setting)
+(provide 'wttr-evil)

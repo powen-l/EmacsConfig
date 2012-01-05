@@ -13,13 +13,13 @@
 (setq ac-quick-help-delay 1.0)          ;default is 1.5
 (setq ac-dwim t)                        ;behavior of completion by TAB will be changed as a behavior of completion by RET
 
-;(defun my-ac-abort ()
+;(defun wttr/ac-abort ()
 ;  "normally ESC in viper mode cannot cancel the ac, so I write one to do that"
 ;  (interactive)
 ;  (ac-abort)
 ;  (viper-intercept-ESC-key))
 ;
-;(define-key ac-completing-map (kbd "ESC") 'my-ac-abort)
+;(define-key ac-completing-map (kbd "ESC") 'wttr/ac-abort)
 
 
-(provide 'my-auto-complete-mode-setting)
+(provide 'wttr-auto-complete)

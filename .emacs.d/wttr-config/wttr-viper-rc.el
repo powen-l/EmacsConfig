@@ -54,7 +54,7 @@
 
 ;;;; key map
 ; normal mode
-(defun my-kill-buffer ()
+(defun wttr/kill-buffer ()
   (interactive)
   (if server-buffer-clients
       (server-kill-buffer))
@@ -62,7 +62,7 @@
 
 (define-key viper-vi-global-user-map (kbd "zf") 'ido-find-file)
 (define-key viper-vi-global-user-map (kbd "zr") 'revert-buffer-with-coding-system)
-(define-key viper-vi-global-user-map (kbd "zc") 'my-kill-buffer)
+(define-key viper-vi-global-user-map (kbd "zc") 'wttr/kill-buffer)
 (define-key viper-vi-global-user-map (kbd "zk") 'ido-kill-buffer)
 (define-key viper-vi-global-user-map (kbd "zo") 'other-window)
 (define-key viper-vi-global-user-map (kbd "zw") 'ido-write-file)
@@ -103,12 +103,6 @@
 ;viper-vi-global-user-map
 ;viper-insert-global-user-map
 ;viper-emacs-global-user-map
-
-;; change key in specific mode
-;(setq my-dired-modifier-map (make-sparse-keymap))
-;(define-key my-dired-modifier-map "dd" 'dired-flag-file-deletion)
-;(define-key my-dired-modifier-map "u" 'dired-unmark)
-;(viper-modify-major-mode 'dired-mode 'vi-state my-dired-modifier-map)
 
 ;viper-buffer-search-char
 ;(viper-buffer-search-enable)

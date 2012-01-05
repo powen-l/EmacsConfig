@@ -26,4 +26,4 @@
 (setq preview-scale-function 1.5)
 (require 'preview)
 
-(provide 'my-auctex-setting)
+(provide 'wttr-auctex)

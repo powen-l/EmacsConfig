@@ -46,6 +46,6 @@
 ;(set-default-font "fontset-Consolas")
 
 
-(provide 'my-font-setting)
+(provide 'wttr-font)
 
 

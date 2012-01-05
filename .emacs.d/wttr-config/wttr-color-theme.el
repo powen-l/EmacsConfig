@@ -15,4 +15,4 @@
 
 
 
-(provide 'my-color-theme-setting)
+(provide 'wttr-color-theme)

@@ -307,4 +307,4 @@
 ;(add-to-list 'load-path "~/.emacs.d/plugins/anything")
 ;(require 'anything-config)
 
-(provide 'my-basic-setting)
+(provide 'wttr-basic)

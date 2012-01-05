@@ -8,4 +8,4 @@
 (setq dired-isearch-filenames t)
 
 
-(provide 'my-dired-setting)
+(provide 'wttr-dired)

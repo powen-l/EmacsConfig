@@ -50,4 +50,4 @@
 (global-set-key (kbd "<C-f6>") 'w32-open-shell-from-current-file-directory)
 
 
-(provide 'my-key-setting)
+(provide 'wttr-key)
