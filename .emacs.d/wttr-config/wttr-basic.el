@@ -84,6 +84,10 @@
 ;; can use the narrow to region
 (put 'narrow-to-region 'disabled nil)
 
+;; use mouse to copy thing automatically
+(setq mouse-drag-copy-region t)
+
+
 ;; move mouse when cursor is close to it
 ;(mouse-avoidance-mode 'animate)
 (mouse-avoidance-mode 'none)

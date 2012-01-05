@@ -62,7 +62,8 @@ Based on the Tango color palette."
      (region ((t (:background "#2e3436"))))
 
      ;; Parenthesis matching
-     (show-paren-match-face ((t (:foreground "#2e3436" :background "#73d216"))))
+     ;(show-paren-match-face ((t (:foreground "#2e3436" :background "#73d216"))))
+     (show-paren-match-face ((t (:foreground "#52B6C9" :background "#354328")))) ;; customed by winterTTr, the former is confusing
      (show-paren-mismatch-face ((t (:foreground "#2e3436" :background "#ef2929"))))
 
      ;; Line highlighting
