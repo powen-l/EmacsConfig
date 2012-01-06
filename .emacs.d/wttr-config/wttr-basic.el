@@ -251,6 +251,11 @@
 (add-to-list 'load-path "~/.emacs.d/plugins/gtags")
 (autoload 'gtags-mode "gtags" "" t)
 
+;; cscope
+(add-to-list 'load-path "~/.emacs.d/plugins/xcscope")
+(require 'xcscope)
+
+
 ;; package manager
 (setq package-archives '(("ELPA" . "http://tromey.com/elpa/") 
                           ("gnu" . "http://elpa.gnu.org/packages/")
