@@ -29,7 +29,7 @@
 ;; show column number in mode line
 (setq column-number-mode t)
 
-;; show parent 
+;; show parent
 (show-paren-mode t)
 (setq show-paren-style 'parenthesis)
 
@@ -122,7 +122,7 @@
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 4)
 
-(setq hippie-expand-try-functions-list 
+(setq hippie-expand-try-functions-list
       '(try-expand-dabbrev
 	try-expand-dabbrev-visible
 	try-expand-dabbrev-all-buffers
@@ -176,13 +176,13 @@
 ;; we do not need to setup the grep command, use the correct exec-path
 ;; and "PATH" env is enough
 ;;
-;(grep-apply-setting 
+;(grep-apply-setting
 ; 'grep-find-command
 ; '("E:/Tools/Emacs/bin/find.exe . -type f -exec E:/Tools/Emacs/bin/grep.exe -nH -ie  {} NUL \";\"" . 80 ) )
-;(grep-apply-setting 
+;(grep-apply-setting
 ; 'grep-command
 ; "E:/Tools/Emacs/bin/grep.exe -nH -ie ")
-;(grep-apply-setting 
+;(grep-apply-setting
 ; 'grep-find-template
 ; "E:/Tools/Emacs/bin/find.exe . <X> -type f <F> -exec E:/Tools/Emacs/bin/grep.exe <C> -nH -ie <R> {} NUL \";\"" )
 ;(setq grep-program "grep.exe")
@@ -255,7 +255,7 @@
 
 
 ;; package manager
-(setq package-archives '(("ELPA" . "http://tromey.com/elpa/") 
+(setq package-archives '(("ELPA" . "http://tromey.com/elpa/")
                           ("gnu" . "http://elpa.gnu.org/packages/")
                           ("marmalade" . "http://marmalade-repo.org/packages/")))
 
@@ -294,11 +294,29 @@
 
 
 ;; elisp mode setting
-(add-hook 'emacs-lisp-mode-hook 
+(add-hook 'emacs-lisp-mode-hook
           #'wttr/delete-trailing-whitespace-when-save)
 
 ;; c-mode setting
 (add-hook 'c-mode-hook
           #'wttr/delete-trailing-whitespace-when-save)
+
+
+;; tramp
+;; 1. Download putty installer with all the tools.
+;; 2. Put putty install in the path
+;; 3. Generate a key with PuttyGen
+;; 4. Copy public key to your server
+;; 5. Append public key to your .ssh/authorized_keys file (be sure to
+;; remove extraneous puttygen text, just get the key)
+;; 6. Load up pageant and add your private key (this can be automated
+;; on windows boot)
+;; 7. Add the following to your .emacs config
+
+;; As long as pageant is running with your key, you can edit your
+;; remote files using the format ssh://user@server:path/to/file
+(require 'tramp)
+(setq default-tramp-method "plink")
+
 
 (provide 'wttr-basic)
