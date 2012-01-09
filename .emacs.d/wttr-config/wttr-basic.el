@@ -233,8 +233,6 @@
 
 ;; use ace-jump-mode
 (add-to-list 'load-path "~/.emacs.d/plugins/ace-jump-mode/")
-(add-hook 'ace-jump-mode-before-jump-hook (lambda ()
-                                            (push-mark)))
 (autoload
   'ace-jump-mode
   "ace-jump-mode"
