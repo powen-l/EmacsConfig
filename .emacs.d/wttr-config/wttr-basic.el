@@ -292,4 +292,13 @@
 ;(add-to-list 'load-path "~/.emacs.d/plugins/anything")
 ;(require 'anything-config)
 
+
+;; elisp mode setting
+(add-hook 'emacs-lisp-mode-hook 
+          #'wttr/delete-trailing-whitespace-when-save)
+
+;; c-mode setting
+(add-hook 'c-mode-hook
+          #'wttr/delete-trailing-whitespace-when-save)
+
 (provide 'wttr-basic)

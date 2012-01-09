@@ -29,5 +29,12 @@
                          (getenv "PATH"))))
 
 
+(defun wttr/delete-trailing-whitespace-when-save ()
+  (add-hook 'local-write-file-hooks
+            (lambda ()
+              (save-excursion
+                (delete-trailing-whitespace)))))
+
+
 
 (provide 'wttr-utils)
