@@ -39,7 +39,7 @@
 ;;;; initial state
 ;evil-set-initial-state
 
-;;;; key map 
+;;;; key map
 ;evil-normal-state-map [Variable]
 ;The global keymap for Normal state.
 (define-key evil-normal-state-map (kbd "C-s") 'save-buffer)
@@ -51,6 +51,10 @@
       (server-kill-buffer))
   (kill-buffer (current-buffer)))
 
+;; some auto load
+(autoload 'dired-jump "dired" "dired-jump" t)
+(autoload 'dired-jump-other-window "dired" "dired-jump" t)
+;; add "SPC" sub map
 (define-prefix-command 'wttr/space-evil-normal-map)
 (define-key evil-normal-state-map (kbd "SPC") 'wttr/space-evil-normal-map)
 (mapc (lambda (info)
@@ -81,7 +85,7 @@
 (substitute-key-definition 'evil-copy-from-below 'move-end-of-line evil-insert-state-map)
 
 (add-to-list 'evil-emacs-state-modes 'dired-mode)
-  
+
 ;evil-insert-state-map [Variable]
 ;The global keymap for Insert state.
 ;evil-visual-state-map [Variable]
