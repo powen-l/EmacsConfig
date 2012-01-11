@@ -29,7 +29,7 @@
 ;; show column number in mode line
 (setq column-number-mode t)
 
-;; show parent 
+;; show parent
 (show-paren-mode t)
 (setq show-paren-style 'parenthesis)
 
@@ -122,7 +122,7 @@
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 4)
 
-(setq hippie-expand-try-functions-list 
+(setq hippie-expand-try-functions-list
       '(try-expand-dabbrev
 	try-expand-dabbrev-visible
 	try-expand-dabbrev-all-buffers
@@ -176,13 +176,13 @@
 ;; we do not need to setup the grep command, use the correct exec-path
 ;; and "PATH" env is enough
 ;;
-;(grep-apply-setting 
+;(grep-apply-setting
 ; 'grep-find-command
 ; '("E:/Tools/Emacs/bin/find.exe . -type f -exec E:/Tools/Emacs/bin/grep.exe -nH -ie  {} NUL \";\"" . 80 ) )
-;(grep-apply-setting 
+;(grep-apply-setting
 ; 'grep-command
 ; "E:/Tools/Emacs/bin/grep.exe -nH -ie ")
-;(grep-apply-setting 
+;(grep-apply-setting
 ; 'grep-find-template
 ; "E:/Tools/Emacs/bin/find.exe . <X> -type f <F> -exec E:/Tools/Emacs/bin/grep.exe <C> -nH -ie <R> {} NUL \";\"" )
 ;(setq grep-program "grep.exe")
@@ -240,7 +240,6 @@
   t)
 ;; I also use SPC in viper mode to direct start this mode
 (define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
-(setq ace-jump-mode-case-sensitive-search nil)
 
 ;; window move mode
 (windmove-default-keybindings 'meta)
@@ -255,7 +254,7 @@
 
 
 ;; package manager
-(setq package-archives '(("ELPA" . "http://tromey.com/elpa/") 
+(setq package-archives '(("ELPA" . "http://tromey.com/elpa/")
                           ("gnu" . "http://elpa.gnu.org/packages/")
                           ("marmalade" . "http://marmalade-repo.org/packages/")))
 
@@ -294,7 +293,7 @@
 
 
 ;; elisp mode setting
-(add-hook 'emacs-lisp-mode-hook 
+(add-hook 'emacs-lisp-mode-hook
           #'wttr/delete-trailing-whitespace-when-save)
 
 ;; c-mode setting
