@@ -293,12 +293,14 @@
 
 
 ;; elisp mode setting
-(add-hook 'emacs-lisp-mode-hook
-          #'wttr/delete-trailing-whitespace-when-save)
+;; (add-hook 'emacs-lisp-mode-hook
+;;           #'wttr/delete-trailing-whitespace-when-save)
+;(add-hook 'emacs-lisp-mode-hook 'imenu-add-menubar-index)
 
 ;; c-mode setting
-(add-hook 'c-mode-hook
-          #'wttr/delete-trailing-whitespace-when-save)
+;; (add-hook 'c-mode-hook
+;;           #'wttr/delete-trailing-whitespace-when-save)
+;(add-hook 'c-mode-hook 'imenu-add-menubar-index)
 
 
 ;; tramp
