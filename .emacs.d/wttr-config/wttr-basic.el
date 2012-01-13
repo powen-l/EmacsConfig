@@ -318,6 +318,7 @@
 ;; remote files using the format ssh://user@server:path/to/file
 (require 'tramp)
 (setq default-tramp-method "plink")
+(wttr/add-to-exec-path "~/.emacs.d/PuTTY")
 
 
 (provide 'wttr-basic)
