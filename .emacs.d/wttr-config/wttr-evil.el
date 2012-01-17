@@ -89,6 +89,10 @@
 (define-key evil-insert-state-map (kbd "C-n") 'next-line)
 (define-key evil-insert-state-map (kbd "C-p") 'previous-line)
 
+;; recover the c-k, do not trigger special char input as vim
+(define-key evil-insert-state-map (kbd "C-k") 'kill-line)
+
+
 
 ;; some mode that should use emacs state
 (add-to-list 'evil-emacs-state-modes 'dired-mode)
