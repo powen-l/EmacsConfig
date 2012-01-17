@@ -82,8 +82,15 @@
       ))
 
 ;; replace the <c-e> to move-end-of-line
-(substitute-key-definition 'evil-copy-from-below 'move-end-of-line evil-insert-state-map)
+;(substitute-key-definition 'evil-copy-from-below 'move-end-of-line evil-insert-state-map)
+(define-key evil-insert-state-map (kbd "C-e") 'move-end-of-line)
 
+;; we do not need c-n and c-p to evil-complete
+(define-key evil-insert-state-map (kbd "C-n") 'next-line)
+(define-key evil-insert-state-map (kbd "C-p") 'previous-line)
+
+
+;; some mode that should use emacs state
 (add-to-list 'evil-emacs-state-modes 'dired-mode)
 
 ;evil-insert-state-map [Variable]

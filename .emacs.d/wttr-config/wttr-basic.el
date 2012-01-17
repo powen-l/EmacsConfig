@@ -167,6 +167,14 @@
 ;(add-hook 'write-file-hooks 'time-stamp)
 ;(setq time-stamp-format "%:y-%02m-%02d %02H:%02M:%02S winterTTr")
 
+;; http://trey-jackson.blogspot.com/2010/04/emacs-tip-36-abort-minibuffer-when.html
+;; very useful when you use mouse meanwhile, close minibuffer when lose focus
+(defun stop-using-minibuffer ()
+  "kill the minibuffer"
+  (when (and (>= (recursion-depth) 1) (active-minibuffer-window))
+    (abort-recursive-edit)))
+
+(add-hook 'mouse-leave-buffer-hook 'stop-using-minibuffer)
 
 ;========================================
 ; Some mode setting
@@ -242,7 +250,12 @@
 (define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
 
 ;; window move mode
-(windmove-default-keybindings 'meta)
+(when (boundp 'windmove-default-keybindings)
+  (windmove-default-keybindings 'meta))
+(global-set-key (kbd "M-j") 'windmove-down)
+(global-set-key (kbd "M-k") 'windmove-up)
+(global-set-key (kbd "M-h") 'windmove-left)
+(global-set-key (kbd "M-l") 'windmove-right)
 
 ;; gtags
 (add-to-list 'load-path "~/.emacs.d/plugins/gtags")
