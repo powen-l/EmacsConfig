@@ -3,7 +3,8 @@
 (create-fontset-from-fontset-spec
  "-outline-Consolas-normal-normal-normal-mono-16-*-*-*-c-*-fontset-Consolas")
 (set-fontset-font "fontset-Consolas" 'ascii "Consolas-14" nil 'prepend)
-(set-fontset-font "fontset-Consolas" 'han "YaHei Consolas Hybrid-12" nil 'prepend)
+;; (set-fontset-font "fontset-Consolas" 'han "YaHei Consolas Hybrid-14" nil 'prepend)
+(set-fontset-font "fontset-Consolas" 'han "Microsoft YaHei-12" nil 'prepend)
 (set-fontset-font "fontset-Consolas" 'kana "MS Gothic-12" nil 'prepend)
 (set-default-font "fontset-Consolas")
 

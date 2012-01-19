@@ -5,6 +5,7 @@
 /.emacs.d/elpa/
 /.emacs.d/url/
 /.emacs.d/bookmarks
+/.emacs.d/eshell/
 /.ido.last
 /.slime-history.eld
 /.eshell/

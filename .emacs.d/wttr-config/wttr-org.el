@@ -57,6 +57,13 @@
 (setq org-src-ask-before-returning-to-edit-buffer nil)
 (setq org-src-fontify-natively t)
 
+;; startup settings i like
+(setq org-startup-folded 'content)
+(setq org-startup-indented t)
+(setq org-startup-align-all-tables t)
+(setq org-startup-with-inline-images t)
+(setq org-hide-leading-stars t)
+
 
 ;; export settings
 ;;;; prevent the _ to become a sub title
