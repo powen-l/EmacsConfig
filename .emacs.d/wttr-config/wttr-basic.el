@@ -329,7 +329,7 @@
 
 ;; As long as pageant is running with your key, you can edit your
 ;; remote files using the format ssh://user@server:path/to/file
-(require 'tramp)
+;; (require 'tramp)
 (setq default-tramp-method "plink")
 (wttr/add-to-exec-path "~/.emacs.d/PuTTY")
 
