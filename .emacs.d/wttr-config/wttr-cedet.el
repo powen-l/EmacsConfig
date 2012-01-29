@@ -6,6 +6,9 @@
 (semantic-load-enable-excessive-code-helpers)
 ;(semantic-load-enable-semantic-debugging-helpers)
 
+;; the function can be folded
+(global-semantic-tag-folding-mode 1)
+
 ; (global-ede-mode 1)
 ; (global-srecode-minor-mode 1) 
 ; 
@@ -16,22 +19,30 @@
 ; (require 'semantic-decorate-include)
 ; (require 'semantic-ia)
 ; (require 'semantic-gcc)
-; ;; use need to update the specific path
-; (let ((c++-include-path-list (cond
-;                               ((string= (system-name) "DONGWANGDSK01")
-;                                (list "C:/Program Files/Microsoft SDKs/Windows/v6.1/Include"
-;                                      "C:/Program Files/Microsoft SDKs/Windows/v6.1/Include/gl"
-;                                      "C:/Program Files/Microsoft SDKs/Windows/v6.1/VC/Include"
-;                                      "C:/Program Files (x86)/Microsoft Visual Studio 8/VC/include"
-;                                      "C:/Program Files (x86)/Microsoft Visual Studio 8/VC/atlmfc/include"
-;                                      "D:/_SRC_/boost/include"))
-;                               ((string= (system-name) "WINTERTTR-PC")
-;                                (list "D:/Program Files/Microsoft Visual Studio 10.0/VC/include"
-;                                      "D:/Program Files/Microsoft Visual Studio 10.0/VC/atlmfc/include"
-;                                      "D:/_SRC_/boost/include"))
-;                               (t
-;                                nil))))
-;   (mapc (lambda (x) (semantic-add-system-include x 'c++-mode)) c++-include-path-list))
+;; use need to update the specific path
+(let ((c++-include-path-list (cond
+                              ((string= (system-name) "WINTERTTR-WS")
+                               (list "D:/src/zephyr/perf/OTHERS/STDCPP/INCLUDE"
+                                     "D:/src/zephyr/perf/TOOLS/PUBLIC/ext/crt80/inc"
+                                     "D:/src/zephyr/perf/PUBLIC/COMMON/OAK/INC"
+                                     "D:/src/zephyr/perf/PUBLIC/COMMON/SDK/INC"))
+                              ((string= (system-name) "DONGWANGDSK01")
+                               (list "C:/Program Files/Microsoft SDKs/Windows/v6.1/Include"
+                                     "C:/Program Files/Microsoft SDKs/Windows/v6.1/Include/gl"
+                                     "C:/Program Files/Microsoft SDKs/Windows/v6.1/VC/Include"
+                                     "C:/Program Files (x86)/Microsoft Visual Studio 8/VC/include"
+                                     "C:/Program Files (x86)/Microsoft Visual Studio 8/VC/atlmfc/include"
+                                     "D:/_SRC_/boost/include"))
+                              ((string= (system-name) "WINTERTTR-PC")
+                               (list "D:/Program Files/Microsoft Visual Studio 10.0/VC/include"
+                                     "D:/Program Files/Microsoft Visual Studio 10.0/VC/atlmfc/include"
+                                     "D:/_SRC_/boost/include"))
+                              (t
+                               nil))))
+  (mapc (lambda (x)
+          (semantic-add-system-include x 'c++-mode)
+          (semantic-add-system-include x 'c-mode))
+        c++-include-path-list))
 ; 
 ; 
 ; 
@@ -49,34 +60,37 @@
 ; (semantic-load-enable-primary-exuberent-ctags-support)
 ; 
 ; 
-; (defun wttr/cedet-hook ()
-;   (local-set-key [(control return)] 'semantic-ia-complete-symbol-menu)
-;   (local-set-key "\C-c?" 'semantic-ia-complete-symbol)
-;   ;;
-;   (local-set-key "\C-c>" 'semantic-complete-analyze-inline)
-;   (local-set-key "\C-c=" 'semantic-decoration-include-visit)
+(defun wttr/cedet-hook ()
+  (local-set-key [(control return)] 'semantic-ia-complete-symbol-menu)
+  (local-set-key "\C-c?" 'semantic-ia-complete-symbol)
+  ;;
+  (local-set-key "\C-c>" 'semantic-complete-analyze-inline)
+  (local-set-key "\C-c=" 'semantic-decoration-include-visit)
+
+  (local-set-key "\C-cj" 'semantic-ia-fast-jump)
+  (local-set-key "\C-cq" 'semantic-ia-show-doc)
+  (local-set-key "\C-cs" 'semantic-ia-show-summary)
+  (local-set-key "\C-cp" 'semantic-analyze-proto-impl-toggle))
+
+(add-hook 'c-mode-common-hook 'wttr/cedet-hook)
+(add-hook 'c++-mode-hook 'wttr/cedet-hook)
+(add-hook 'emacs-lisp-mode-hook 'wttr/cedet-hook)
+(add-hook 'lisp-mode-hook 'wttr/cedet-hook)
 ; 
-;   (local-set-key "\C-cj" 'semantic-ia-fast-jump)
-;   (local-set-key "\C-cq" 'semantic-ia-show-doc)
-;   (local-set-key "\C-cs" 'semantic-ia-show-summary)
-;   (local-set-key "\C-cp" 'semantic-analyze-proto-impl-toggle))
 ; 
-; (add-hook 'c-mode-common-hook 'wttr/cedet-hook)
-; (add-hook 'c++-mode-hook 'wttr/cedet-hook)
-; (add-hook 'emacs-lisp-mode-hook 'wttr/cedet-hook)
-; (add-hook 'lisp-mode-hook 'wttr/cedet-hook)
-; 
-; 
-; (defun wttr/c-mode-cedet-hook ()
-;   (local-set-key "." 'semantic-complete-self-insert)
-;   (local-set-key ">" 'semantic-complete-self-insert)
-;   (local-set-key "\C-ct" 'eassist-switch-h-cpp)
-;   (local-set-key "\C-xt" 'eassist-switch-h-cpp)
-;   (local-set-key "\C-ce" 'eassist-list-methods)
-;   (local-set-key "\C-c\C-r" 'semantic-symref))
-; 
-; (add-hook 'c-mode-common-hook 'wttr/c-mode-cedet-hook)
-; (add-hook 'c++-mode-hook 'wttr/c-mode-cedet-hook)
+(defun wttr/c-mode-cedet-hook ()
+  ;(local-set-key "." 'semantic-complete-self-insert)
+  ;(local-set-key ">" 'semantic-complete-self-insert)
+  (local-set-key "\C-ct" 'eassist-switch-h-cpp)
+  (local-set-key "\C-xt" 'eassist-switch-h-cpp)
+  (local-set-key "\C-ce" 'eassist-list-methods)
+  (local-set-key "\C-c\C-r" 'semantic-symref))
+
+(add-hook 'c-mode-common-hook 'wttr/c-mode-cedet-hook)
+(add-hook 'c++-mode-hook 'wttr/c-mode-cedet-hook)
+
+;; Always use C++ mode for file
+(add-to-list 'auto-mode-alist '("\\.[hc]$" . c++-mode))
 ; 
 ; 
 ; (require 'semantic-lex-spp)

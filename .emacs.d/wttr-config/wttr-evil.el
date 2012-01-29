@@ -96,6 +96,7 @@
 
 ;; some mode that should use emacs state
 (add-to-list 'evil-emacs-state-modes 'dired-mode)
+(add-to-list 'evil-emacs-state-modes 'eassist-mode)
 
 ;evil-insert-state-map [Variable]
 ;The global keymap for Insert state.
