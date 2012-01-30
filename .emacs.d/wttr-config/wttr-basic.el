@@ -73,7 +73,8 @@
   (interactive)
   (w32-send-sys-command 61488))
 
-(run-with-idle-timer 0.2 nil 'w32-maximize-frame)
+; (run-with-idle-timer 0.2 nil 'w32-maximize-frame)
+(add-to-list 'emacs-startup-hook #'w32-maximize-frame)
 
 ;===================================
 ; Control
@@ -110,6 +111,9 @@
 
 ;; set default mode to text-mode
 (setq-default major-mode 'text-mode)
+
+;; set startup scrach buffer to another mode
+; (setq initial-major-mode 'text-mode)
 
 ;; scroll one line at a time (less "jumpy" than defaults)
 (setq mouse-wheel-scroll-amount '(1 ((shift) . 3)))   ;; one line at a time
