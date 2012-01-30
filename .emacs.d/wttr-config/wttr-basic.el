@@ -157,8 +157,11 @@
 ;; add extra binary path
 (when (string-equal system-type "windows-nt")
   (mapc #'wttr/add-to-exec-path
-        '("~/.emacs.d/extra-bin"
-          "~/.emacs.d/unix-utils-bin"
+        '("~/.emacs.d/extra-bin/PuTTY"
+          "~/.emacs.d/extra-bin/clang"
+          "~/.emacs.d/extra-bin/unix-utils-bin"
+          "~/.emacs.d/extra-bin/etc"
+          "~/.emacs.d/extra-bin/PuTTY/"
           "~/bin")))
 
 ;; time stamp support
