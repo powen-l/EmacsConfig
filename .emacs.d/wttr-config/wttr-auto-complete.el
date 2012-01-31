@@ -40,7 +40,9 @@
                           ((string= (system-name) "WINTERTTR-PC")
                            (list "-IC:/MinGW/include"
                                  "-IC:/MinGW/include/c++/3.4.5"
-                                 "-IC:/MinGW/lib/gcc/mingw32/3.4.5/include"))
+                                 "-IC:/MinGW/lib/gcc/mingw32/3.4.5/include"
+                                 "-IC:/MinGW/include/c++/3.4.5/mingw32"
+                                 "-D__MSVCRT__"))
                           (t
                            nil))))
   (setq ac-clang-flags extra-clang-flags))
