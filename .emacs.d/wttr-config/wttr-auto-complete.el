@@ -37,19 +37,10 @@
                                  "-ID:/src/zephyr/perf/PUBLIC/COMMON/OAK/INC"
                                  "-ID:/src/zephyr/perf/PUBLIC/COMMON/SDK/INC"
                                  "-fmsc-version=1500"))
-                          ((string= (system-name) "DONGWANGDSK01")
-                           (list "-IC:/Program Files/Microsoft SDKs/Windows/v6.1/Include"
-                                 "-IC:/Program Files/Microsoft SDKs/Windows/v6.1/Include/gl"
-                                 "-IC:/Program Files/Microsoft SDKs/Windows/v6.1/VC/Include"
-                                 "-IC:/Program Files (x86)/Microsoft Visual Studio 8/VC/include"
-                                 "-IC:/Program Files (x86)/Microsoft Visual Studio 8/VC/atlmfc/include"
-                                 "-ID:/_SRC_/boost/include"))
                           ((string= (system-name) "WINTERTTR-PC")
-                           (list "-ID:/Program Files/Microsoft Visual Studio 10.0/VC/include"
-                                 "-ID:/Program Files/Microsoft Visual Studio 10.0/VC/atlmfc/include"
-                                 "-ID:/_SRC_/boost/include"
-                                 "-fmsc-version=1600"
-                                 "-D__w64="))
+                           (list "-IC:/MinGW/include"
+                                 "-IC:/MinGW/include/c++/3.4.5"
+                                 "-IC:/MinGW/lib/gcc/mingw32/3.4.5/include"))
                           (t
                            nil))))
   (setq ac-clang-flags extra-clang-flags))
