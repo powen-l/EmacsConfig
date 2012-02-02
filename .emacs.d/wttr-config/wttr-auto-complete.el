@@ -36,7 +36,15 @@
                                  "-ID:/src/zephyr/perf/TOOLS/PUBLIC/ext/crt80/inc"
                                  "-ID:/src/zephyr/perf/PUBLIC/COMMON/OAK/INC"
                                  "-ID:/src/zephyr/perf/PUBLIC/COMMON/SDK/INC"
-                                 "-fmsc-version=1500"))
+                                 "-fmsc-version=1500"
+                                 "-D_WIN32_WCE"
+                                 "-D__w64="
+                                 "-DUNICODE"
+                                 "-D_WCHAR_T_DEFINED"
+                                 "-D__int64=long"
+                                 "-Derrno_t=int"
+                                 "-Dsize_t=int"
+                                 "-D_inline="))
                           ((string= (system-name) "WINTERTTR-PC")
                            (list "-IC:/MinGW/include"
                                  "-IC:/MinGW/include/c++/3.4.5"

@@ -340,5 +340,19 @@
 (setq default-tramp-method "plink")
 (wttr/add-to-exec-path "~/.emacs.d/PuTTY")
 
+;; F# mode
+(add-to-list 'load-path "~/.emacs.d/plugins/fsharp-mode")
+(add-to-list 'auto-mode-alist '("\\.fs[iylx]?$" . fsharp-mode))
+(autoload 'fsharp-mode "fsharp" "Major mode for editing F# code." t)
+(autoload 'run-fsharp "inf-fsharp" "Run an inferior F# process." t)
+
+(cond
+ ((string-equal (system-name) "WINTERTTR-WS")
+  (setq inferior-fsharp-program "\"C:/Program Files (x86)/Microsoft F#/v4.0/Fsi.exe\"")
+  (setq fsharp-compiler "\"C:/Program Files (x86)/Microsoft F#/v4.0/Fsc.exe\""))
+ (t
+  nil))
+
+
 
 (provide 'wttr-basic)
