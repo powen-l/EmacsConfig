@@ -360,4 +360,10 @@
 (setq undo-tree-mode-lighter " UndoT")
 
 
+;; expand-region
+(add-to-list 'load-path "~/.emacs.d/plugins/expand-region")
+(autoload 'er/expand-region "auto expand region" t)
+(global-set-key (kbd "M-2") 'er/expand-region)
+
+
 (provide 'wttr-basic)
