@@ -356,6 +356,8 @@
  (t
   nil))
 
+;; redo tree
+(setq undo-tree-mode-lighter " UndoT")
 
 
 (provide 'wttr-basic)
