@@ -161,12 +161,12 @@
 ;; add extra binary path
 (when (string-equal system-type "windows-nt")
   (mapc #'wttr/add-to-exec-path
-        '("~/.emacs.d/extra-bin/PuTTY"
+        '("~/bin"
+          "~/.emacs.d/extra-bin/etc"
           "~/.emacs.d/extra-bin/clang"
           "~/.emacs.d/extra-bin/unix-utils-bin"
-          "~/.emacs.d/extra-bin/etc"
-          "~/.emacs.d/extra-bin/PuTTY/"
-          "~/bin")))
+          "~/.emacs.d/extra-bin/PuTTY"
+          )))
 
 ;; time stamp support
 ;(setq time-stamp-active t)
@@ -191,6 +191,9 @@
 ;; we do not need to setup the grep command, use the correct exec-path
 ;; and "PATH" env is enough
 ;;
+(require 'grep)
+(grep-apply-setting
+ 'grep-find-use-xargs 'exec)
 ;(grep-apply-setting
 ; 'grep-find-command
 ; '("E:/Tools/Emacs/bin/find.exe . -type f -exec E:/Tools/Emacs/bin/grep.exe -nH -ie  {} NUL \";\"" . 80 ) )
@@ -338,7 +341,6 @@
 ;; remote files using the format ssh://user@server:path/to/file
 ;; (require 'tramp)
 (setq default-tramp-method "plink")
-(wttr/add-to-exec-path "~/.emacs.d/PuTTY")
 
 ;; F# mode
 (add-to-list 'load-path "~/.emacs.d/plugins/fsharp-mode")
