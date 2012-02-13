@@ -60,7 +60,7 @@
 ;; startup settings i like
 (setq org-startup-folded 'content)
 (setq org-startup-indented t)
-(setq org-startup-align-all-tables t)
+; (setq org-startup-align-all-tables t)
 (setq org-startup-with-inline-images t)
 (setq org-hide-leading-stars t)
 
