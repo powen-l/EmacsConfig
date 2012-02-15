@@ -105,6 +105,7 @@
 
 ;; encoding
 (set-language-environment 'UTF-8)
+(setq file-name-coding-system 'gb2312)
 
 ;; setup up a big kill-ring, so i will never miss anything:-)
 (setq kill-ring-max 100)
