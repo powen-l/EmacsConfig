@@ -78,6 +78,7 @@
         ("l" . ibuffer)
         ("j" . dired-jump )
         ("J" . dired-jump-other-window )
+        ("i" . ispell-buffer)
         ("SPC" . ace-jump-mode)
       ))
 

@@ -381,4 +381,11 @@
 ; (add-to-list 'wrap-region-except-modes 'conflicting-mode)
 
 
+;; ispell setting
+(autoload 'ispell-buffer "ispell" "spell check the current buffer" t)
+(when (string= system-type "windows-nt")
+  (wttr/add-to-exec-path "~/.emacs.d/extra-bin/aspell/bin")
+  (setq ispell-program-name "aspell"))
+(setq ispell-dictionary "british")
+
 (provide 'wttr-basic)
