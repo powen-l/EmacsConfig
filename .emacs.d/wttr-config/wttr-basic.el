@@ -388,4 +388,9 @@
   (setq ispell-program-name "aspell"))
 (setq ispell-dictionary "british")
 
+
+;; uniquify setting
+(require 'uniquify)
+(setq uniquify-buffer-name-style 'post-forward-angle-brackets)
+
 (provide 'wttr-basic)

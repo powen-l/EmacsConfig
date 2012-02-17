@@ -27,4 +27,4 @@
                     :box '(:line-width 2 :color "gray70")
                     )
 
-(provide 'wttr-tabbar-config)
+(provide 'wttr-tabbar)
