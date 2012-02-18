@@ -21,19 +21,12 @@
 ; (require 'semantic-gcc)
 ;; use need to update the specific path
 (let ((c++-include-path-list (cond
-                              ((string= (system-name) "WINTERTTR-WS")
+                              (wttr/host:MSWSp
                                (list "D:/src/zephyr/perf/OTHERS/STDCPP/INCLUDE"
                                      "D:/src/zephyr/perf/TOOLS/PUBLIC/ext/crt80/inc"
                                      "D:/src/zephyr/perf/PUBLIC/COMMON/OAK/INC"
                                      "D:/src/zephyr/perf/PUBLIC/COMMON/SDK/INC"))
-                              ((string= (system-name) "DONGWANGDSK01")
-                               (list "C:/Program Files/Microsoft SDKs/Windows/v6.1/Include"
-                                     "C:/Program Files/Microsoft SDKs/Windows/v6.1/Include/gl"
-                                     "C:/Program Files/Microsoft SDKs/Windows/v6.1/VC/Include"
-                                     "C:/Program Files (x86)/Microsoft Visual Studio 8/VC/include"
-                                     "C:/Program Files (x86)/Microsoft Visual Studio 8/VC/atlmfc/include"
-                                     "D:/_SRC_/boost/include"))
-                              ((string= (system-name) "WINTERTTR-PC")
+                              (wttr/host:HOMEp
                                (list "D:/Program Files/Microsoft Visual Studio 10.0/VC/include"
                                      "D:/Program Files/Microsoft Visual Studio 10.0/VC/atlmfc/include"
                                      "D:/_SRC_/boost/include"))

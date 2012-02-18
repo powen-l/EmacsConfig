@@ -1,7 +1,7 @@
 ;; -*- coding: utf-8 -*-
 
 ;; we need to add the ccl binary path
-(when (string-equal system-type "windows-nt")
+(when wttr/os:win32p
   (wttr/add-to-exec-path "~/../ccl-1.7-windows")
   (setq inferior-lisp-program
         (if (getenv "PROGRAMW6432") "wx86cl64.exe" "wx86cl.exe"))

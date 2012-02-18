@@ -38,9 +38,7 @@
 
 ;; make the title infomation more useful
 (setq frame-title-format
-      '( (:eval (system-name) )
-        " >> "
-        "%f") )
+      (list "GNU Emacs " emacs-version "@" system-name " - " '(buffer-file-name "%f" "%b")))
 
 ;(setq global-mode-string (append global-mode-string  '("  [" default-directory "]") ))
 (setq-default mode-line-format
@@ -150,17 +148,14 @@
 (setq split-width-threshold nil)
 
 ;; server
-;(setq server-mode-forbidden-list '("WINTERTTR-WS"))
-(setq server-mode-forbidden-list nil)
-(when (not (member (system-name) server-mode-forbidden-list))
-    (server-start)
-    (add-hook 'kill-emacs-hook
-              (lambda ()
-                (if (file-exists-p "~/.emacs.d/server/server")
-                    (delete-file "~/.emacs.d/server/server")))))
+(server-start)
+(add-hook 'kill-emacs-hook
+          (lambda ()
+            (if (file-exists-p "~/.emacs.d/server/server")
+                (delete-file "~/.emacs.d/server/server"))))
 
 ;; add extra binary path
-(when (string-equal system-type "windows-nt")
+(when wttr/os:win32p
   (mapc #'wttr/add-to-exec-path
         '("~/bin"
           "~/.emacs.d/extra-bin/etc"
@@ -293,8 +288,15 @@
 (global-undo-tree-mode)
 
 ;; ido mode
-(require 'ido)
-(ido-mode t)
+(when (require 'ido "ido" t)
+  (ido-mode t)
+  (setq ido-enable-flex-matching t)
+  (setq ido-use-virtual-buffers t))
+
+
+;; turn off blinding cursor 
+(when (fboundp 'blink-cursor-mode)
+  (blink-cursor-mode -1)) 
 
 ;; tempbuf mode
 (add-to-list 'load-path "~/.emacs.d/plugins/tempbuf-mode")
@@ -350,10 +352,10 @@
 (autoload 'run-fsharp "inf-fsharp" "Run an inferior F# process." t)
 
 (cond
- ((string-equal (system-name) "WINTERTTR-WS")
+ (wttr/host:MSWSp
   (setq inferior-fsharp-program "\"C:/Program Files (x86)/Microsoft F#/v4.0/Fsi.exe\"")
   (setq fsharp-compiler "\"C:/Program Files (x86)/Microsoft F#/v4.0/Fsc.exe\""))
- ((string-equal (system-name) "WINTERTTR-PC")
+ (wttr/host:HOMEp
   (setq inferior-fsharp-program "\"C:/Program Files/Microsoft F#/v4.0/Fsi.exe\"")
   (setq fsharp-compiler "\"C:/Program Files/Microsoft F#/v4.0/Fsc.exe\""))
  (t
@@ -383,7 +385,7 @@
 
 ;; ispell setting
 (autoload 'ispell-buffer "ispell" "spell check the current buffer" t)
-(when (string= system-type "windows-nt")
+(when wttr/os:win32p
   (wttr/add-to-exec-path "~/.emacs.d/extra-bin/aspell/bin")
   (setq ispell-program-name "aspell"))
 (setq ispell-dictionary "british")

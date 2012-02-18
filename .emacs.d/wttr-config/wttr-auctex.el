@@ -4,7 +4,7 @@
 (add-to-list 'load-path "~/.emacs.d/plugins/auctex-11.86-e23.3-msw/site-lisp")
 (load "site-start.el" nil t t)
 
-(if (string= system-type "windows-nt")
+(if wttr/os:win32p
     (require 'tex-mik))
 
 (add-hook 'LaTeX-mode-hook 'auto-fill-mode)

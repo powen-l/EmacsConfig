@@ -32,13 +32,13 @@
 
 ;; system specific setting
 (let ((extra-clang-flags (cond
-                          ((string= (system-name) "WINTERTTR-WS")
+                          (wttr/host:MSWSp
                            (list "-IC:/MinGW/include"
                                  "-IC:/MinGW/lib/gcc/mingw32/4.6.1/include"
                                  "-IC:/MinGW/lib/gcc/mingw32/4.6.1/include/c++"
                                  "-IC:/MinGW/lib/gcc/mingw32/4.6.1/include/c++/mingw32"
                                  "-D__MSVCRT__="))
-                          ((string= (system-name) "WINTERTTR-PC")
+                          (wttr/host:HOMEp
                            (list "-IC:/MinGW/include"
                                  "-IC:/MinGW/include/c++/3.4.5"
                                  "-IC:/MinGW/lib/gcc/mingw32/3.4.5/include"

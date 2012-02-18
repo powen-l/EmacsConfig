@@ -36,5 +36,14 @@
                 (delete-trailing-whitespace)))))
 
 
+;; some const variable
+(defconst wttr/os:win32p (eq system-type 'windowns-nt)
+  "if current environment is win32 system")
+
+(defconst wttr/host:MSWSp (string-equal system-name "WINTERTTR-WS")
+  "if the currrent host is Microsoft workstation")
+
+(defconst wttr/host:HOMEp (string-equal system-name "WINTERTTR-PC")
+  "if the current host is home laptop")
 
 (provide 'wttr-utils)
