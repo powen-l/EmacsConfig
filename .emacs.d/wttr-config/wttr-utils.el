@@ -20,13 +20,22 @@
 ;; `PATH'. This is because some Emacs features invoke programs
 ;; directly, while others do that through the shell or some other
 ;; intermediary programs.
-(defun wttr/add-to-exec-path (path)
-  (setq exec-path
-        (cons (expand-file-name path)
-              exec-path))
+(defun wttr/prepend-to-exec-path (path)
+  "prepand the path to the emacs intenral `exec-path' and \"PATH\" env variable.
+Return the updated `exec-path'"
   (setenv "PATH" (concat (expand-file-name path)
                          path-separator
-                         (getenv "PATH"))))
+                         (getenv "PATH")))
+  (setq exec-path
+        (cons (expand-file-name path)
+              exec-path)))
+
+
+;; as the (add-to-list 'load-path ...) will always check if the
+;; added path already exists, that's expansive to CPU and not so much neccesary.
+(defun wttr/prepend-to-load-path (path)
+  "prepand the PATH to the head of the `load-path', return updated load-path."
+  (setq load-path (cons path load-path)))
 
 
 (defun wttr/delete-trailing-whitespace-when-save ()
@@ -37,7 +46,7 @@
 
 
 ;; some const variable
-(defconst wttr/os:win32p (eq system-type 'windowns-nt)
+(defconst wttr/os:win32p (eq system-type 'windows-nt)
   "if current environment is win32 system")
 
 (defconst wttr/host:MSWSp (string-equal system-name "WINTERTTR-WS")

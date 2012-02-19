@@ -14,7 +14,7 @@
 (setq evil-want-C-u-scroll nil)
 
 ;; load
-(add-to-list 'load-path "~/.emacs.d/plugins/evil")
+(wttr/prepend-to-load-path "~/.emacs.d/plugins/evil")
 (require 'evil)
 (evil-mode 1)
 

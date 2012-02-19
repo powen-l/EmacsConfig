@@ -4,6 +4,7 @@
 (add-to-list 'load-path "~/.emacs.d/wttr-config")
 (require 'wttr-utils)
 (require 'wttr-basic)
+(require 'wttr-minor-modes)
 (require 'wttr-key)
 ;(require 'wttr-viper)
 (require 'wttr-evil)

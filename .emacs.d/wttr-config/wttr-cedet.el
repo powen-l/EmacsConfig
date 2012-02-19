@@ -119,9 +119,9 @@
 
 
 ;; ecb
-; (add-to-list 'load-path "~/.emacs.d/plugins/ecb-2.40/")
+; (wttr/prepend-to-load-path "~/.emacs.d/plugins/ecb-2.40/")
 ; (require 'ecb)
-;(setq ecb-auto-activate t
+; (setq ecb-auto-activate t
 ;      ecb-tip-of-the-day nil)
 
 

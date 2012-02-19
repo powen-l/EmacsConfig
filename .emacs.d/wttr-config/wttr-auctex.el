@@ -1,7 +1,7 @@
 ;; -*- coding: utf-8 -*-
 
 
-(add-to-list 'load-path "~/.emacs.d/plugins/auctex-11.86-e23.3-msw/site-lisp")
+(wttr/prepend-to-load-path "~/.emacs.d/plugins/auctex-11.86-e23.3-msw/site-lisp")
 (load "site-start.el" nil t t)
 
 (if wttr/os:win32p

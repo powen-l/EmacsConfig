@@ -1,7 +1,7 @@
 ;; -*- coding: utf-8 -*-
 
 ;; load
-(add-to-list 'load-path "~/.emacs.d/plugins/auto-complete-1.3.1")
+(wttr/prepend-to-load-path "~/.emacs.d/plugins/auto-complete-1.3.1")
 (require 'pos-tip)
 (require 'auto-complete)
 (require 'auto-complete-config)
