@@ -230,4 +230,10 @@
 (wttr/prepend-to-load-path "~/.emacs.d/plugins/hide-lines")
 (autoload 'hide-lines "hide-lines" nil t)
 
+
+;; action script mode
+(wttr/prepend-to-load-path "~/.emacs.d/plugins/action-script-mode")
+(autoload 'actionscript-mode "actionscript-mode" nil t)
+(add-to-list 'auto-mode-alist '("\\.as$" . actionscript-mode))
+
 (provide 'wttr-minor-modes)

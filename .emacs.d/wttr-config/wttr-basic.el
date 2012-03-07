@@ -10,6 +10,9 @@
 ;; close startup message
 (setq inhibit-startup-message t)
 
+;; transprent window
+; (set-frame-parameter (selected-frame) 'alpha (list 70 70))
+; (add-to-list 'default-frame-alist (cons 'alpha (list 90 85)))
 
 
 ;; turn on syntax hilight
@@ -41,26 +44,6 @@
 ;; make the title infomation more useful
 (setq frame-title-format
       (list "GNU Emacs " emacs-version "@" system-name " - " '(buffer-file-name "%f" "%b")))
-
-;(setq global-mode-string (append global-mode-string  '("  [" default-directory "]") ))
-(setq-default mode-line-format
-      '( "%e"
-         "-"
-         ("[" (:eval (format "%s" buffer-file-coding-system)) ":")   ;mode-line-mule-info, use more readable format
-         ;mode-line-client, remove
-         ("" mode-line-modified "]") ; change format to be together with encoding
-         ;mode-line-remote, remove
-         ;mode-line-frame-identification, remove
-         "["
-         mode-line-buffer-identification
-         "]"
-         mode-line-position
-         (vc-mode vc-mode)
-         mode-line-modes
-         ;("" viper-mode-string)    ;global-mode-string contains it
-         global-mode-string
-         ;("[" default-directory "]")
-         "-%-" ) )
 
 ;; setup startup window size
 (defun w32-restore-frame ()
