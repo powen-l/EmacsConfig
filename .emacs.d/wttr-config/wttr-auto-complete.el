@@ -26,7 +26,7 @@
 (defun wttr/ac-cc-mode-setup ()
   (make-local-variable 'ac-auto-start)
   (setq ac-auto-start nil)              ;auto complete using clang is CPU sensitive
-  (setq ac-sources (append '(ac-source-clang ac-source-yasnippet) ac-sources)))
+  (setq ac-sources (append '(ac-source-yasnippet ac-source-clang) ac-sources)))
 (add-hook 'c-mode-hook 'wttr/ac-cc-mode-setup)
 (add-hook 'c++-mode-hook 'wttr/ac-cc-mode-setup)
 

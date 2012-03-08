@@ -3,13 +3,13 @@
 ;;;; load base settings
 (add-to-list 'load-path "~/.emacs.d/wttr-config")
 (require 'wttr-utils)
+(require 'wttr-font)
 (require 'wttr-basic)
 (require 'wttr-modeline)
 (require 'wttr-minor-modes)
 (require 'wttr-key)
 ;(require 'wttr-viper)
 (require 'wttr-evil)
-(require 'wttr-font)
 (require 'wttr-color-theme)
 
 ;;;; some complex mode
