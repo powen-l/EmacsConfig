@@ -10,31 +10,77 @@ Otherwise, the return value may not be the corrent value for current fontset."
   (- (elt (window-pixel-edges) 3)
      (elt (window-inside-pixel-edges) 3)))
 
-(defun wttr/mode-line:generate-triangle-image-data (height width)
+(defun wttr/mode-line:data-generator-left-triangle (height width)
+  "Generator for the data section of the XPM format image.
+This function is used to generate the left triangle style.
+It return a alist ((data \"data-string\") (width <num>) (height <num))."
   (let* ((min-triagle-width (+ (/ height 2) (% height 2)))
          (final-width (max min-triagle-width width))
-         (line-format "\"%s%s\",")
+         (line-format "\"%s%s\"")
          (top-part
           (loop for offset from 1 to (/ height 2)
                 collect (format line-format
                                 (make-string offset ?.)
-                                (make-string (- final-width offset) ? )))))
-    (mapconcat #'identity
-               (append top-part
-                       (if (equal (% height 2) 1)
-                           (list (format line-format
-                                         (make-string min-triagle-width ?.)
-                                         (make-string (- final-width min-triagle-width) ? ))))
-                       (reverse top-part))
-               "\n")))
+                                (make-string (- final-width offset) ? ))))
+         (data (mapconcat #'identity
+                          (append top-part
+                                  (if (equal (% height 2) 1)
+                                      (list (format line-format
+                                                    (make-string min-triagle-width ?.)
+                                                    (make-string (- final-width min-triagle-width) ? ))))
+                                  (reverse top-part))
+                          ",\n")))
+    (list (list 'data data) (list 'width final-width) (list 'height height))))
 
 
+(defun wttr/create-bicolor-xpm (height width fg-color bg-color data-generator)
+  "Create the xpm image for showing based on the width and height.
+The actual result will based on the return value of data-generator,
+which shows the real width and height of the final data.
 
-(defun wttr/mode-line:create-xpm (height width fg-color bg-color data-generator)
-  "Create the xpm image for showing based on the HEIGHT.
-The color the triangle is FG-COLOR, and other part is BG-COLOR."
-  nil)
+The input DATA-GENERATOR is a funciton object, will be called as:
+(DATA-GENERATOR height width)
 
+It should return an alist as below:
+((data \"data-string\") (height <num) (width <num>))
+
+The data is the <Pixels> part of a XPM format image.  You can refer
+here : http://en.wikipedia.org/wiki/X_PixMap. The width and height
+gives the real image created by this generator, which will filled
+into <Values> part of the XPM.
+
+All the data must only contains dot(.) and Space( ), so that the dot
+will be filled with FG-COLOR and Space will be filled with BG-COLOR."
+  (let ((base-xpm-format "/* XPM */
+static char * XPM_IMAGE[] = {
+/* <Values> */
+/* <width/cols> <height/rows> <colors> <char on pixel>*/
+\"%d %d 2 1\",
+/* <Colors> */
+\". c %s\",
+\"  c %s\",
+/* <Pixels> */
+%s}\;")
+        (generated-data (funcall data-generator height width)))
+     (create-image (format base-xpm-format
+                           (second (assoc 'width generated-data))
+                           (second (assoc 'height generated-data))
+                           fg-color
+                           bg-color
+                           (second (assoc 'data generated-data)))
+                    'xpm t :ascent 'center)))
+
+;
+
+;(insert (propertize " "
+;                    'display
+;                    (wttr/create-bicolor-xpm 22
+;                                             15
+;                                             "#00AA00"
+;                                             "#BB0000"
+;                                             #'wttr/mode-line:data-generator-left-triangle)))
+
+             
 
 
 ;(defun arrow-right-xpm (color1 color2)
@@ -162,4 +208,4 @@ The color the triangle is FG-COLOR, and other part is BG-COLOR."
          "-%-" ) )
 
 
-(provide 'wttr-modeline)
+(provide 'wttr-mode-line)

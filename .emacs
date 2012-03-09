@@ -5,7 +5,7 @@
 (require 'wttr-utils)
 (require 'wttr-font)
 (require 'wttr-basic)
-(require 'wttr-modeline)
+(require 'wttr-mode-line)
 (require 'wttr-minor-modes)
 (require 'wttr-key)
 ;(require 'wttr-viper)
