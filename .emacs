@@ -5,12 +5,12 @@
 (require 'wttr-utils)
 (require 'wttr-font)
 (require 'wttr-basic)
-(require 'wttr-mode-line)
 (require 'wttr-minor-modes)
 (require 'wttr-key)
 ;(require 'wttr-viper)
 (require 'wttr-evil)
 (require 'wttr-color-theme)
+(require 'wttr-mode-line)
 
 ;;;; some complex mode
 (require 'wttr-dired)
