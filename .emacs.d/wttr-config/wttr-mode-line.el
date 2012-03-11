@@ -30,25 +30,46 @@ Otherwise, the return value may not be the corrent value for current fontset."
 
 (defun wttr/mode-line:data-generator-left-triangle (height width)
   "Generator for the data section of the XPM format image.
-This function is used to generate the left triangle style.
-It return a alist ((data \"data-string\") (width <num>) (height <num))."
+This function is used to generate the left triangle XPM image.
+It return a list of string, each string stands for one line of data.
+"
   (let* ((min-triagle-width (+ (/ height 2) (% height 2)))
          (final-width (max min-triagle-width width))
          (make-line #'(lambda (offset)
-                        (format "\"%s%s\""
+                        (format "%s%s"
                                 (make-string offset ?.)
                                 (make-string (- final-width offset) ? ))))
          (top-part
           (loop for offset from 1 to (/ height 2)
-                collect (funcall make-line offset)))
-         (data (mapconcat #'identity
-                          (append top-part
-                                  (if (equal (% height 2) 1)
-                                      (list (funcall make-line min-triagle-width)))
-                                  (reverse top-part))
-                          ",\n")))
-    (list (list 'data data) (list 'width final-width) (list 'height height))))
+                collect (funcall make-line offset))))
+    (append top-part
+            (if (equal (% height 2) 1)
+                (list (funcall make-line min-triagle-width)))
+            (reverse top-part))))
 
+(defun wttr/mode-line:data-generator-eight-trigrams (height width)
+  (list "...............     "
+        "............        "
+        ".........           "
+        "......              "
+        "....                "
+        "...      ...        "
+        "...      ...        "
+        "...      ...        "
+        "....                "
+        "......              "
+        "..........          "
+        ".............       "
+        "...............     "
+        "................    "
+        ".........   .....   "
+        ".........   .....   "
+        ".........   .....   "
+        "................    "
+        "...............     "
+        ".............       "
+        "..........          "
+        "......              "))
 
 (defun wttr/create-bicolor-xpm (height width fg-color bg-color data-generator)
   "Create the xpm image for showing based on the width and height.
@@ -58,8 +79,8 @@ which shows the real width and height of the final data.
 The input DATA-GENERATOR is a funciton object, will be called as:
 \(DATA-GENERATOR height width\)
 
-It should return an alist as below:
-\((data \"data-string\") (height <num) (width <num>)\)
+It should return a list of string, each string stands for one line in
+<Pixels> part of XPM, of course, each string should be the same length.
 
 The data is the <Pixels> part of a XPM format image.  You can refer
 here : http://en.wikipedia.org/wiki/X_PixMap. The width and height
@@ -79,13 +100,18 @@ static char * XPM_IMAGE[] = {
 /* <Pixels> */
 %s}\;")
         (generated-data (funcall data-generator height width)))
-     (create-image (format base-xpm-format
-                           (second (assoc 'width generated-data))
-                           (second (assoc 'height generated-data))
-                           fg-color
-                           bg-color
-                           (second (assoc 'data generated-data)))
-                    'xpm t :ascent 'center)))
+    (create-image (format base-xpm-format
+                          (length (car generated-data))
+                          (length generated-data)
+                          fg-color
+                          bg-color
+                          (mapconcat #'(lambda (x)
+                                         (concat "\"" x "\""))
+                                     generated-data
+                                     ",\n"))
+                  'xpm t :ascent 'center)))
+
+
 
 (defun wttr/create-bicolor-xpm-from-face (height width bicolor-face data-generator)
   (apply #'wttr/create-bicolor-xpm
@@ -100,12 +126,18 @@ static char * XPM_IMAGE[] = {
 current height of the mode line, with FG-COLOR to be triangle color,
 and BG-COLOR to be the background color"
   (let* ((height (wttr/mode-line:current-height))
-         (width (or width height )))
+         (width (or width height)))
     (wttr/create-bicolor-xpm-from-face height
                                        width
                                        bicolor-face
                                        #'wttr/mode-line:data-generator-left-triangle)))
 
+(defun wttr/mode-line:create-eight-trigrams-xpm (bicolor-face)
+  (let ((height (wttr/mode-line:current-height)))
+    (wttr/create-bicolor-xpm-from-face height
+                                       height
+                                       bicolor-face
+                                       #'wttr/mode-line:data-generator-eight-trigrams)))
 
 
 (defun wttr/mode-line:decorate-string-face (mode-line-var bicolor-face)
@@ -128,23 +160,24 @@ and BG-COLOR to be the background color"
     (funcall decorate-into mode-line-var)))
 
     
-(wttr/defun-bicolor-face 'mode-line-face/encoding-writable-modified "#000000" "#DDDDDD")
-(wttr/defun-bicolor-face 'mode-line-face/buffer-name "#000000" "#888888")
-(wttr/defun-bicolor-face 'mode-line-face/line-position "#000000" "#444444")
+(wttr/defun-bicolor-face 'mode-line-face/encoding-writable-modified "#000000" "#AAAAAA")
+(wttr/defun-bicolor-face 'mode-line-face/buffer-name "#000000" "#555555")
 (wttr/defun-bicolor-transition-face 'mode-line-face/transition1
                                     'mode-line-face/encoding-writable-modified
                                     'mode-line-face/buffer-name)
 (wttr/defun-bicolor-transition-face 'mode-line-face/transition2
                                     'mode-line-face/buffer-name
-                                    'mode-line-face/line-position)
-(wttr/defun-bicolor-transition-face 'mode-line-face/transition3
-                                    'mode-line-face/line-position
                                     'mode-line)
 
 (defun wttr/mode-line:create-triangle-seperator (face)
   (propertize " "
               'display
               (wttr/mode-line:create-left-triangle-xpm face)))
+
+(defun wttr/mode-line:create-eight-trigrams-seperator (face)
+  (propertize " "
+              'display
+              (wttr/mode-line:create-eight-trigrams-xpm face)))
 
 (setq-default mode-line-format
               (list
@@ -156,15 +189,13 @@ and BG-COLOR to be the background color"
                                    'face 'mode-line-face/encoding-writable-modified))
                (wttr/mode-line:decorate-string-face mode-line-modified
                                                     'mode-line-face/encoding-writable-modified)
-               (wttr/mode-line:create-triangle-seperator 'mode-line-face/transition1)
+               (wttr/mode-line:create-eight-trigrams-seperator 'mode-line-face/transition1)
                ;mode-line-remote, remove
                ;mode-line-frame-identification, remove
                (wttr/mode-line:decorate-string-face mode-line-buffer-identification
                                                     'mode-line-face/buffer-name)
                (wttr/mode-line:create-triangle-seperator 'mode-line-face/transition2)
-               (wttr/mode-line:decorate-string-face mode-line-position
-                                                    'mode-line-face/line-position)
-               (wttr/mode-line:create-triangle-seperator 'mode-line-face/transition3)
+               mode-line-position
                '(vc-mode vc-mode)
                mode-line-modes
                ;("" viper-mode-string)    ;global-mode-string contains it
@@ -173,49 +204,11 @@ and BG-COLOR to be the background color"
                "-%-" ))
 
 
-
-;(setq color1 "#00AA00")
-;(setq color2 "#AAAAAA")
-;
-;(setq-default mode-line-format
-; (list  '(:eval (concat (propertize " %b " 'face 'mode-line-color-1)
-;                        (propertize " " 'display arrow-right-1)))
-;        '(:eval (concat (propertize " %m " 'face 'mode-line-color-2)
-;                        (propertize " " 'display arrow-right-2)))
-;
-;        ;; Justify right by filling with spaces to right fringe - 16
-;        ;; (16 should be computed rahter than hardcoded)
-;        '(:eval (propertize " " 'display '((space :align-to (- right-fringe 17)))))
-;
-;        '(:eval (concat (propertize " " 'display arrow-left-2)
-;                        (propertize " %p " 'face 'mode-line-color-2)))
-;        '(:eval (concat (propertize " " 'display arrow-left-1)
-;                        (propertize "%4l:%2c  " 'face 'mode-line-color-1)))
-;)) 
-;
-;(make-face 'mode-line-color-1)
-;(set-face-attribute 'mode-line-color-1 nil
-;                    :foreground "#0f0f0f"
-;                    :background color1)
-;
-;(make-face 'mode-line-color-2)
-;(set-face-attribute 'mode-line-color-2 nil
-;                    :foreground "#0f0f0f"
-;                    :background color2)
-;
-;(set-face-attribute 'mode-line nil
-;                    :foreground "#0f0f0f"
-;                    :background "#000000"
-;                    :box nil)
-;(set-face-attribute 'mode-line-inactive nil
-;                    :foreground "#0f0f0f"
-;                    :background "#000000")
-
-;(setq global-mode-string (append global-mode-string  '("  [" default-directory "]") ))
+;; normal one without decoration
 ;(setq-default mode-line-format
 ;      '( "%e"
 ;         "-"
-;         ("[" (:eval (format (propertize "%s" 'face face-111) buffer-file-coding-system)) ":")   ;mode-line-mule-info, use more readable format
+;         ("[" (:eval (format "%s" buffer-file-coding-system)) ":")   ;mode-line-mule-info, use more readable format
 ;         ;mode-line-client, remove
 ;         ("" mode-line-modified "]") ; change format to be together with encoding
 ;         ;mode-line-remote, remove
@@ -231,5 +224,10 @@ and BG-COLOR to be the background color"
 ;         ;("[" default-directory "]")
 ;         "-%-" ) )
 
+;(insert (wttr/mode-line:create-triangle-seperator 'mode-line-face/transition1))
+;(wttr/create-bicolor-xpm 20 10 "#0A0A0A" "#A0A0A0" #'wttr/mode-line:data-generator-left-triangle)
+;(wttr/create-bicolor-xpm-from-face 20 10 'mode-line-face/transition1
+;                                   'wttr/mode-line:data-generator-left-triangle)
 
 (provide 'wttr-mode-line)
+)
