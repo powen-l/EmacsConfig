@@ -48,28 +48,28 @@ It return a list of string, each string stands for one line of data.
             (reverse top-part))))
 
 (defun wttr/mode-line:data-generator-eight-trigrams (height width)
-  (list "...............     "
+  (list "..............      "
         "............        "
         ".........           "
+        ".......             "
         "......              "
-        "....                "
-        "...      ...        "
-        "...      ...        "
-        "...      ...        "
-        "....                "
-        "......              "
+        "......    .         "
+        "......   ...        "
+        "......    .         "
+        ".......             "
+        "........            "
         "..........          "
+        "............        "
         ".............       "
-        "...............     "
-        "................    "
-        ".........   .....   "
-        ".........   .....   "
-        ".........   .....   "
-        "................    "
-        "...............     "
+        "..............      "
+        ".......... ...      "
+        ".........   ..      "
+        ".......... ...      "
         ".............       "
-        "..........          "
-        "......              "))
+        "............        "
+        "...........         "
+        ".........           "
+        ".......             "))
 
 (defun wttr/create-bicolor-xpm (height width fg-color bg-color data-generator)
   "Create the xpm image for showing based on the width and height.
@@ -160,8 +160,8 @@ and BG-COLOR to be the background color"
     (funcall decorate-into mode-line-var)))
 
     
-(wttr/defun-bicolor-face 'mode-line-face/encoding-writable-modified "#000000" "#AAAAAA")
-(wttr/defun-bicolor-face 'mode-line-face/buffer-name "#000000" "#555555")
+(wttr/defun-bicolor-face 'mode-line-face/encoding-writable-modified "#000000" "#999999")
+(wttr/defun-bicolor-face 'mode-line-face/buffer-name "#000000" "#777777")
 (wttr/defun-bicolor-transition-face 'mode-line-face/transition1
                                     'mode-line-face/encoding-writable-modified
                                     'mode-line-face/buffer-name)
@@ -230,4 +230,4 @@ and BG-COLOR to be the background color"
 ;                                   'wttr/mode-line:data-generator-left-triangle)
 
 (provide 'wttr-mode-line)
-)
+
