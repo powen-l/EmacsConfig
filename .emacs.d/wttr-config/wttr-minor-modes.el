@@ -6,6 +6,18 @@
 (require 'grep)
 (grep-apply-setting
  'grep-find-use-xargs 'exec)
+
+(when wttr/os:win32p
+  (defadvice grep-expand-template (around grep-expand-template-w32-around (template &optional regexp files dir excl))
+    "A patch for the windows system, as the [find . -iname \"balabala\" -exec grep \"grep-bala\" {} ;] will
+result as a seperate windows process [grep grep-balaba file-name-from-find].
+When grep-bala contains *, this will lead to very wierd result as the paramter is not quoted in new process.
+So I patch it."
+    (if (string-match-p "find.*grep" template)
+        (let ((regexp (format "\"%s\"" regexp)))
+          ad-do-it)))
+  (ad-activate 'grep-expand-template))
+
 ;(grep-apply-setting
 ; 'grep-find-command
 ; '("E:/Tools/Emacs/bin/find.exe . -type f -exec E:/Tools/Emacs/bin/grep.exe -nH -ie  {} NUL \";\"" . 80 ) )
