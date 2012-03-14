@@ -161,7 +161,7 @@ and BG-COLOR to be the background color"
 
     
 (wttr/defun-bicolor-face 'mode-line-face/encoding-writable-modified "#000000" "#999999")
-(wttr/defun-bicolor-face 'mode-line-face/buffer-name "#000000" "#777777")
+(wttr/defun-bicolor-face 'mode-line-face/buffer-name "#FFFFFF" "#666666")
 (wttr/defun-bicolor-transition-face 'mode-line-face/transition1
                                     'mode-line-face/encoding-writable-modified
                                     'mode-line-face/buffer-name)
