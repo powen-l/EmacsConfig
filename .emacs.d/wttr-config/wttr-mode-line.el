@@ -160,13 +160,17 @@ and BG-COLOR to be the background color"
     (funcall decorate-into mode-line-var)))
 
     
-(wttr/defun-bicolor-face 'mode-line-face/encoding-writable-modified "#000000" "#999999")
-(wttr/defun-bicolor-face 'mode-line-face/buffer-name "#FFFFFF" "#666666")
+(wttr/defun-bicolor-face 'mode-line-face/encoding-writable-modified "#000000" "#AAAAAA")
+(wttr/defun-bicolor-face 'mode-line-face/buffer-name "#FFFFFF" "#888888")
+(wttr/defun-bicolor-face 'mode-line-face/position "#FFFFFF" "#555555")
 (wttr/defun-bicolor-transition-face 'mode-line-face/transition1
                                     'mode-line-face/encoding-writable-modified
                                     'mode-line-face/buffer-name)
 (wttr/defun-bicolor-transition-face 'mode-line-face/transition2
                                     'mode-line-face/buffer-name
+                                    'mode-line-face/position)
+(wttr/defun-bicolor-transition-face 'mode-line-face/transition3
+                                    'mode-line-face/position
                                     'mode-line)
 
 (defun wttr/mode-line:create-triangle-seperator (face)
@@ -195,7 +199,9 @@ and BG-COLOR to be the background color"
                (wttr/mode-line:decorate-string-face mode-line-buffer-identification
                                                     'mode-line-face/buffer-name)
                (wttr/mode-line:create-triangle-seperator 'mode-line-face/transition2)
-               mode-line-position
+               (wttr/mode-line:decorate-string-face mode-line-position
+                                                    'mode-line-face/position)
+               (wttr/mode-line:create-triangle-seperator 'mode-line-face/transition3)
                '(vc-mode vc-mode)
                mode-line-modes
                ;("" viper-mode-string)    ;global-mode-string contains it
