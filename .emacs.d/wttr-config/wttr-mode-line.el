@@ -147,30 +147,33 @@ and BG-COLOR to be the background color"
                            ;; it should be better to add "%" check
                            ;; actually I need more better way to know which kind of
                            ;; string need to be decorated.
-                           ;(if (string-match-p "%" var)
-                           ;    (propertize var 'face bicolor-face)
-                           ;  var))
-                           (propertize var 'face bicolor-face))
-                          ((arrayp var)
-                           (map 'array decorate-into var))
+                           (if (string-match-p "%" var)
+                               (propertize var 'face bicolor-face)
+                             var))
                           ((listp var)
-                           (mapcar decorate-into var))
+                           ;(if (and (integerp (car var))
+                           ;         (listp (cdr var))
+                           ;         (stringp (cadr var)))
+                           ;    (cons (length (replace-regexp-in-string "%\\d*\\w+" " " (cadr var)))
+                           ;            (mapcar decorate-into (cdr var)))
+                           ; if it is a list not a cons
+                           (if (listp (cdr var))
+                               (mapcar decorate-into var)
+                             (cons (funcall decorate-into (car var))
+                                   (funcall decorate-into (cdr var)))))
                           (t
                            var)))))
     (funcall decorate-into mode-line-var)))
 
-    
-(wttr/defun-bicolor-face 'mode-line-face/encoding-writable-modified "#000000" "#AAAAAA")
-(wttr/defun-bicolor-face 'mode-line-face/buffer-name "#FFFFFF" "#888888")
-(wttr/defun-bicolor-face 'mode-line-face/position "#FFFFFF" "#555555")
+
+
+(wttr/defun-bicolor-face 'mode-line-face/encoding-writable-modified "#000000" "#999999")
+(wttr/defun-bicolor-face 'mode-line-face/buffer-name "#FFFFFF" "#555555")
 (wttr/defun-bicolor-transition-face 'mode-line-face/transition1
                                     'mode-line-face/encoding-writable-modified
                                     'mode-line-face/buffer-name)
 (wttr/defun-bicolor-transition-face 'mode-line-face/transition2
                                     'mode-line-face/buffer-name
-                                    'mode-line-face/position)
-(wttr/defun-bicolor-transition-face 'mode-line-face/transition3
-                                    'mode-line-face/position
                                     'mode-line)
 
 (defun wttr/mode-line:create-triangle-seperator (face)
@@ -199,16 +202,13 @@ and BG-COLOR to be the background color"
                (wttr/mode-line:decorate-string-face mode-line-buffer-identification
                                                     'mode-line-face/buffer-name)
                (wttr/mode-line:create-triangle-seperator 'mode-line-face/transition2)
-               (wttr/mode-line:decorate-string-face mode-line-position
-                                                    'mode-line-face/position)
-               (wttr/mode-line:create-triangle-seperator 'mode-line-face/transition3)
+               mode-line-position
                '(vc-mode vc-mode)
                mode-line-modes
                ;("" viper-mode-string)    ;global-mode-string contains it
                global-mode-string
                ;("[" default-directory "]")
                "-%-" ))
-
 
 ;; normal one without decoration
 ;(setq-default mode-line-format
