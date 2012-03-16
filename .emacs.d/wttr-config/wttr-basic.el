@@ -104,7 +104,7 @@
 (setq mouse-wheel-progressive-speed nil)              ;; don't accelerate scrolling
 (setq mouse-wheel-follow-mouse 't)                    ;; scroll window under mouse
 (setq scroll-step 1)                                  ;; keyboard scroll one line at a time
-(setq scroll-margin 3)
+(setq scroll-margin 0)
 
 ;; not use tab, use space to indent
 (setq-default indent-tabs-mode nil)
