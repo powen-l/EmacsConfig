@@ -11,8 +11,6 @@
 ;; color theme solarized
 ;(wttr/prepend-to-load-path "~/.emacs.d/plugins/color-theme-solarized")
 ;(require 'color-theme-solarized)
-;(color-theme-solarized-light)
-
-
+;(color-theme-solarized-dark)
 
 (provide 'wttr-color-theme)

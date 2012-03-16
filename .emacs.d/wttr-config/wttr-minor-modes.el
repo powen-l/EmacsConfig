@@ -248,17 +248,5 @@ So I patch it."
 (autoload 'actionscript-mode "actionscript-mode" nil t)
 (add-to-list 'auto-mode-alist '("\\.as$" . actionscript-mode))
 
-;
-;;; tmtheme
-;(wttr/prepend-to-load-path "~/.emacs.d/plugins/tmtheme")
-;(require 'tmtheme)
-;(setq tmtheme-directory "~/.emacs.d/plugins/tmtheme/theme")
-;(tmtheme-scan)
-;
-;;; color theme tomorrow
-;(wttr/prepend-to-load-path "~/.emacs.d/plugins/color-theme-tomorrow")
-;(require 'color-theme-tomorrow)
-;(color-theme-tomorrow)
-;(require 'tomorrow-night-theme)
 
 (provide 'wttr-minor-modes)
