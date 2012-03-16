@@ -1,8 +1,11 @@
 ;; -*- coding: utf-8 -*-
 
+(if wttr/os:win32p
+    (setq w32-enable-synthesized-fonts t))
+
 (create-fontset-from-fontset-spec
- "-outline-Consolas-normal-normal-normal-mono-16-*-*-*-c-*-fontset-Consolas")
-(set-fontset-font "fontset-Consolas" 'ascii "Consolas-14" nil 'prepend)
+ "-outline-Consolas-bold-normal-normal-mono-13-*-*-*-c-*-fontset-Consolas")
+(set-fontset-font "fontset-Consolas" 'ascii "Consolas-13" nil 'prepend)
 ;; (set-fontset-font "fontset-Consolas" 'han "YaHei Consolas Hybrid-14" nil 'prepend)
 (set-fontset-font "fontset-Consolas" 'han "Microsoft YaHei-12" nil 'prepend)
 (set-fontset-font "fontset-Consolas" 'kana "MS Gothic-12" nil 'prepend)
@@ -11,6 +14,9 @@
 (setq default-frame-alist
       (append
        '((font . "fontset-Consolas")) default-frame-alist))
+
+;; Very useful tools when you want to know the font description under win32
+;(w32-select-font nil t)
 
 ;; test example:
 ;; Chinese : 测试
