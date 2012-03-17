@@ -5,7 +5,7 @@
 
 (create-fontset-from-fontset-spec
  "-outline-Consolas-bold-normal-normal-mono-13-*-*-*-c-*-fontset-Consolas")
-(set-fontset-font "fontset-Consolas" 'ascii "Menlo-12" nil 'prepend)
+(set-fontset-font "fontset-Consolas" 'ascii "文泉驿等宽微米黑-12" nil 'prepend)
 ;; (set-fontset-font "fontset-Consolas" 'han "YaHei Consolas Hybrid-14" nil 'prepend)
 (set-fontset-font "fontset-Consolas" 'han "Microsoft YaHei-12" nil 'prepend)
 (set-fontset-font "fontset-Consolas" 'kana "MS Gothic-12" nil 'prepend)
@@ -16,7 +16,7 @@
        '((font . "fontset-Consolas")) default-frame-alist))
 
 ;; Very useful tools when you want to know the font description under win32
-;(w32-select-font nil t)
+;(w32-select-font nil nil)
 
 ;; test example:
 ;; Chinese : 测试
