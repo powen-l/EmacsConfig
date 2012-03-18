@@ -1,5 +1,15 @@
 ;; -*- coding: utf-8 -*-
 
+;; c setting
+(setq-default c-basic-offset 4)
+
+;; server mode
+(server-start)
+(add-hook 'kill-emacs-hook
+          (lambda ()
+            (if (file-exists-p "~/.emacs.d/server/server")
+                (delete-file "~/.emacs.d/server/server"))))
+
 ;; === grep mode ===
 ;; we do not need to setup the grep command, use the correct exec-path
 ;; and "PATH" env is enough
@@ -94,7 +104,7 @@ So I patch it."
   "ace-jump-mode"
   "Emacs quick move minor mode"
   t)
-;; I also use SPC in viper mode to direct start this mode
+;; I also use SPC in eval mode to direct start this mode
 (define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
 
 ;; window move mode
@@ -110,7 +120,6 @@ So I patch it."
 (autoload 'gtags-mode "gtags" "" t)
 
 ;; cscope
-
 (wttr/prepend-to-load-path "~/.emacs.d/plugins/xcscope")
 (require 'xcscope)
 
@@ -186,7 +195,8 @@ So I patch it."
 ;; As long as pageant is running with your key, you can edit your
 ;; remote files using the format ssh://user@server:path/to/file
 ;; (require 'tramp)
-(setq default-tramp-method "plink")
+(when wttr/os:win32p
+  (setq default-tramp-method "plink"))
 
 ;; F# mode
 (wttr/prepend-to-load-path "~/.emacs.d/plugins/fsharp-mode")

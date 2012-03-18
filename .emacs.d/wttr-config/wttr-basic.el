@@ -104,27 +104,17 @@
 (setq mouse-wheel-progressive-speed nil)              ;; don't accelerate scrolling
 (setq mouse-wheel-follow-mouse 't)                    ;; scroll window under mouse
 (setq scroll-step 1)                                  ;; keyboard scroll one line at a time
-(setq scroll-margin 0)
+(setq scroll-margin 0)                                ;; stop autoscroll when mouse is close to margin
 
 ;; not use tab, use space to indent
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 4)
-
-;; c setting
-(setq-default c-basic-offset 4)
 
 ;; auto-load mode
 (global-auto-revert-mode 1)
 
 ;; always split window vertically
 (setq split-width-threshold nil)
-
-;; server
-(server-start)
-(add-hook 'kill-emacs-hook
-          (lambda ()
-            (if (file-exists-p "~/.emacs.d/server/server")
-                (delete-file "~/.emacs.d/server/server"))))
 
 ;; add extra binary path
 ;; it seems the "find" in "unix-utils-bin" works better and the

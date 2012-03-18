@@ -44,13 +44,6 @@
 ;The global keymap for Normal state.
 (define-key evil-normal-state-map (kbd "C-s") 'save-buffer)
 
-(defun wttr/kill-buffer ()
-  (interactive)
-  (if (and (boundp 'server-buffer-clients)
-           server-buffer-clients)
-      (server-kill-buffer))
-  (kill-buffer (current-buffer)))
-
 ;; some auto load
 (autoload 'dired-jump "dired" "dired-jump" t)
 (autoload 'dired-jump-other-window "dired" "dired-jump" t)
@@ -65,7 +58,7 @@
         ("d" . ido-dired)
         ("f" . ido-find-file)
         ("r" . revert-buffer-with-coding-system)
-        ("c" . wttr/kill-buffer)
+        ("4" . wttr/kill-buffer-may-have-clients)
         ("k" . ido-kill-buffer)
         ("o" . other-window)
         ("w" . ido-write-file)

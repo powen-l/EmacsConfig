@@ -1,6 +1,7 @@
 ;; -*- coding: utf-8 -*-
 
 (global-set-key [(meta ?/)] 'hippie-expand)
+(global-set-key (kbd "<f4>") 'wttr/kill-buffer-may-have-clients)
 
 ;; change C-m and enter
 (global-set-key "\C-m" 'newline-and-indent)

@@ -39,10 +39,21 @@ Return the updated `exec-path'"
 
 
 (defun wttr/delete-trailing-whitespace-when-save ()
+  "add local hook, so that when save action happens, auto remove the trailing whitespaces"
   (add-hook 'local-write-file-hooks
             (lambda ()
               (save-excursion
                 (delete-trailing-whitespace)))))
+
+
+(defun wttr/kill-buffer-may-have-clients ()
+  "The same as kill buffer, but if this buffer is open via
+emacsclient, also notify the server to close connection."
+  (interactive)
+  (if (and (boundp 'server-buffer-clients)
+           server-buffer-clients)
+      (server-kill-buffer))
+  (kill-buffer (current-buffer)))
 
 
 ;; some const variable
