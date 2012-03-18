@@ -18,7 +18,8 @@
  'grep-find-use-xargs 'exec)
 
 (when wttr/os:win32p
-  (defadvice grep-expand-template (around grep-expand-template-w32-around (template &optional regexp files dir excl))
+  (defadvice grep-expand-template
+    (around grep-expand-template-w32-around (template &optional regexp files dir excl))
     "A patch for the windows system, as the [find . -iname \"balabala\" -exec grep \"grep-bala\" {} ;] will
 result as a seperate windows process [grep grep-balaba file-name-from-find].
 When grep-bala contains *, this will lead to very wierd result as the paramter is not quoted in new process.

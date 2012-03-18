@@ -1,5 +1,16 @@
 ;; -*- coding: utf-8 -*-
 
+;; some const variable
+(defconst wttr/os:win32p (eq system-type 'windows-nt)
+  "if current environment is win32 system")
+
+(defconst wttr/host:MSWSp (string-equal system-name "WINTERTTR-WS")
+  "if the currrent host is Microsoft workstation")
+
+(defconst wttr/host:HOMEp (string-equal system-name "WINTERTTR-PC")
+  "if the current host is home laptop")
+
+
 ;; `load-path' is a list of directories where Emacs Lisp libraries
 ;; (`.el' and `.elc' files) are installed.
 ;;
@@ -56,14 +67,17 @@ emacsclient, also notify the server to close connection."
   (kill-buffer (current-buffer)))
 
 
-;; some const variable
-(defconst wttr/os:win32p (eq system-type 'windows-nt)
-  "if current environment is win32 system")
+;; setup startup window size
+(when wttr/os:win32p
+  (defun wttr/w32-restore-frame ()
+    "Restore a minimized frame"
+    (interactive)
+    (w32-send-sys-command 61728))
 
-(defconst wttr/host:MSWSp (string-equal system-name "WINTERTTR-WS")
-  "if the currrent host is Microsoft workstation")
+  (defun wttr/w32-maximize-frame ()
+    "Maximize the current frame"
+    (interactive)
+    (w32-send-sys-command 61488)))
 
-(defconst wttr/host:HOMEp (string-equal system-name "WINTERTTR-PC")
-  "if the current host is home laptop")
 
 (provide 'wttr-utils)

@@ -45,19 +45,9 @@
 (setq frame-title-format
       (list "GNU Emacs " emacs-version "@" system-name " - " '(buffer-file-name "%f" "%b")))
 
-;; setup startup window size
-(defun w32-restore-frame ()
-  "Restore a minimized frame"
-  (interactive)
-  (w32-send-sys-command 61728))
-
-(defun w32-maximize-frame ()
-  "Maximize the current frame"
-  (interactive)
-  (w32-send-sys-command 61488))
-
 ; (run-with-idle-timer 0.2 nil 'w32-maximize-frame)
-(add-to-list 'emacs-startup-hook #'w32-maximize-frame)
+(when wttr/os:win32p
+  (add-to-list 'emacs-startup-hook #'wttr/w32-maximize-frame))
 
 ;===================================
 ; Control
@@ -137,11 +127,11 @@
 
 ;; http://trey-jackson.blogspot.com/2010/04/emacs-tip-36-abort-minibuffer-when.html
 ;; very useful when you use mouse meanwhile, close minibuffer when lose focus
-(defun stop-using-minibuffer ()
+(defun wttr/kill-minibuffer-when-lost-focus ()
   "kill the minibuffer"
   (when (and (>= (recursion-depth) 1) (active-minibuffer-window))
     (abort-recursive-edit)))
 
-(add-hook 'mouse-leave-buffer-hook 'stop-using-minibuffer)
+(add-hook 'mouse-leave-buffer-hook 'wttr/kill-minibuffer-when-lost-focus)
 
 (provide 'wttr-basic)
