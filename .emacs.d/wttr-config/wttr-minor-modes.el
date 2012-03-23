@@ -24,10 +24,14 @@
 result as a seperate windows process [grep grep-balaba file-name-from-find].
 When grep-bala contains *, this will lead to very wierd result as the paramter is not quoted in new process.
 So I patch it."
-    (if (string-match-p "find.*grep" template)
-        (let ((regexp (format "\"%s\"" regexp)))
-          ad-do-it)
-      ad-do-it))
+    (cond
+     ((string-match-p "^find.*grep" template)
+      (let ((regexp (format "\"%s\"" regexp)))
+        ad-do-it))
+     ((string-match-p "^grep.*" template)
+      ad-do-it)
+     (t
+      ad-do-it)))
   (ad-activate 'grep-expand-template))
 
 ;(grep-apply-setting
