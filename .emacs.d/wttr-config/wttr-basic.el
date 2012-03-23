@@ -113,8 +113,8 @@
   (mapc #'wttr/prepend-to-exec-path
         (reverse 
          '("~/bin"
-           "~/.emacs.d/extra-bin/unix-utils-bin"
            "~/.emacs.d/extra-bin/etc"
+           "~/.emacs.d/extra-bin/unix-utils-bin"
            "~/.emacs.d/extra-bin/PuTTY"
            "~/.emacs.d/extra-bin/clang"
            ))))

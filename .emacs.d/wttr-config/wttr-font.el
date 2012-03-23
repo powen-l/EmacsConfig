@@ -5,8 +5,14 @@
 
 (create-fontset-from-fontset-spec
  "-outline-Consolas-bold-normal-normal-mono-13-*-*-*-c-*-fontset-Consolas")
-(set-fontset-font "fontset-Consolas" 'ascii "文泉驿等宽微米黑-12:bold" nil 'prepend)
-;; (set-fontset-font "fontset-Consolas" 'han "YaHei Consolas Hybrid-14" nil 'prepend)
+(cond 
+  (wttr/host:MSWSp
+	(set-fontset-font "fontset-Consolas" 'ascii "WenQuanYi Micro Hei Mono-12" nil 'prepend))
+  (wttr/host:HOMEp
+	(set-fontset-font "fontset-Consolas" 'ascii "文泉驿等宽微米黑-12" nil 'prepend))
+  (t
+	nil))
+
 (set-fontset-font "fontset-Consolas" 'han "Microsoft YaHei-12" nil 'prepend)
 (set-fontset-font "fontset-Consolas" 'kana "MS Gothic-12" nil 'prepend)
 (set-default-font "fontset-Consolas")

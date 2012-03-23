@@ -1,5 +1,8 @@
 ;; -*- coding: utf-8 -*-
 
+(when wttr/os:win32p
+  (wttr/prepend-to-exec-path "c:/Python27"))
+
 (setq-default py-indent-offset 4)
 (wttr/prepend-to-load-path "~/.emacs.d/plugins/python-enhance/")
 (add-to-list 'auto-mode-alist '("\\.py$\\'" . python-mode))

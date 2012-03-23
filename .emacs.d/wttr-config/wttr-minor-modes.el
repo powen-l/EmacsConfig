@@ -26,7 +26,8 @@ When grep-bala contains *, this will lead to very wierd result as the paramter i
 So I patch it."
     (if (string-match-p "find.*grep" template)
         (let ((regexp (format "\"%s\"" regexp)))
-          ad-do-it)))
+          ad-do-it)
+      ad-do-it))
   (ad-activate 'grep-expand-template))
 
 ;(grep-apply-setting
@@ -259,5 +260,10 @@ So I patch it."
 (autoload 'actionscript-mode "actionscript-mode" nil t)
 (add-to-list 'auto-mode-alist '("\\.as$" . actionscript-mode))
 
+;; windiff comment mode
+(wttr/prepend-to-load-path "~/.emacs.d/plugins/windiff-comment-mode")
+(autoload 'windiff-comment-mode "windiff-comment-mode" nil t)
+(add-to-list 'auto-mode-alist
+             '("\\.wdc$" . windiff-comment-mode))
 
 (provide 'wttr-minor-modes)
