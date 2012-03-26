@@ -23,12 +23,12 @@
 ;; auto complete clang
 (require 'auto-complete-clang)
 
-(defun wttr/ac-cc-mode-setup ()
+(defun wttr/cc-mode:auto-complete-setup ()
   (make-local-variable 'ac-auto-start)
   (setq ac-auto-start nil)              ;auto complete using clang is CPU sensitive
   (setq ac-sources (append '(ac-source-yasnippet ac-source-clang) ac-sources)))
-(add-hook 'c-mode-hook 'wttr/ac-cc-mode-setup)
-(add-hook 'c++-mode-hook 'wttr/ac-cc-mode-setup)
+(add-hook 'c-mode-hook 'wttr/cc-mode:auto-complete-setup)
+(add-hook 'c++-mode-hook 'wttr/cc-mode:auto-complete-setup)
 
 ;; system specific setting
 (let ((extra-clang-flags (cond

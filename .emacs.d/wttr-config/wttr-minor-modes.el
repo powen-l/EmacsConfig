@@ -2,6 +2,11 @@
 
 ;; c setting
 (setq-default c-basic-offset 4)
+(defun wttr/cc-mode:basic-setup ()
+  "Set setting for cc mode"
+  (c-set-style "stroustrup"))
+(add-hook 'c-mode-hook 'wttr/cc-mode:basic-setup)
+(add-hook 'c++-mode-hook 'wttr/cc-mode:basic-setup)
 
 ;; server mode
 (server-start)
