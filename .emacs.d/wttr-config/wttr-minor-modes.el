@@ -128,7 +128,22 @@ So I patch it."
 
 ;; gtags
 (wttr/prepend-to-load-path "~/.emacs.d/plugins/gtags")
+(wttr/prepend-to-exec-path "~/.emacs.d/extra-bin/gtags")
 (autoload 'gtags-mode "gtags" "" t)
+(add-hook 'gtags-mode-hook
+  '(lambda ()
+     (setq gtags-pop-delete t)
+     (setq gtags-path-style 'absolute)))
+(add-hook 'gtags-select-mode-hook
+  '(lambda ()
+     (setq hl-line-face 'underline)
+     (hl-line-mode 1)))
+
+(defun wttr/cc-mode:gtags-setup ()
+  (gtags-mode 1))
+
+(add-hook 'c-mode-hook #'wttr/cc-mode:gtags-setup)
+(add-hook 'c++-mode-hook #'wttr/cc-mode:gtags-setup)
 
 ;; cscope
 (wttr/prepend-to-load-path "~/.emacs.d/plugins/xcscope")
@@ -274,5 +289,9 @@ So I patch it."
 (autoload 'windiff-comment-mode "windiff-comment-mode" nil t)
 (add-to-list 'auto-mode-alist
              '("\\.wdc$" . windiff-comment-mode))
+
+
+;; bookmark setting
+(setq bookmark-save-flag t)
 
 (provide 'wttr-minor-modes)
