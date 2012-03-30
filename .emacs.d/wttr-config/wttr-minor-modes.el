@@ -130,6 +130,7 @@ So I patch it."
 (wttr/prepend-to-load-path "~/.emacs.d/plugins/gtags")
 (wttr/prepend-to-exec-path "~/.emacs.d/extra-bin/gtags")
 (autoload 'gtags-mode "gtags" "" t)
+(setq gtags-suggested-key-mapping t)
 (add-hook 'gtags-mode-hook
   '(lambda ()
      (setq gtags-pop-delete t)
