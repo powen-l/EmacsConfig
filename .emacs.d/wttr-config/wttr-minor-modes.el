@@ -181,6 +181,7 @@ So I patch it."
 (require 'tempbuf)
 (add-hook 'help-mode-hook 'turn-on-tempbuf-mode)
 (add-hook 'grep-mode-hook 'turn-on-tempbuf-mode)
+(add-hook 'gtags-select-mode-hook 'turn-on-tempbuf-mode)
 
 ;; sr-speedbar
 ;(wttr/prepend-to-load-path "~/.emacs.d/plugins/sr-speedbar-0.1.8/")
