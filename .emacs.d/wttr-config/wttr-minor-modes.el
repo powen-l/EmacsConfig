@@ -132,10 +132,18 @@ So I patch it."
 (wttr/prepend-to-exec-path "~/.emacs.d/extra-bin/gtags")
 (autoload 'gtags-mode "gtags" "" t)
 (setq gtags-suggested-key-mapping t)
+
 (add-hook 'gtags-mode-hook
   '(lambda ()
-     (setq gtags-pop-delete t)
-     (setq gtags-path-style 'absolute)))
+     ;use relative path to root
+     (setq gtags-path-style 'root)      
+     ;will not delete buffer when popup
+     (setq gtags-pop-delete nil)        
+     ;only use on select buffer
+     (setq gtags-select-buffer-single t)
+     ;mouse mapping is kinda useful, i use it
+     (setq gtags-disable-pushy-mouse-mapping nil)))
+
 (add-hook 'gtags-select-mode-hook
   '(lambda ()
      (setq hl-line-face 'underline)
