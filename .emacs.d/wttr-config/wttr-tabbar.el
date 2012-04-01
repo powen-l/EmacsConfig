@@ -1,6 +1,6 @@
 ;; -*- coding: utf-8 -*-
 
-(wttr/prepend-to-load-path "~/.emacs.d/plugins/tabbar-2.0")
+(wttr/plugin:prepend-to-load-path "tabbar-2.0")
 (require 'tabbar)
 (tabbar-mode t)
 (set-face-attribute 'tabbar-default nil

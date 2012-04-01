@@ -1,11 +1,9 @@
 ;; -*- coding: utf-8 -*-
 
 
-(wttr/prepend-to-load-path "~/.emacs.d/plugins/auctex-11.86-e23.3-msw/site-lisp")
+(wttr/plugin:prepend-to-load-path "auctex-11.86-e23.3-msw/site-lisp")
 (load "site-start.el" nil t t)
-
-(if wttr/os:win32p
-    (require 'tex-mik))
+(require 'tex-mik)
 
 (add-hook 'LaTeX-mode-hook 'auto-fill-mode)
 (add-hook 'LaTeX-mode-hook 'LaTex-math-mode)

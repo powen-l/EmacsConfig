@@ -119,7 +119,7 @@
 
 
 ;; ecb
-; (wttr/prepend-to-load-path "~/.emacs.d/plugins/ecb-2.40/")
+; (wttr/plugin:prepend-to-load-path "ecb-2.40")
 ; (require 'ecb)
 ; (setq ecb-auto-activate t
 ;      ecb-tip-of-the-day nil)

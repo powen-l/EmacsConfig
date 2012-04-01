@@ -5,7 +5,7 @@
   (wttr/prepend-to-exec-path "~/../ccl-1.7-windows")
   (setq inferior-lisp-program
         (if (getenv "PROGRAMW6432") "wx86cl64.exe" "wx86cl.exe"))
-  (wttr/prepend-to-load-path (expand-file-name "~/../ccl-quicklisp/quicklisp"))
+  (wttr/plugin:prepend-to-load-path "quicklisp" "~/../ccl-quicklisp")
   (autoload 'slime "slime-helper" nil t))
 
 ;; we use emacs to slime repl

@@ -71,12 +71,12 @@ So I patch it."
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 
 ;;js2 mode
-(wttr/prepend-to-load-path "~/.emacs.d/plugins/js2-mode-20090723/")
+(wttr/plugin:prepend-to-load-path "js2-mode-20090723")
 (autoload 'js2-mode "js2" nil t)
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
 
 ;; dos mode
-(wttr/prepend-to-load-path "~/.emacs.d/plugins/dos-2.16/")
+(wttr/plugin:prepend-to-load-path "dos-2.16")
 (autoload 'dos-mode "dos" "Edit Dos scripts." t)
 (add-to-list 'auto-mode-alist '("\\.bat$" . dos-mode))
 (add-to-list 'auto-mode-alist '("\\.cmd$" . dos-mode))
@@ -85,7 +85,7 @@ So I patch it."
 (setq list-matching-lines-default-context-lines 2)
 
 ;; hilight-symbol
-(wttr/prepend-to-load-path "~/.emacs.d/plugins/highlight-symbol-1.1/")
+(wttr/plugin:prepend-to-load-path "highlight-symbol-1.1")
 (autoload 'highlight-symbol-at-point "highlight-symbol" nil t)
 (global-set-key [f3] 'highlight-symbol-at-point)
 ;(global-set-key [(control f3)] 'highlight-symbol-at-point)
@@ -100,17 +100,17 @@ So I patch it."
 
 
 ;browser kill ring mode
-(wttr/prepend-to-load-path "~/.emacs.d/plugins/browser-king-ring-1.3a/")
-(require 'browse-kill-ring)
-(browse-kill-ring-default-keybindings)
+;(wttr/plugin:prepend-to-load-path "browser-king-ring-1.3a")
+;(require 'browse-kill-ring)
+;(browse-kill-ring-default-keybindings)
 
 ;; use gsl-mode, for gomez, but there is no use now
-;(wttr/prepend-to-load-path "~/.emacs.d/plugins/gsl-mode/")
+;(wttr/plugin:prepend-to-load-path "gsl-mode")
 ;(add-to-list 'auto-mode-alist '("\\.gsl$" . gsl-mode))
 ;(autoload 'gsl-mode "gsl-mode" "my gsl mode" t)
 
 ;; use ace-jump-mode
-(wttr/prepend-to-load-path "~/.emacs.d/plugins/ace-jump-mode/")
+(wttr/plugin:prepend-to-load-path "ace-jump-mode")
 (autoload
   'ace-jump-mode
   "ace-jump-mode"
@@ -128,7 +128,7 @@ So I patch it."
 (global-set-key (kbd "M-l") 'windmove-right)
 
 ;; gtags
-(wttr/prepend-to-load-path "~/.emacs.d/plugins/gtags")
+(wttr/plugin:prepend-to-load-path "gtags")
 (wttr/prepend-to-exec-path "~/.emacs.d/extra-bin/gtags")
 (autoload 'gtags-mode "gtags" "" t)
 (setq gtags-suggested-key-mapping t)
@@ -148,7 +148,7 @@ So I patch it."
 (add-hook 'c++-mode-hook #'wttr/cc-mode:gtags-setup)
 
 ;; cscope
-(wttr/prepend-to-load-path "~/.emacs.d/plugins/xcscope")
+(wttr/plugin:prepend-to-load-path "xcscope")
 (require 'xcscope)
 
 
@@ -158,12 +158,12 @@ So I patch it."
                           ("marmalade" . "http://marmalade-repo.org/packages/")))
 
 ;; powershell-mode
-(wttr/prepend-to-load-path "~/.emacs.d/plugins/powershell-mode-0.5")
+(wttr/plugin:prepend-to-load-path "powershell-mode-0.5")
 (autoload 'powershell-mode "powershell-mode" nil t)
 (add-to-list 'auto-mode-alist '("\\.ps[12]?$" . powershell-mode))
 
 ;; undo tree mode
-(wttr/prepend-to-load-path "~/.emacs.d/plugins/undo-tree-0.3")
+(wttr/plugin:prepend-to-load-path "undo-tree-0.3")
 (require 'undo-tree)
 (global-undo-tree-mode)
 
@@ -179,23 +179,23 @@ So I patch it."
   (blink-cursor-mode -1)) 
 
 ;; tempbuf mode
-(wttr/prepend-to-load-path "~/.emacs.d/plugins/tempbuf-mode")
+(wttr/plugin:prepend-to-load-path "tempbuf-mode")
 (require 'tempbuf)
 (add-hook 'help-mode-hook 'turn-on-tempbuf-mode)
 (add-hook 'grep-mode-hook 'turn-on-tempbuf-mode)
 (add-hook 'gtags-select-mode-hook 'turn-on-tempbuf-mode)
 
 ;; sr-speedbar
-;(wttr/prepend-to-load-path "~/.emacs.d/plugins/sr-speedbar-0.1.8/")
+;(wttr/plugin:prepend-to-load-path "sr-speedbar-0.1.8")
 ;(require 'sr-speedbar)
 ;(setq sr-speedbar-right-side nil)
 ;(setq speedbar-show-unknown-files nil)
 
-(wttr/prepend-to-load-path "~/.emacs.d/plugins/csharp-mode")
+(wttr/plugin:prepend-to-load-path "csharp-mode")
 (autoload 'csharp-mode "csharp-mode-0.8.5" nil t)
 (add-to-list 'auto-mode-alist '("\\.cs$" . csharp-mode))
 
-;(wttr/prepend-to-load-path "~/.emacs.d/plugins/anything")
+;(wttr/plugin:prepend-to-load-path "anything")
 ;(require 'anything-config)
 
 
@@ -228,7 +228,7 @@ So I patch it."
   (setq default-tramp-method "plink"))
 
 ;; F# mode
-(wttr/prepend-to-load-path "~/.emacs.d/plugins/fsharp-mode")
+(wttr/plugin:prepend-to-load-path "fsharp-mode")
 (add-to-list 'auto-mode-alist '("\\.fs[iylx]?$" . fsharp-mode))
 (autoload 'fsharp-mode "fsharp" "Major mode for editing F# code." t)
 (autoload 'run-fsharp "inf-fsharp" "Run an inferior F# process." t)
@@ -248,12 +248,12 @@ So I patch it."
 
 
 ;; expand-region
-(wttr/prepend-to-load-path "~/.emacs.d/plugins/expand-region")
+(wttr/plugin:prepend-to-load-path "expand-region")
 (autoload 'er/expand-region "expand-region" "auto expand region" t)
 (global-set-key (kbd "M-2") 'er/expand-region)
 
 ;; wrap-region
-(wttr/prepend-to-load-path "~/.emacs.d/plugins/wrap-region")
+(wttr/plugin:prepend-to-load-path "wrap-region")
 (require 'wrap-region)
 (wrap-region-global-mode t)
 ; (wrap-region-add-wrappers
@@ -278,17 +278,17 @@ So I patch it."
 (setq uniquify-buffer-name-style 'post-forward-angle-brackets)
 
 ;; hide lines
-(wttr/prepend-to-load-path "~/.emacs.d/plugins/hide-lines")
+(wttr/plugin:prepend-to-load-path "hide-lines")
 (autoload 'hide-lines "hide-lines" nil t)
 
 
 ;; action script mode
-(wttr/prepend-to-load-path "~/.emacs.d/plugins/action-script-mode")
+(wttr/plugin:prepend-to-load-path "action-script-mode")
 (autoload 'actionscript-mode "actionscript-mode" nil t)
 (add-to-list 'auto-mode-alist '("\\.as$" . actionscript-mode))
 
 ;; windiff comment mode
-(wttr/prepend-to-load-path "~/.emacs.d/plugins/windiff-comment-mode")
+(wttr/plugin:prepend-to-load-path "windiff-comment-mode")
 (autoload 'windiff-comment-mode "windiff-comment-mode" nil t)
 (add-to-list 'auto-mode-alist
              '("\\.wdc$" . windiff-comment-mode))

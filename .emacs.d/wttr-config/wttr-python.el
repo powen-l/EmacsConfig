@@ -4,7 +4,7 @@
   (wttr/prepend-to-exec-path "c:/Python27"))
 
 (setq-default py-indent-offset 4)
-(wttr/prepend-to-load-path "~/.emacs.d/plugins/python-enhance/")
+(wttr/plugin:prepend-to-load-path "python-enhance")
 (add-to-list 'auto-mode-alist '("\\.py$\\'" . python-mode))
 (add-to-list 'interpreter-mode-alist '("python" . python-mode))
 (autoload 'python-mode "python-mode" "Python Mode." t)

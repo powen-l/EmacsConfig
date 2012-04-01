@@ -1,10 +1,10 @@
 ;; -*- coding: utf-8 -*-
 
 ;; yasnippet
-(wttr/prepend-to-load-path "~/.emacs.d/plugins/yasnippet-0.6.1c")
+(wttr/plugin:prepend-to-load-path "yasnippet-0.6.1c")
 (require 'yasnippet)
 (yas/initialize)
-(yas/load-directory "~/.emacs.d/plugins/yasnippet-0.6.1c/snippets")
+(yas/load-directory (wttr/plugin:expand-file-name "yasnippet-0.6.1c/snippets"))
 
 
 (provide 'wttr-yasnippet)

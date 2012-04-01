@@ -1,11 +1,12 @@
 ;; -*- coding: utf-8 -*-
 
 ;; load
-(wttr/prepend-to-load-path "~/.emacs.d/plugins/auto-complete-1.3.1")
+(wttr/plugin:prepend-to-load-path "auto-complete-1.3.1")
 (require 'pos-tip)
 (require 'auto-complete)
 (require 'auto-complete-config)
-(add-to-list 'ac-dictionary-directories "~/.emacs.d/plugins/auto-complete-1.3.1/dict")
+(add-to-list 'ac-dictionary-directories
+             (wttr/plugin:expand-file-name "auto-complete-1.3.1/dict"))
 (ac-config-default)
 
 ;; custom

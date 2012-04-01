@@ -10,6 +10,9 @@
 (defconst wttr/host:HOMEp (string-equal system-name "WINTERTTR-PC")
   "if the current host is home laptop")
 
+(defconst wttr/plugin:base-directory "~/.emacs.d/plugins"
+  "The root directory that all the extra plugin will put in")
+
 
 ;; `load-path' is a list of directories where Emacs Lisp libraries
 ;; (`.el' and `.elc' files) are installed.
@@ -32,7 +35,7 @@
 ;; directly, while others do that through the shell or some other
 ;; intermediary programs.
 (defun wttr/prepend-to-exec-path (path)
-  "prepand the path to the emacs intenral `exec-path' and \"PATH\" env variable.
+  "prepend the path to the emacs intenral `exec-path' and \"PATH\" env variable.
 Return the updated `exec-path'"
   (setenv "PATH" (concat (expand-file-name path)
                          path-separator
@@ -42,11 +45,27 @@ Return the updated `exec-path'"
               exec-path)))
 
 
-;; as the (add-to-list 'load-path ...) will always check if the
-;; added path already exists, that's expansive to CPU and not so much neccesary.
+;; Prepend a path to the begin of the `load-path'
 (defun wttr/prepend-to-load-path (path)
-  "prepand the PATH to the head of the `load-path', return updated load-path."
-  (setq load-path (cons path load-path)))
+  "prepend the PATH to the head of the `load-path', return updated load-path."
+  (add-to-list 'load-path path))
+
+
+(defun wttr/plugin:expand-file-name (relative-path &optional base-diretory)
+  "Expand the RELATIVE-PATH according to BASE-DIRECORY.
+If BASE-DIRECORY is nil, use `wttr/plugin:base-directory'."
+  (expand-file-name relative-path (or base-diretory wttr/plugin:base-directory)))
+
+
+(defun wttr/plugin:prepend-to-load-path (plugin-folder-name &optional base-diretory)
+  "Prepend the plugin in BASE-DIRECTORY in the `load-path', so that you can use `require' later.
+If BASE-DIRECTORY is nil, use `wttr/plugin:base-directory' as base director.
+This function will also check if the plugin folder exist before prepend to `load-path'."
+  (let ((full-path (wttr/plugin:expand-file-name plugin-folder-name base-diretory)))
+    (if (file-exists-p full-path)
+        (wttr/prepend-to-load-path full-path)
+      (error (format "%s does not exist, please recheck." full-path)))))
+    
 
 
 (defun wttr/delete-trailing-whitespace-when-save ()
