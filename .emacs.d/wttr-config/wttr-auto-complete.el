@@ -22,6 +22,8 @@
 (global-auto-complete-mode t)
 
 ;; auto complete clang
+(if wttr/os:win32p 
+    (wttr/prepend-to-exec-path "~/.emacs.d/extra-bin/clang"))
 (require 'auto-complete-clang)
 
 (defun wttr/cc-mode:auto-complete-setup ()

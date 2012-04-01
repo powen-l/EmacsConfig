@@ -233,6 +233,7 @@ So I patch it."
 ;; remote files using the format ssh://user@server:path/to/file
 ;; (require 'tramp)
 (when wttr/os:win32p
+  (wttr/prepend-to-exec-path "~/.emacs.d/extra-bin/PuTTY")
   (setq default-tramp-method "plink"))
 
 ;; F# mode
