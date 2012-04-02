@@ -9,7 +9,9 @@
 
 (setq linum-mode-inhibit-modes-list
       '(fundamental-mode
+        speedbar-mode
         help-mode
+        Info-mode
         eshell-mode
         shell-mode
         erc-mode

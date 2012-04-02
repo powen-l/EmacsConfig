@@ -22,7 +22,7 @@
 (tool-bar-mode 0)
 ;(menu-bar-mode 0)
 ;; remove scroll bar
-;(set-scroll-bar-mode nil)
+(set-scroll-bar-mode nil)
 
 ;; show clock at statusline, now i close the clock
 (display-time-mode t)

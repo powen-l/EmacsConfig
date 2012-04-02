@@ -2,6 +2,7 @@
 /.emacs.d/auto-save-list/
 /.emacs.d/server/
 /.emacs.d/plugins/js2-mode-20090723/js2.elc
+/.emacs.d/plugins/ecb-2.40/*.elc
 /.emacs.d/elpa/
 /.emacs.d/url/
 /.emacs.d/bookmarks

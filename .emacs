@@ -21,6 +21,6 @@
 (require 'wttr-auto-complete)
 (require 'wttr-yasnippet)
 (require 'wttr-python)
-;(require 'wttr-cedet)
+(require 'wttr-cedet)
 (require 'wttr-auctex)
 
