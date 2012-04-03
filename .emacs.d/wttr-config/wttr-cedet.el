@@ -5,6 +5,21 @@
 (wttr/plugin:prepend-to-load-path "cedet/semantic")
 (wttr/plugin:prepend-to-load-path "cedet/speedbar")
 (load-file "~/.emacs.d/plugins/cedet/common/cedet.el")
+
+
+;; use gnu global for semantic
+(require 'semanticdb-global)
+(semanticdb-enable-gnu-global-databases 'c-mode)
+(semanticdb-enable-gnu-global-databases 'c++-mode)
+(semantic-load-enable-primary-exuberent-ctags-support)
+
+;; which mode is prefer? min -> max
+;(semantic-load-enable-minimum-features)
+(semantic-load-enable-code-helpers)
+;(semantic-load-enable-gaudy-code-helpers)
+;(semantic-load-enable-excessive-code-helpers)
+;(semantic-load-enable-semantic-debugging-helpers)
+
 ;(semantic-load-enable-all-exuberent-ctags-support)
 ;(semantic-load-enable-excessive-code-helpers)
 ;;(semantic-load-enable-semantic-debugging-helpers)
