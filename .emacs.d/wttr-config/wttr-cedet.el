@@ -127,13 +127,58 @@
 (wttr/plugin:prepend-to-load-path "ecb-2.40")
 (require 'ecb-autoloads)
 
-;error reports if i do not set this var
+;;error reports if i do not set this var
 (setq stack-trace-on-error t)           
-;disable tips, kinda noisy
+;;disable tips, kinda noisy
 (setq ecb-tip-of-the-day nil)
-;use 'image style, i like this than 'ascii-guide
+;;use 'image style, i like this than 'ascii-guide
 (setq ecb-tree-buffer-style 'image)
+;;do not remove record in history when kill-buffer
+(setq ecb-kill-buffer-clears-history nil)
+;;bucket the history by major-mode
+(setq ecb-history-make-buckets 'mode)
+;use manually update, c-c . r
+;(setq ecb-analyse-buffer-sync nil)
+;; start ecb in a new frame
+(setq ecb-new-ecb-frame nil)
+;; use mouse 1 instead of mouse 2
+(setq ecb-primary-secondary-mouse-buttons 'mouse-1--C-mouse-1)
+;; compile window
+;(setq ecb-compile-window-height nil)
+;; whether show file in directory-buffer
+;(setq ecb-show-sources-in-directories-buffer 'always)
+(setq ecb-show-sources-in-directories-buffer
+      (list "left7" "left13" "left14" "left15"))
 
+
+(defun wttr/ecb:smart-switch-layout (layout-name)
+  "If the layout name is not current layout, open/swtich to it.
+Other close current ecb layout."
+  (if (and (boundp 'ecb-minor-mode) ecb-minor-mode)
+      (if (string-equal ecb-layout-name layout-name)
+          (ecb-deactivate)
+        (ecb-layout-switch layout-name))
+    (progn
+      (setq ecb-layout-name layout-name)
+      (ecb-activate))))
+
+(defun wttr/ecb:left-method-layout ()
+  (interactive)
+  (wttr/ecb:smart-switch-layout "left9"))
+  
+
+(defun wttr/ecb:left-directory-layout ()
+  (interactive)
+  (wttr/ecb:smart-switch-layout "left13"))
+
+    
+(defun wttr/ecb:left-directory-method-layout ()
+  "Open left directory window, default to left15 layout"
+  (interactive)
+  (wttr/ecb:smart-switch-layout "left15"))
+
+(global-set-key (kbd "<f11>") 'wttr/ecb:left-directory-layout)
+(global-set-key (kbd "<f12>") 'wttr/ecb:left-method-layout)
 
 
 (provide 'wttr-cedet)
