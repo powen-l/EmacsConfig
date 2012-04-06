@@ -1,4 +1,5 @@
 ;; -*- coding: utf-8 -*-
+(require 'wttr-utils)
 
 
 (wttr/plugin:prepend-to-load-path "auctex-11.86-e23.3-msw/site-lisp")

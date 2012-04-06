@@ -1,4 +1,5 @@
 ;; -*- coding: utf-8 -*-
+(require 'wttr-utils)
 
 ;; set user information
 (setq user-full-name "winterTTr")
@@ -18,13 +19,12 @@
 ;; turn on syntax hilight
 (global-font-lock-mode t)
 
-;; close toolbar and menu bar
+;; remove toolbar/menu bar/scroll bar
 (tool-bar-mode 0)
 ;(menu-bar-mode 0)
-;; remove scroll bar
 (set-scroll-bar-mode nil)
 
-;; show clock at statusline, now i close the clock
+;; show clock at statusline
 (display-time-mode t)
 (setq display-time-24hr-format t)
 (setq display-time-day-and-date t)
@@ -45,6 +45,7 @@
 (setq frame-title-format
       (list "GNU Emacs " emacs-version "@" system-name " - " '(buffer-file-name "%f" "%b")))
 
+;; auto maximize window after emacs startup
 ; (run-with-idle-timer 0.2 nil 'w32-maximize-frame)
 (when wttr/os:win32p
   (add-to-list 'emacs-startup-hook #'wttr/w32-maximize-frame))
@@ -60,7 +61,6 @@
 
 ;; use mouse to copy thing automatically
 (setq mouse-drag-copy-region t)
-
 
 ;; move mouse when cursor is close to it
 ;(mouse-avoidance-mode 'animate)
@@ -78,13 +78,14 @@
 
 ;; encoding
 (set-language-environment 'UTF-8)
-(setq file-name-coding-system 'gb2312)
+(if wttr/os:win32p
+    (setq file-name-coding-system 'gb2312))
 
 ;; setup up a big kill-ring, so i will never miss anything:-)
 (setq kill-ring-max 100)
 
-;; set default mode to text-mode
-(setq-default major-mode 'text-mode)
+;; set default mode to text-mode, seems useless.
+;(setq-default major-mode 'text-mode)
 
 ;; set startup scrach buffer to another mode
 ; (setq initial-major-mode 'text-mode)
@@ -99,9 +100,6 @@
 ;; not use tab, use space to indent
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 4)
-
-;; auto-load mode
-(global-auto-revert-mode 1)
 
 ;; always split window vertically
 (setq split-width-threshold nil)

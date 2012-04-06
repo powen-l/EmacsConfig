@@ -1,4 +1,5 @@
 ;; -*- coding: utf-8 -*-
+(require 'wttr-utils)
 
 ;;;; pre setting
 (setq-default evil-auto-indent t)

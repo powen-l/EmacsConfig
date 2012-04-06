@@ -1,4 +1,5 @@
 ;; -*- coding: utf-8 -*-
+(require 'wttr-utils)
 
 ;; we need to add the ccl binary path
 (when wttr/os:win32p

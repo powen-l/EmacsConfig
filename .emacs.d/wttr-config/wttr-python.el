@@ -1,4 +1,5 @@
 ;; -*- coding: utf-8 -*-
+(require 'wttr-utils)
 
 (when wttr/os:win32p
   (wttr/prepend-to-exec-path "c:/Python27"))

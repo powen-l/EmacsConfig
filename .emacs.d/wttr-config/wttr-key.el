@@ -1,4 +1,5 @@
 ;; -*- coding: utf-8 -*-
+(require 'wttr-utils)
 
 (global-set-key [(meta ?/)] 'hippie-expand)
 (global-set-key (kbd "<f4>") 'wttr/kill-buffer-may-have-clients)

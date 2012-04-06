@@ -44,6 +44,10 @@ Return the updated `exec-path'"
         (cons (expand-file-name path)
               exec-path)))
 
+(defun wttr/log:message (message &rest args)
+  "Display the warning message into *init* buffer"
+  (display-warning 'wttr-config (apply 'format message args) :warning "*wttr-config*"))
+
 
 ;; Prepend a path to the begin of the `load-path'
 (defun wttr/prepend-to-load-path (path)
@@ -62,10 +66,13 @@ If BASE-DIRECORY is nil, use `wttr/plugin:base-directory'."
 If BASE-DIRECTORY is nil, use `wttr/plugin:base-directory' as base director.
 This function will also check if the plugin folder exist before prepend to `load-path'."
   (let ((full-path (wttr/plugin:expand-file-name plugin-folder-name base-diretory)))
-    (if (file-exists-p full-path)
-        (wttr/prepend-to-load-path full-path)
-      (error (format "%s does not exist, please recheck." full-path)))))
-    
+    (cond
+     ((file-exists-p full-path)
+      (wttr/prepend-to-load-path full-path)
+      full-path)
+     (t
+      (wttr/log:message "plugin dir [%s] does not exist, loading possibly failed." full-path)
+      nil))))
 
 
 (defun wttr/delete-trailing-whitespace-when-save ()

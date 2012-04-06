@@ -1,25 +1,32 @@
 ;; -*- coding: utf-8 -*-
+(require 'wttr-utils)
 
 (if wttr/os:win32p
     (setq w32-enable-synthesized-fonts t))
 
+;; create fontset
 (create-fontset-from-fontset-spec
  "-outline-Consolas-bold-normal-normal-mono-13-*-*-*-c-*-fontset-Consolas")
-(cond 
-  (wttr/host:MSWSp
-	(set-fontset-font "fontset-Consolas" 'ascii "WenQuanYi Micro Hei Mono-12" nil 'prepend))
-  (wttr/host:HOMEp
-	(set-fontset-font "fontset-Consolas" 'ascii "文泉驿等宽微米黑-12" nil 'prepend))
-  (t
-	nil))
 
-(set-fontset-font "fontset-Consolas" 'han "Microsoft YaHei-12" nil 'prepend)
-(set-fontset-font "fontset-Consolas" 'kana "MS Gothic-12" nil 'prepend)
+(cond 
+ (wttr/host:MSWSp
+  (set-fontset-font "fontset-Consolas" 'ascii "WenQuanYi Micro Hei Mono-12" nil 'prepend))
+ (wttr/host:HOMEp
+  (set-fontset-font "fontset-Consolas" 'ascii "文泉驿等宽微米黑-12" nil 'prepend))
+ (t
+  (wttr/log:message "wttr-font: Not registered host. Need update font setting for 'ascii charset.")))
+
+(cond
+ ((or wttr/host:HOMEp wttr/host:MSWSp)
+  (set-fontset-font "fontset-Consolas" 'han "Microsoft YaHei-12" nil 'prepend)
+  (set-fontset-font "fontset-Consolas" 'kana "MS Gothic-12" nil 'prepend))
+ (t
+  (wttr/log:message "wttr-font: Not registered host. Need update font setting for 'han and 'kana charset.")))
+
 (set-default-font "fontset-Consolas")
 
 (setq default-frame-alist
-      (append
-       '((font . "fontset-Consolas")) default-frame-alist))
+      (cons '(font . "fontset-Consolas") default-frame-alist))
 
 ;; Very useful tools when you want to know the font description under win32
 ;(w32-select-font nil nil)

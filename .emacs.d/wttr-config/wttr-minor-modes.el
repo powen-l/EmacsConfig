@@ -1,4 +1,5 @@
 ;; -*- coding: utf-8 -*-
+(require 'wttr-utils)
 
 ;; c c++ mode setting
 (setq-default c-basic-offset 4)
@@ -11,10 +12,11 @@
 
 ;; server mode
 (server-start)
-(add-hook 'kill-emacs-hook
-          (lambda ()
-            (if (file-exists-p "~/.emacs.d/server/server")
-                (delete-file "~/.emacs.d/server/server"))))
+(defun wttr/server-mode:kill-flag-file ()
+  "Kill the server mode flag file when emacs exist"
+  (if (file-exists-p "~/.emacs.d/server/server")
+      (delete-file "~/.emacs.d/server/server")))
+(add-hook 'kill-emacs-hook #'wttr/server-mode:kill-flag-file)
 
 ;; === grep mode ===
 ;; we do not need to setup the grep command, use the correct exec-path
@@ -305,5 +307,8 @@ So I patch it."
 
 ;; bookmark setting
 (setq bookmark-save-flag t)
+
+;; auto-load mode
+(global-auto-revert-mode 1)
 
 (provide 'wttr-minor-modes)

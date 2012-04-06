@@ -1,4 +1,5 @@
 ;; -*- coding: utf-8 -*-
+(require 'wttr-utils)
 
 ;; load
 (wttr/plugin:prepend-to-load-path "auto-complete-1.3.1")

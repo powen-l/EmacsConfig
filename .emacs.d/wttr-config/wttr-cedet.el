@@ -1,4 +1,5 @@
 ;; -*- coding: utf-8 -*-
+(require 'wttr-utils)
 
 (wttr/plugin:prepend-to-load-path "cedet")
 (wttr/plugin:prepend-to-load-path "cedet/eieio")
