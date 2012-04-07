@@ -3,17 +3,24 @@
 
 ;; load
 (wttr/plugin:prepend-to-load-path "auto-complete-1.3.1")
-(require 'pos-tip)
-(require 'auto-complete)
 (require 'auto-complete-config)
 (add-to-list 'ac-dictionary-directories
              (wttr/plugin:expand-file-name "auto-complete-1.3.1/dict"))
 (ac-config-default)
 
 ;; custom
+
+;; Quick help will appear at the side of completion menu, so you can
+;; easily see that, but there is a problem if there is no space to
+;; displaying the help. Quick help will be shown automatically
 (setq ac-use-quick-help t)
-(setq ac-quick-help-delay 0.5)          ;default is 1.5
-(setq ac-dwim t)                        ;behavior of completion by TAB will be changed as a behavior of completion by RET
+(setq ac-quick-help-delay 1.0)
+
+;; behavior of completion by TAB will be changed as a behavior of
+;; completion by RET
+(setq ac-dwim t)                        
+
+
 (define-key ac-mode-map  [(control return)] 'auto-complete)
 (add-hook 'emacs-lisp-mode-hook 'ac-emacs-lisp-mode-setup)
 (add-hook 'c-mode-common-hook 'ac-cc-mode-setup)
