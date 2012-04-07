@@ -1,21 +1,29 @@
 ;; -*- coding: utf-8 -*-
 (require 'wttr-utils)
 
-;; load
-
 (wttr/plugin:prepend-to-load-path "auto-complete-suite/pos-tip")
 (wttr/plugin:prepend-to-load-path "auto-complete-suite/popup-el")
+(wttr/plugin:prepend-to-load-path "auto-complete-suite/fuzzy-el")
 (wttr/plugin:prepend-to-load-path "auto-complete-suite/auto-complete")
+
+;; load auto-complete
 (require 'auto-complete-config)
 (add-to-list 'ac-dictionary-directories
              (wttr/plugin:expand-file-name "auto-complete-suite/auto-complete/dict"))
 (ac-config-default)
 
-;; custom
+;; use pos-tip, which is better than native popup
+;; 
+;; NOTE:
+;; If we do not require pos-tip explicitly, this feature will not be
+;; triggered, even we set `ac-quick-help-prefer-pos-tip' to t, which
+;; is already the default value. We can see the implementation of
+;; `ac-quick-help-use-pos-tip-p' to find the reason.
+(require 'pos-tip)
+(setq ac-quick-help-prefer-pos-tip t)   ;default is t
 
 ;; Quick help will appear at the side of completion menu, so you can
-;; easily see that, but there is a problem if there is no space to
-;; displaying the help. Quick help will be shown automatically
+;; easily see the help.
 (setq ac-use-quick-help t)
 (setq ac-quick-help-delay 1.0)
 
@@ -23,14 +31,14 @@
 ;; completion by RET
 (setq ac-dwim t)                        
 
+;; give a key to trigger ac when it is not automatically triggered
+(ac-set-trigger-key "<C-return>")
 
-(define-key ac-mode-map  [(control return)] 'auto-complete)
-(add-hook 'emacs-lisp-mode-hook 'ac-emacs-lisp-mode-setup)
-(add-hook 'c-mode-common-hook 'ac-cc-mode-setup)
-(add-hook 'ruby-mode-hook 'ac-ruby-mode-setup)
-(add-hook 'css-mode-hook 'ac-css-mode-setup)
-(add-hook 'auto-complete-mode-hook 'ac-common-setup)
-(global-auto-complete-mode t)
+;; make del also trigger the ac
+(setq ac-trigger-commands (cons 'backward-delete-char-untabify ac-trigger-commands))
+
+;; use fuzzy mode, its interesting
+(setq ac-fuzzy-enable t)
 
 ;; auto complete clang
 (if wttr/os:win32p 

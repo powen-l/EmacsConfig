@@ -22,3 +22,6 @@
 [submodule ".emacs.d/plugins/auto-complete-suite/popup-el"]
 	path = .emacs.d/plugins/auto-complete-suite/popup-el
 	url = https://github.com/m2ym/popup-el.git
+[submodule ".emacs.d/plugins/auto-complete-suite/fuzzy-el"]
+	path = .emacs.d/plugins/auto-complete-suite/fuzzy-el
+	url = https://github.com/m2ym/fuzzy-el.git
