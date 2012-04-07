@@ -13,3 +13,12 @@
 [submodule ".emacs.d/plugins/wrap-region"]
 	path = .emacs.d/plugins/wrap-region
 	url = https://github.com/rejeep/wrap-region.git
+[submodule ".emacs.d/plugins/auto-complete"]
+	path = .emacs.d/plugins/auto-complete-suite/auto-complete
+	url = https://github.com/m2ym/auto-complete.git
+[submodule ".emacs.d/plugins/auto-complete-suite/auto-complete-clang"]
+	path = .emacs.d/plugins/auto-complete-suite/auto-complete-clang
+	url = https://github.com/brianjcj/auto-complete-clang.git
+[submodule ".emacs.d/plugins/auto-complete-suite/popup-el"]
+	path = .emacs.d/plugins/auto-complete-suite/popup-el
+	url = https://github.com/m2ym/popup-el.git

@@ -2,10 +2,13 @@
 (require 'wttr-utils)
 
 ;; load
-(wttr/plugin:prepend-to-load-path "auto-complete-1.3.1")
+
+(wttr/plugin:prepend-to-load-path "auto-complete-suite/pos-tip")
+(wttr/plugin:prepend-to-load-path "auto-complete-suite/popup-el")
+(wttr/plugin:prepend-to-load-path "auto-complete-suite/auto-complete")
 (require 'auto-complete-config)
 (add-to-list 'ac-dictionary-directories
-             (wttr/plugin:expand-file-name "auto-complete-1.3.1/dict"))
+             (wttr/plugin:expand-file-name "auto-complete-suite/auto-complete/dict"))
 (ac-config-default)
 
 ;; custom
@@ -32,6 +35,7 @@
 ;; auto complete clang
 (if wttr/os:win32p 
     (wttr/prepend-to-exec-path "~/.emacs.d/extra-bin/clang"))
+(wttr/plugin:prepend-to-load-path "auto-complete-suite/auto-complete-clang")
 (require 'auto-complete-clang)
 
 (defun wttr/cc-mode:auto-complete-setup ()
