@@ -1,6 +1,9 @@
 ;; -*- coding: utf-8 -*-
 (require 'wttr-utils)
 
+;; compile command:
+;;   emacs -Q -l cedet-build.el -f cedet-build
+
 (wttr/plugin:prepend-to-load-path "cedet")
 (wttr/plugin:prepend-to-load-path "cedet/eieio")
 (wttr/plugin:prepend-to-load-path "cedet/semantic")
@@ -22,8 +25,24 @@
 ;(semantic-load-enable-semantic-debugging-helpers)
 
 ;(semantic-load-enable-all-exuberent-ctags-support)
-;(semantic-load-enable-excessive-code-helpers)
-;;(semantic-load-enable-semantic-debugging-helpers)
+
+;; Enable EDE(Emacs Develpment Enviroment) mode
+(global-ede-mode t)
+
+;;; EDE example
+;(ede-cpp-root-project "CedetTest"
+;                :name "Test Cedet"
+;                :file "d:/_SRC_/_mine_/__CPP__/cedet/anchor.TXT"
+;                :include-path '("/"
+;                                "/a"
+;                                "/b"
+;                               )
+;                :system-include-path '()
+;                :spp-table '(("BOOST_TEST_DYN_LINK" . "")))
+
+
+
+
 ;
 ;;; the function can be folded
 ;(global-semantic-tag-folding-mode 1)
@@ -195,6 +214,7 @@ Other close current ecb layout."
 
 (global-set-key (kbd "<f11>") 'wttr/ecb:left-directory-layout)
 (global-set-key (kbd "<f12>") 'wttr/ecb:left-method-layout)
+
 
 
 (provide 'wttr-cedet)
