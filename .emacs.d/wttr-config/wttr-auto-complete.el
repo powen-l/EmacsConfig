@@ -29,6 +29,8 @@
 
 ;; behavior of completion by TAB will be changed as a behavior of
 ;; completion by RET
+;;  - After selecting candidates, TAB will behave as RET
+;;  - TAB will behave as RET only on candidate remains
 (setq ac-dwim t)                        
 
 ;; give a key to trigger ac when it is not automatically triggered
