@@ -255,7 +255,7 @@ So I patch it."
   nil))
 
 ;; redo tree
-(setq undo-tree-mode-lighter " UndoT")
+(setq undo-tree-mode-lighter " UT")
 
 
 ;; expand-region
@@ -310,5 +310,15 @@ So I patch it."
 
 ;; auto-load mode
 (global-auto-revert-mode 1)
+
+
+;; use save mini buffer hisitory
+(savehist-mode t)
+
+
+;; save place when file is close and resume next itme
+(setq save-place-file "~/.emacs.d/.emacs-places")
+(setq-default save-place t)                   ;; activate it for all buffers
+(require 'saveplace)                          ;; get the package
 
 (provide 'wttr-minor-modes)

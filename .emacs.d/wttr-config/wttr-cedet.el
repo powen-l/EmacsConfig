@@ -4,11 +4,13 @@
 ;; compile command:
 ;;   emacs -Q -l cedet-build.el -f cedet-build
 
-(wttr/plugin:prepend-to-load-path "cedet")
-(wttr/plugin:prepend-to-load-path "cedet/eieio")
-(wttr/plugin:prepend-to-load-path "cedet/semantic")
-(wttr/plugin:prepend-to-load-path "cedet/speedbar")
-(load-file "~/.emacs.d/plugins/cedet/common/cedet.el")
+;; Don't need to call these explicitly, cedet.el will handle all
+;(wttr/plugin:prepend-to-load-path "cedet/common")
+;(wttr/plugin:prepend-to-load-path "cedet/eieio")
+;(wttr/plugin:prepend-to-load-path "cedet/semantic")
+;(wttr/plugin:prepend-to-load-path "cedet/speedbar")
+;(require 'cedet)
+(load (wttr/plugin:expand-file-name "cedet/common/cedet.el"))
 
 
 ;; use gnu global for semantic
@@ -24,8 +26,6 @@
 ;(semantic-load-enable-excessive-code-helpers)
 ;(semantic-load-enable-semantic-debugging-helpers)
 
-;(semantic-load-enable-all-exuberent-ctags-support)
-
 ;; Enable EDE(Emacs Develpment Enviroment) mode
 (global-ede-mode t)
 
@@ -40,15 +40,14 @@
 ;                :system-include-path '()
 ;                :spp-table '(("BOOST_TEST_DYN_LINK" . "")))
 
+;; Use Re-Code mode, a template mode, I use yasnippet, so ignore it.
+;(global-srecode-minor-mode 1)
 
 
+;; the function can be folded
+(global-semantic-tag-folding-mode 1)
 
-;
-;;; the function can be folded
-;(global-semantic-tag-folding-mode 1)
-;
-;; (global-ede-mode 1)
-;; (global-srecode-minor-mode 1) 
+
 ;; 
 ;; (setq senator-minor-mode-name "SN")
 ;; (setq semantic-imenu-auto-rebuild-directory-indexes nil)

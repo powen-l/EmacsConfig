@@ -7,6 +7,8 @@
 /.emacs.d/url/
 /.emacs.d/bookmarks
 /.emacs.d/eshell/
+/.emacs.d/.emacs-places
+/.emacs.d/history
 /.ido.last
 /.slime-history.eld
 /.eshell/
