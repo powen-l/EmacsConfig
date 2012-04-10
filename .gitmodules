@@ -25,3 +25,6 @@
 [submodule ".emacs.d/plugins/auto-complete-suite/auto-complete"]
 	path = .emacs.d/plugins/auto-complete-suite/auto-complete
 	url = https://github.com/m2ym/auto-complete.git
+[submodule ".emacs.d/plugins/magit"]
+	path = .emacs.d/plugins/magit
+	url = https://github.com/magit/magit.git

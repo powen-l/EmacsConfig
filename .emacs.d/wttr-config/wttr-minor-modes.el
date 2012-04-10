@@ -321,4 +321,18 @@ So I patch it."
 (setq-default save-place t)                   ;; activate it for all buffers
 (require 'saveplace)                          ;; get the package
 
+
+;; go mode
+(when wttr/os:win32p
+  (wttr/prepend-to-exec-path "C:/go/bin"))
+(wttr/plugin:prepend-to-load-path "go-mode")
+(require 'go-mode-load)
+
+;; magit
+(when wttr/os:win32p
+  (wttr/prepend-to-exec-path "C:/Program Files (x86)/Git/bin"))
+(wttr/plugin:prepend-to-load-path "magit")
+(autoload 'magit-status "magit" "magit" t)
+
+
 (provide 'wttr-minor-modes)
