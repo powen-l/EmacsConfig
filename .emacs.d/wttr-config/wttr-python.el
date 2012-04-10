@@ -1,7 +1,7 @@
 ;; -*- coding: utf-8 -*-
 (require 'wttr-utils)
 
-(when wttr/os:win32p
+(when wttr/os:windowsp
   (wttr/prepend-to-exec-path "c:/Python27"))
 
 (setq-default py-indent-offset 4)

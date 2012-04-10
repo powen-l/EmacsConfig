@@ -43,7 +43,7 @@
 (setq ac-fuzzy-enable t)
 
 ;; auto complete clang
-(if wttr/os:win32p 
+(if wttr/os:windowsp 
     (wttr/prepend-to-exec-path "~/.emacs.d/extra-bin/clang"))
 (wttr/plugin:prepend-to-load-path "auto-complete-suite/auto-complete-clang")
 (require 'auto-complete-clang)

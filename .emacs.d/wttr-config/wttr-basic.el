@@ -47,7 +47,7 @@
 
 ;; auto maximize window after emacs startup
 ; (run-with-idle-timer 0.2 nil 'w32-maximize-frame)
-(when wttr/os:win32p
+(when wttr/os:windowsp
   (add-to-list 'emacs-startup-hook #'wttr/w32-maximize-frame))
 
 ;===================================
@@ -78,7 +78,7 @@
 
 ;; encoding
 (set-language-environment 'UTF-8)
-(if wttr/os:win32p
+(if wttr/os:windowsp
     (setq file-name-coding-system 'gb2312))
 
 ;; setup up a big kill-ring, so i will never miss anything:-)
@@ -107,7 +107,7 @@
 ;; add extra binary path
 ;; it seems the "find" in "unix-utils-bin" works better and the
 ;; on in the "etc", so we put "ect" after "unix-utils-bin"
-(when wttr/os:win32p
+(when wttr/os:windowsp
   (mapc #'wttr/prepend-to-exec-path
         (reverse 
          '("~/bin"

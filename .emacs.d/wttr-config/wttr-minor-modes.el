@@ -21,26 +21,26 @@
 ;; === grep mode ===
 ;; we do not need to setup the grep command, use the correct exec-path
 ;; and "PATH" env is enough
-(require 'grep)
-(grep-apply-setting
- 'grep-find-use-xargs 'exec)
+;(require 'grep)
+;(grep-apply-setting
+; 'grep-find-use-xargs 'exec)
 
-(when wttr/os:win32p
-  (defadvice grep-expand-template
-    (around grep-expand-template-w32-around (template &optional regexp files dir excl))
-    "A patch for the windows system, as the [find . -iname \"balabala\" -exec grep \"grep-bala\" {} ;] will
-result as a seperate windows process [grep grep-balaba file-name-from-find].
-When grep-bala contains *, this will lead to very wierd result as the paramter is not quoted in new process.
-So I patch it."
-    (cond
-     ((string-match-p "^find.*grep" template)
-      (let ((regexp (format "\"%s\"" regexp)))
-        ad-do-it))
-     ((string-match-p "^grep.*" template)
-      ad-do-it)
-     (t
-      ad-do-it)))
-  (ad-activate 'grep-expand-template))
+;(when wttr/os:windowsp
+;  (defadvice grep-expand-template
+;    (around grep-expand-template-w32-around (template &optional regexp files dir excl))
+;    "A patch for the windows system, as the [find . -iname \"balabala\" -exec grep \"grep-bala\" {} ;] will
+;result as a seperate windows process [grep grep-balaba file-name-from-find].
+;When grep-bala contains *, this will lead to very wierd result as the paramter is not quoted in new process.
+;So I patch it."
+;    (cond
+;     ((string-match-p "^find.*grep" template)
+;      (let ((regexp (format "\"%s\"" regexp)))
+;        ad-do-it))
+;     ((string-match-p "^grep.*" template)
+;      ad-do-it)
+;     (t
+;      ad-do-it)))
+;  (ad-activate 'grep-expand-template))
 
 ;(grep-apply-setting
 ; 'grep-find-command
@@ -234,7 +234,7 @@ So I patch it."
 ;; As long as pageant is running with your key, you can edit your
 ;; remote files using the format ssh://user@server:path/to/file
 ;; (require 'tramp)
-(when wttr/os:win32p
+(when wttr/os:windowsp
   (wttr/prepend-to-exec-path "~/.emacs.d/extra-bin/PuTTY")
   (setq default-tramp-method "plink"))
 
@@ -278,7 +278,7 @@ So I patch it."
 
 ;; ispell setting
 (autoload 'ispell-buffer "ispell" "spell check the current buffer" t)
-(when wttr/os:win32p
+(when wttr/os:windowsp
   (wttr/prepend-to-exec-path "~/.emacs.d/extra-bin/aspell/bin")
   (setq ispell-program-name "aspell"))
 (setq ispell-dictionary "british")
@@ -323,14 +323,20 @@ So I patch it."
 
 
 ;; go mode
-(when wttr/os:win32p
+(when wttr/os:windowsp
   (wttr/prepend-to-exec-path "C:/go/bin"))
 (wttr/plugin:prepend-to-load-path "go-mode")
 (require 'go-mode-load)
 
 ;; magit
-(when wttr/os:win32p
-  (wttr/prepend-to-exec-path "C:/Program Files (x86)/Git/bin"))
+(if wttr/os:windowsp
+    (cond
+     (wttr/os:win64p
+      (wttr/prepend-to-exec-path "C:/Program Files (x86)/Git/bin"))
+     (wttr/os:win32p
+      (wttr/prepend-to-exec-path "C:/Program Files/Git/bin"))
+     (t
+      nil)))
 (wttr/plugin:prepend-to-load-path "magit")
 (autoload 'magit-status "magit" "magit" t)
 

@@ -2,7 +2,7 @@
 (require 'wttr-utils)
 
 ;; we need to add the ccl binary path
-(when wttr/os:win32p
+(when wttr/os:windowsp
   (wttr/prepend-to-exec-path "~/../ccl-1.7-windows")
   (setq inferior-lisp-program
         (if (getenv "PROGRAMW6432") "wx86cl64.exe" "wx86cl.exe"))

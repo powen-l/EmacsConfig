@@ -1,7 +1,7 @@
 ;; -*- coding: utf-8 -*-
 (require 'wttr-utils)
 
-(if wttr/os:win32p
+(if wttr/os:windowsp
     (setq w32-enable-synthesized-fonts t))
 
 ;; create fontset

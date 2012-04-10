@@ -1,8 +1,16 @@
 ;; -*- coding: utf-8 -*-
 
 ;; some const variable
-(defconst wttr/os:win32p (eq system-type 'windows-nt)
-  "if current environment is win32 system")
+(defconst wttr/os:windowsp (eq system-type 'windows-nt)
+  "if current operation system is windows system")
+
+(defconst wttr/os:win32p (and wttr/os:windowsp
+                              (not (getenv "PROGRAMW6432")))
+  "if current operation system is windows 32bit version")
+
+(defconst wttr/os:win64p (and wttr/os:windowsp
+                              (getenv "PROGRAMW6432"))
+  "if current operation system is windows 64bit verison.")
 
 (defconst wttr/host:MSWSp (string-equal system-name "WINTERTTR-WS")
   "if the currrent host is Microsoft workstation")
@@ -94,7 +102,7 @@ emacsclient, also notify the server to close connection."
 
 
 ;; setup startup window size
-(when wttr/os:win32p
+(when wttr/os:windowsp
   (defun wttr/w32-restore-frame ()
     "Restore a minimized frame"
     (interactive)
