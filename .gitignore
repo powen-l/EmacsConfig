@@ -57,3 +57,5 @@
 /readme.txt
 /.recentf
 /.history
+/.ssh/
+/.emacs.d/plugins/msel/
