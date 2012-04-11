@@ -94,6 +94,9 @@
 (add-to-list 'evil-emacs-state-modes 'eassist-mode)
 (add-to-list 'evil-emacs-state-modes 'gtags-select-mode)
 (add-to-list 'evil-emacs-state-modes 'magit-status-mode)
+(add-to-list 'evil-emacs-state-modes 'magit-log-mode)
+(add-to-list 'evil-emacs-state-modes 'magit-commit-mode)
+(add-to-list 'evil-emacs-state-modes 'magit-diff-mode)
 
 ;evil-insert-state-map [Variable]
 ;The global keymap for Insert state.
