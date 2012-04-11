@@ -21,9 +21,9 @@
 ;; === grep mode ===
 ;; we do not need to setup the grep command, use the correct exec-path
 ;; and "PATH" env is enough
-;(require 'grep)
-;(grep-apply-setting
-; 'grep-find-use-xargs 'exec)
+(require 'grep)
+(grep-apply-setting
+ 'grep-find-use-xargs 'exec)
 
 ;(when wttr/os:windowsp
 ;  (defadvice grep-expand-template
@@ -329,14 +329,6 @@
 (require 'go-mode-load)
 
 ;; magit
-(if wttr/os:windowsp
-    (cond
-     (wttr/os:win64p
-      (wttr/prepend-to-exec-path "C:/Program Files (x86)/Git/bin"))
-     (wttr/os:win32p
-      (wttr/prepend-to-exec-path "C:/Program Files/Git/bin"))
-     (t
-      nil)))
 (wttr/plugin:prepend-to-load-path "magit")
 (autoload 'magit-status "magit" "magit" t)
 
