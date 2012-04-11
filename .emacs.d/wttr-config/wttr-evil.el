@@ -93,6 +93,7 @@
 (add-to-list 'evil-emacs-state-modes 'dired-mode)
 (add-to-list 'evil-emacs-state-modes 'eassist-mode)
 (add-to-list 'evil-emacs-state-modes 'gtags-select-mode)
+(add-to-list 'evil-emacs-state-modes 'magit-status-mode)
 
 ;evil-insert-state-map [Variable]
 ;The global keymap for Insert state.
