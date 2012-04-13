@@ -57,6 +57,7 @@
           (cdr info)))
       '(
         ("d" . ido-dired)
+        ("e" . kid-switch-to-shell)
         ("f" . ido-find-file)
         ("r" . revert-buffer-with-coding-system)
         ("4" . wttr/kill-buffer-may-have-clients)
@@ -73,6 +74,7 @@
         ("j" . dired-jump )
         ("J" . dired-jump-other-window )
         ("i" . ispell-buffer)
+        ("m" . magit-status)
         ("SPC" . ace-jump-mode)
       ))
 
