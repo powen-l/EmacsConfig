@@ -73,6 +73,7 @@
         ("j" . dired-jump )
         ("J" . dired-jump-other-window )
         ("i" . ispell-buffer)
+        ("m" . magit-status)
         ("SPC" . ace-jump-mode)
       ))
 
