@@ -5,6 +5,8 @@
 (setq dired-recursive-deletes t)
 (setq dired-recursive-copies t)
 
+;; prevent the warning message
+(put 'dired-find-alternate-file 'disabled nil)
 
 ;; normal we use the Recycle bin
 (setq delete-by-moving-to-trash t)
@@ -20,6 +22,7 @@
 (require 'wdired)
 (setq wdired-allow-to-change-permissions 'advanced)
 (define-key dired-mode-map (kbd "r") 'wdired-change-to-wdired-mode)
+
 
 
 (provide 'wttr-dired)
