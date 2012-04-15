@@ -13,6 +13,7 @@
 /.slime-history.eld
 /.eshell/
 /BUGS
+/.smex-items
 /COPYING
 /INSTALL
 /README
