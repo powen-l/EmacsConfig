@@ -49,14 +49,15 @@
 (autoload 'dired-jump "dired" "dired-jump" t)
 (autoload 'dired-jump-other-window "dired" "dired-jump" t)
 ;; add "SPC" sub map
-(define-prefix-command 'wttr/space-evil-normal-map)
-(define-key evil-normal-state-map (kbd "SPC") 'wttr/space-evil-normal-map)
+(define-prefix-command 'wttr/my-evil-normal-map)
+(define-key evil-normal-state-map (kbd ";") 'wttr/my-evil-normal-map)
 (mapc (lambda (info)
-        (define-key wttr/space-evil-normal-map
+        (define-key wttr/my-evil-normal-map
           (read-kbd-macro (car info))
           (cdr info)))
       '(
         ("d" . ido-dired)
+        ("E" . eshell)
         ("e" . kid-switch-to-shell)
         ("f" . ido-find-file)
         ("r" . revert-buffer-with-coding-system)
@@ -75,8 +76,9 @@
         ("J" . dired-jump-other-window )
         ("i" . ispell-buffer)
         ("m" . magit-status)
-        ("SPC" . ace-jump-mode)
       ))
+
+(define-key evil-normal-state-map (kbd "SPC") 'ace-jump-mode)
 
 ;; replace the <c-e> to move-end-of-line
 ;(substitute-key-definition 'evil-copy-from-below 'move-end-of-line evil-insert-state-map)
