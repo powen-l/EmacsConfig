@@ -3,7 +3,7 @@
 [difftool "p4merge"]
     cmd = "p4merge.exe $LOCAL $REMOTE"
 [difftool "emacs"]
-    cmd = e:/Tools/Emacs/bin/ediff.sh $LOCAL $REMOTE
+    cmd = e:/Tools/Emacs/.emacs.d/extra-bin/git-script/ediff.sh $LOCAL $REMOTE
 [merge]
 	tool = p4merge
 [mergetool "p4merge"]
