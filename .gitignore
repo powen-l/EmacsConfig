@@ -6,7 +6,8 @@
 /.emacs.d/elpa/
 /.emacs.d/url/
 /.emacs.d/bookmarks
-/.emacs.d/eshell/
+/.emacs.d/eshell/history
+/.emacs.d/eshell/lastdir
 /.emacs.d/.emacs-places
 /.emacs.d/history
 /.ido.last
