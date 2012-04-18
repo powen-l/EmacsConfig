@@ -127,11 +127,11 @@
 
 ;; http://trey-jackson.blogspot.com/2010/04/emacs-tip-36-abort-minibuffer-when.html
 ;; very useful when you use mouse meanwhile, close minibuffer when lose focus
-(defun wttr/kill-minibuffer-when-lost-focus ()
-  "kill the minibuffer"
-  (when (and (>= (recursion-depth) 1) (active-minibuffer-window))
-    (abort-recursive-edit)))
-
-(add-hook 'mouse-leave-buffer-hook 'wttr/kill-minibuffer-when-lost-focus)
+;(defun wttr/kill-minibuffer-when-lost-focus ()
+;  "kill the minibuffer"
+;  (when (and (>= (recursion-depth) 1) (active-minibuffer-window))
+;    (abort-recursive-edit)))
+;
+;(add-hook 'mouse-leave-buffer-hook 'wttr/kill-minibuffer-when-lost-focus)
 
 (provide 'wttr-basic)
