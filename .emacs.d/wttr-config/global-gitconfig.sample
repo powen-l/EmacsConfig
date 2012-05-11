@@ -9,5 +9,5 @@
 [mergetool "p4merge"]
 	cmd = p4merge.exe /\"$BASE/\" /\"$LOCAL/\" /\"$REMOTE/\" /\"$MERGED/\"
 [core]
-	editor = e:/Tools/Emacs/bin/emacs.sh
+	editor = e:/Tools/Emacs/.emacs.d/extra-bin/git-script/emacs.sh
 

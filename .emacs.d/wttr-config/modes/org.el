@@ -16,12 +16,19 @@
 (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
 (global-set-key "\C-cl" 'org-store-link)
 (global-set-key "\C-ca" 'org-agenda)
-;(setq org-agenda-files
-;      (list
-;       "E:/My Dropbox/Material/Org/gomez.org") )
+(setq org-agenda-files
+      (list
+       "e:/Dropbox/Material/Org/Microsoft/buglist.org") )
 
 (setq org-insert-mode-line-in-empty-file t)
 (setq org-hierarchical-todo-statistics t)
+
+
+(defun wttr/org-mode-setup ()
+  (define-key org-mode-map (kbd "C-c i") #'(lambda ()
+                                             (interactive)
+                                             (org-time-stamp 4))))
+(add-hook 'org-mode-hook #'wttr/org-mode-setup)
 
 
 ;; work flow for the gomez
