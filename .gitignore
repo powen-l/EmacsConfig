@@ -21,6 +21,12 @@
 /README.W32
 /_viminfo
 /bin/COPYING
+/bin/ctags.exe
+/bin/ctags.exe
+/bin/libgdk_pixbuf-2.0-0.dll
+/bin/libglib-2.0-0.dll
+/bin/libpng14.dll
+/bin/librsvg-2-2.dll
 /bin/addpm.exe
 /bin/cmdproxy.exe
 /bin/ddeclient.exe

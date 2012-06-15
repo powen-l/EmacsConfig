@@ -111,13 +111,12 @@
   (mapc #'wttr/prepend-to-exec-path
         (reverse 
          (list
-          "~/bin"
           (if wttr/os:win64p
               "C:/Program Files (x86)/Git/bin"
             "C:/Program Files/Git/bin")
-            "~/.emacs.d/extra-bin/gnuwin32"
-            "~/.emacs.d/extra-bin/unix-utils-bin"
-          ))))
+          "~/.emacs.d/extra-bin/gnuwin32"
+          "~/.emacs.d/extra-bin/unix-utils-bin"
+          "~/bin"))))
 
 ;; time stamp support
 ;(setq time-stamp-active t)
