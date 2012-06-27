@@ -15,7 +15,7 @@
 (defconst wttr/host:MSWSp (string-equal system-name "WINTERTTR-WS")
   "if the currrent host is Microsoft workstation")
 
-(defconst wttr/host:HOMEp (string-equal system-name "WINTERTTR-PC")
+(defconst wttr/host:HOMEp (string-equal system-name "WTTR-T61")
   "if the current host is home laptop")
 
 (defconst wttr/plugin:base-directory "~/.emacs.d/plugins"
