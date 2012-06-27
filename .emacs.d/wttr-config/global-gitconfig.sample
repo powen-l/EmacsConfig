@@ -1,3 +1,10 @@
+[user]
+	name = winterTTr
+	email = winterTTr@gmail.com
+[push]
+	default = upstream
+[core]
+	editor = e:/Tools/Emacs/.emacs.d/extra-bin/git-script/emacs.sh
 [diff]
     tool = p4merge
 [difftool "p4merge"]
@@ -8,6 +15,4 @@
 	tool = p4merge
 [mergetool "p4merge"]
 	cmd = p4merge.exe /\"$BASE/\" /\"$LOCAL/\" /\"$REMOTE/\" /\"$MERGED/\"
-[core]
-	editor = e:/Tools/Emacs/.emacs.d/extra-bin/git-script/emacs.sh
 
