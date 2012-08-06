@@ -13,11 +13,16 @@
   (set-fontset-font "fontset-Consolas" 'ascii "WenQuanYi Micro Hei Mono-12" nil 'prepend))
  (wttr/host:HOMEp
   (set-fontset-font "fontset-Consolas" 'ascii "文泉驿等宽微米黑-12" nil 'prepend))
+ (wttr/os:linuxp
+  (set-fontset-font "fontset-Consolas" 'ascii "WenQuanYi Micro Hei Mono-12" nil 'prepend))
  (t
   (wttr/log:message "wttr-font: Not registered host. Need update font setting for 'ascii charset.")))
 
 (cond
  ((or wttr/host:HOMEp wttr/host:MSWSp)
+  (set-fontset-font "fontset-Consolas" 'han "Microsoft YaHei-12" nil 'prepend)
+  (set-fontset-font "fontset-Consolas" 'kana "MS Gothic-12" nil 'prepend))
+ (wttr/os:linuxp
   (set-fontset-font "fontset-Consolas" 'han "Microsoft YaHei-12" nil 'prepend)
   (set-fontset-font "fontset-Consolas" 'kana "MS Gothic-12" nil 'prepend))
  (t
@@ -27,6 +32,7 @@
 
 (setq default-frame-alist
       (cons '(font . "fontset-Consolas") default-frame-alist))
+
 
 ;; Very useful tools when you want to know the font description under win32
 ;(w32-select-font nil nil)
