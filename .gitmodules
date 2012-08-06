@@ -1,6 +1,7 @@
 [submodule ".emacs.d/plugins/ace-jump-mode"]
 	path = .emacs.d/plugins/ace-jump-mode
-	url = git@github.com:winterTTr/ace-jump-mode.git
+	url = https://github.com/winterTTr/ace-jump-mode.git
+	pushurl = git@github.com:winterTTr/ace-jump-mode.git
 [submodule ".emacs.d/plugins/evil"]
 	path = .emacs.d/plugins/evil
 	url = git://gitorious.org/evil/evil.git
