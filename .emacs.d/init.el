@@ -9,5 +9,3 @@
 (require 'wttr-mode-line)
 (require 'wttr-modes)
 
-
-(put 'ido-exit-minibuffer 'disabled nil)
