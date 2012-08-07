@@ -1,12 +1,10 @@
 [submodule ".emacs.d/plugins/ace-jump-mode"]
 	path = .emacs.d/plugins/ace-jump-mode
-	url = git@github.com:winterTTr/ace-jump-mode.git
+	url = https://github.com/winterTTr/ace-jump-mode.git
+	pushurl = git@github.com:winterTTr/ace-jump-mode.git
 [submodule ".emacs.d/plugins/evil"]
 	path = .emacs.d/plugins/evil
 	url = git://gitorious.org/evil/evil.git
-[submodule ".emacs.d/plugins/color-theme-solarized"]
-	path = .emacs.d/plugins/color-theme-solarized
-	url = https://github.com/sellout/emacs-color-theme-solarized.git
 [submodule ".emacs.d/plugins/expand-region"]
 	path = .emacs.d/plugins/expand-region
 	url = https://github.com/magnars/expand-region.el.git

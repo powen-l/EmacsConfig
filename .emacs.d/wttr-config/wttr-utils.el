@@ -4,6 +4,9 @@
 (defconst wttr/os:windowsp (eq system-type 'windows-nt)
   "if current operation system is windows system")
 
+(defconst wttr/os:linuxp (eq system-type 'gnu/linux)
+  "if current operation system is linux")
+
 (defconst wttr/os:win32p (and wttr/os:windowsp
                               (not (getenv "PROGRAMW6432")))
   "if current operation system is windows 32bit version")
