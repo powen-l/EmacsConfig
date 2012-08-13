@@ -32,3 +32,6 @@
 [submodule ".emacs.d/plugins/actionscript-mode"]
 	path = .emacs.d/plugins/actionscript-mode
 	url = https://github.com/austinhaas/actionscript-mode.git
+[submodule ".emacs.d/plugins/org-mode"]
+	path = .emacs.d/plugins/org-mode
+	url = git://orgmode.org/org-mode.git

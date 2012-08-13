@@ -7,9 +7,9 @@
 (setq system-time-locale "C")
 
 ; add new path at the begining
-(setq load-path (cons "~/.emacs.d/plugins/org-7.7/lisp/" load-path) )
+(setq load-path (cons "~/.emacs.d/plugins/org-mode/lisp/" load-path) )
 ; we also turn on contrib : htmlize.el
-(setq load-path (cons "~/.emacs.d/plugins/org-7.7/contrib/lisp/" load-path) )
+(setq load-path (cons "~/.emacs.d/plugins/org-mode/contrib/lisp/" load-path) )
 
 
 (require 'org-install)
