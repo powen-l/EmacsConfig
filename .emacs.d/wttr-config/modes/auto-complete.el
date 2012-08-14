@@ -80,3 +80,10 @@
 ;                                     "D:/src/zephyr/perf/PUBLIC/COMMON/SDK/INC")))
 ;  (setq ac-clang-flags (cons "-D_WIN32_WCE" ac-clang-flags)))
 
+
+
+;;;
+;;; auto complete go
+;;;
+(wttr/plugin:prepend-to-load-path "auto-complete-suite/auto-complete-go")
+(require 'go-autocomplete)
