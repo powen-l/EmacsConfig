@@ -38,3 +38,6 @@
 [submodule ".emacs.d/plugins/yasnippet"]
 	path = .emacs.d/plugins/yasnippet
 	url = https://github.com/capitaomorte/yasnippet.git
+[submodule ".emacs.d/plugins/multiple-cursors"]
+	path = .emacs.d/plugins/multiple-cursors
+	url = https://github.com/magnars/multiple-cursors.el.git
