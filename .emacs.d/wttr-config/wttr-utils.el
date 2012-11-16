@@ -15,7 +15,7 @@
                               (getenv "PROGRAMW6432"))
   "if current operation system is windows 64bit verison.")
 
-(defconst wttr/host:MSWSp (string-equal system-name "WINTERTTR-WS")
+(defconst wttr/host:MSWSp (string-equal system-name "WTTR-T5500")
   "if the currrent host is Microsoft workstation")
 
 (defconst wttr/host:HOMEp (string-equal system-name "WTTR-T61")

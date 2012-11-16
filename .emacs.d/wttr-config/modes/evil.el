@@ -79,6 +79,7 @@
       ))
 
 (define-key evil-normal-state-map (kbd "SPC") 'ace-jump-mode)
+(define-key evil-normal-state-map (kbd "TAB") 'evil-jump-forward)
 
 ;; replace the <c-e> to move-end-of-line
 ;(substitute-key-definition 'evil-copy-from-below 'move-end-of-line evil-insert-state-map)

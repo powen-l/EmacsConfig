@@ -18,7 +18,8 @@
 (global-set-key "\C-ca" 'org-agenda)
 (setq org-agenda-files
       (list
-       "e:/Dropbox/Material/Org/Microsoft/buglist.org") )
+       "e:/Dropbox/Material/Org/Microsoft/buglist.org"
+       "e:/Dropbox/Material/Org/Microsoft/Zodiac/zodiac-bugs.org"))
 
 (setq org-insert-mode-line-in-empty-file t)
 (setq org-hierarchical-todo-statistics t)
