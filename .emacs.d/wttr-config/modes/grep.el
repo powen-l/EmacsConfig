@@ -6,6 +6,24 @@
 (grep-apply-setting
  'grep-find-use-xargs 'exec)
 
+(grep-apply-setting 'grep-highlight-matches 'always)
+
+(if wttr/os:windowsp
+    (grep-apply-setting
+     'grep-find-template
+     (concat "find . <X> -type f <F> -exec "
+             "E:/Tools/emacs/.emacs.d/extra-bin/gnuwin32/grep.exe <C> -nH -e <R> {} \";\"")))
+
+;; for windows perl need to install Win32::Console::ANSI
+;; perl -MCPAN -e shell
+;; ftp://freesoft.cgi.gov.cn/pub/languages/perl/CPAN
+;; install Win32::Console::ANSI
+
+;; (grep-apply-setting
+;;  'grep-find-template 
+;;  "\"c:/Program Files/git/bin/perl.exe\"
+;;  "\"E:/Tools/emacs/.emacs.d/extra-bin/ack/ack-standalone.pl\"
+;;  --color --nogroup <R>")
 
 ;(when wttr/os:windowsp
 ;  (defadvice grep-expand-template
