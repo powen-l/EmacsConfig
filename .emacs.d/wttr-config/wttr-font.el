@@ -1,38 +1,45 @@
 ;; -*- coding: utf-8 -*-
 (require 'wttr-utils)
+(require 'cl)
 
 (if wttr/os:windowsp
     (setq w32-enable-synthesized-fonts t))
 
-;; create fontset
-(create-fontset-from-fontset-spec
- "-outline-Consolas-bold-normal-normal-mono-13-*-*-*-c-*-fontset-Consolas")
 
-(cond 
- (wttr/host:MSWSp
-  (set-fontset-font "fontset-Consolas" 'ascii "WenQuanYi Micro Hei Mono-12" nil 'prepend))
- (wttr/host:HOMEp
-  (set-fontset-font "fontset-Consolas" 'ascii "文泉驿等宽微米黑-12" nil 'prepend))
- (wttr/os:linuxp
-  (set-fontset-font "fontset-Consolas" 'ascii "WenQuanYi Micro Hei Mono-12" nil 'prepend))
- (t
-  (wttr/log:message "wttr-font: Not registered host. Need update font setting for 'ascii charset.")))
+(defconst wttr/font:ascii-font-candidates
+  '("Cousine" "WenQuanYi Micro Hei Mono" "文泉驿等宽微米黑" "Consolas"))
 
-(cond
- ((or wttr/host:HOMEp wttr/host:MSWSp)
-  (set-fontset-font "fontset-Consolas" 'han "Microsoft YaHei-12" nil 'prepend)
-  (set-fontset-font "fontset-Consolas" 'kana "MS Gothic-12" nil 'prepend))
- (wttr/os:linuxp
-  (set-fontset-font "fontset-Consolas" 'han "Microsoft YaHei-12" nil 'prepend)
-  (set-fontset-font "fontset-Consolas" 'kana "MS Gothic-12" nil 'prepend))
- (t
-  (wttr/log:message "wttr-font: Not registered host. Need update font setting for 'han and 'kana charset.")))
 
-(set-default-font "fontset-Consolas")
+(defconst wttr/font:non-ascii-font-candidates
+  '("文泉驿等宽微米黑" "Microsoft YaHei" "MS Gothic"))
 
-(setq default-frame-alist
-      (cons '(font . "fontset-Consolas") default-frame-alist))
 
+(defconst wttr/font:default-font-size 16)
+
+
+(defun wttr/font:existp (font-name)
+  "Check if the font with FONT-NAME exist in current system"
+  (null (null (x-list-fonts font-name))))
+
+
+(let ((ascii-font (find-if #'wttr/font:existp
+                           wttr/font:ascii-font-candidates))
+      (non-ascii-font (find-if #'wttr/font:existp
+                               wttr/font:non-ascii-font-candidates))
+      fontset)
+  (when ascii-font
+    (set-face-font 'default (font-spec :family ascii-font :size 16))
+    (message "Select ascii font: %s" ascii-font))
+
+  (when non-ascii-font
+    (setq fontset (frame-parameter nil 'font))
+    (dolist (script '(han kana))
+      (set-fontset-font fontset script non-ascii-font nil 'prepend))
+    (message "Select non-ascii font: %s" non-ascii-font)))
+
+
+;; (setq default-frame-alist
+;;       (cons '(font . "fontset-Consolas") default-frame-alist))
 
 ;; Very useful tools when you want to know the font description under win32
 ;(w32-select-font nil nil)
@@ -54,6 +61,14 @@
 ;; script-representative-chars
 ;; char-script-table
 ;; =================================================
+
+;; former used II
+;(create-fontset-from-fontset-spec
+; "-outline-Cousine-normal-normal-normal-*-*-*-*-*-*-*-fontset-Cousine")
+;(set-fontset-font "fontset-Cousine" 'ascii "Cousine")
+;(set-fontset-font "fontset-Cousine" 'han "Microsoft YaHei")
+;(set-frame-font "fontset-Cousine" nil t)
+
 
 ;;; former used, leave here for reference
 ;; Font
