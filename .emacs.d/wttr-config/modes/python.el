@@ -15,6 +15,8 @@
 (add-to-list 'interpreter-mode-alist '("python" . python-mode))
 (setq python-mode-hook nil)
 
+;;
+;; pip install -r requirements.txt
 
 ;; jedi suite
 (wttr/plugin:prepend-to-load-path "jedi-suite/ctable")
@@ -22,6 +24,7 @@
 (wttr/plugin:prepend-to-load-path "jedi-suite/deferred")
 (wttr/plugin:prepend-to-load-path "jedi-suite/jedi")
 (setq jedi:setup-keys t)
+(setq jedi:complete-on-dot t)
 
 (autoload 'jedi:setup "jedi" nil t)
 (add-hook 'python-mode-hook
