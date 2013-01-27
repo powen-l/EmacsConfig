@@ -51,5 +51,15 @@
        (concat "/k cd /d" (file-name-directory file))))))
 (global-set-key (kbd "<C-f6>") 'w32-open-shell-from-current-file-directory)
 
+(defun wttr/w32:copy-current-file-name (&optional prefix)
+  (interactive "p")
+  (cond
+   ((equal prefix 1)
+    (kill-new (buffer-name)))
+   ((equal prefix 4)
+    (kill-new (or (buffer-file-name)
+                  (buffer-name))))))
+(global-set-key (kbd "<M-f5>") 'wttr/w32:copy-current-file-name)
+
 
 (provide 'wttr-key)
