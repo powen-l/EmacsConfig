@@ -83,6 +83,11 @@
 
 ;; setup up a big kill-ring, so i will never miss anything:-)
 (setq kill-ring-max 100)
+;; we need to paste something from another program, but sometimes we
+;; do real paste after some kill action, that will erase the
+;; clipboard,so we need to save it to kill ring, here is the setting
+;; used to control that
+(setq save-interprogram-paste-before-kill t)
 
 ;; set default mode to text-mode, seems useless.
 ;(setq-default major-mode 'text-mode)

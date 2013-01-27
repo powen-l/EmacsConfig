@@ -48,7 +48,7 @@
 ;; some auto load
 (autoload 'dired-jump "dired" "dired-jump" t)
 (autoload 'dired-jump-other-window "dired" "dired-jump" t)
-;; add "SPC" sub map
+;; add ";" sub map
 (define-prefix-command 'wttr/my-evil-normal-map)
 (define-key evil-normal-state-map (kbd ";") 'wttr/my-evil-normal-map)
 (mapc (lambda (info)
@@ -80,10 +80,12 @@
       ))
 
 (define-key evil-normal-state-map (kbd "SPC") 'ace-jump-mode)
+;; opposite to C-o : evil-jump-backward
 (define-key evil-normal-state-map (kbd "TAB") 'evil-jump-forward)
+;; opposite to u : undo-tree-undo
+(define-key evil-normal-state-map (kbd "C-r") 'undo-tree-redo)
 
 ;; replace the <c-e> to move-end-of-line
-;(substitute-key-definition 'evil-copy-from-below 'move-end-of-line evil-insert-state-map)
 (define-key evil-insert-state-map (kbd "C-e") 'move-end-of-line)
 
 ;; we do not need c-n and c-p to evil-complete
@@ -92,17 +94,21 @@
 
 ;; recover the c-k, do not trigger special char input as vim
 (define-key evil-insert-state-map (kbd "C-k") 'kill-line)
+;; recover the c-y, yank
+(define-key evil-insert-state-map (kbd "C-y") 'yank)
 
 
 
 ;; some mode that should use emacs state
-(add-to-list 'evil-emacs-state-modes 'dired-mode)
-(add-to-list 'evil-emacs-state-modes 'eassist-mode)
-(add-to-list 'evil-emacs-state-modes 'gtags-select-mode)
-(add-to-list 'evil-emacs-state-modes 'magit-status-mode)
-(add-to-list 'evil-emacs-state-modes 'magit-log-mode)
-(add-to-list 'evil-emacs-state-modes 'magit-commit-mode)
-(add-to-list 'evil-emacs-state-modes 'magit-diff-mode)
+(dolist (mode '(dired-mode
+                eassist-mode
+                gtags-select-mode
+                magit-status-mode
+                magit-log-mode
+                magit-commit-mode
+                magit-diff-mode))
+  (add-to-list 'evil-emacs-state-modes mode))
+
 
 ;evil-insert-state-map [Variable]
 ;The global keymap for Insert state.
