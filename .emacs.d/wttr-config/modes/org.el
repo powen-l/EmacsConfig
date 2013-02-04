@@ -26,6 +26,7 @@
 
 
 (defun wttr/org-mode-setup ()
+  (linum-mode -1)
   (define-key org-mode-map (kbd "C-c i") #'(lambda ()
                                              (interactive)
                                              (org-time-stamp 4))))

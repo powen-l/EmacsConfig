@@ -4,6 +4,35 @@
 (eval-when-compile
   (require 'cl))
 
+(require 'which-func)
+(which-function-mode 1)
+(defface which-func
+  ;; Whether `font-lock-function-name-face' is an appropriate face to
+  ;; inherit depends on the mode-line face; define several variants based
+  ;; on the default mode-line face.
+  '(;; The default mode-line face on a high-color display is a relatively
+    ;; light color ("grey75"), and only the light-background variant of
+    ;; `font-lock-function-name-face' is visible against it.
+    (((class color) (min-colors 88) (background light))
+     :inherit font-lock-function-name-face)
+    ;; The default mode-line face on other display types is inverse-video;
+    ;; it seems that only in the dark-background case is
+    ;; `font-lock-function-name-face' visible against it.
+    (((class grayscale mono) (background dark))
+     :inherit font-lock-function-name-face)
+    (((class color) (background light))
+     :inherit font-lock-function-name-face)
+    ;; If none of the above cases, use an explicit color chosen to contrast
+    ;; well with the default mode-line face.
+    (((class color) (min-colors 88) (background dark))
+     :foreground "moccasin")
+    (((background dark))
+     :foreground "Blue1")
+    (t
+     :foreground "LightSkyBlue"))
+  "Face used to highlight mode line function names."
+  :group 'which-func)
+
 (defun wttr/mode-line:current-height ()
   "Return the mode line height of the current window.
 NOTE: this function should be used after you apply any font settings.
@@ -206,6 +235,7 @@ and BG-COLOR to be the background color"
                mode-line-position
                '(vc-mode vc-mode)
                mode-line-modes
+               '(which-func-mode which-func-format)
                ;("" viper-mode-string)    ;global-mode-string contains it
                global-mode-string
                ;("[" default-directory "]")
