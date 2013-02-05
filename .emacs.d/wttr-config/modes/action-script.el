@@ -8,12 +8,13 @@
   ` (
     ("variables"
      ,(concat
-       "^"                                 ; line MUST start with word char
+        "^"                                 ; line MUST start with word char
         "[ \t]*\\(public\\|protected\\|mx_internal\\|private\\)"
+        "[ \t]*\\(static\\)?"
         "[ \t]+var"
         "[ \t]+\\([a-zA-Z_][a-zA-Z0-9_]*\\)"     ; match function name
-        "[ \t]*:\\([a-zA-Z_][a-zA-Z0-9_]*\\)"
-        ) 2)
+        "[ \t]*:\[ \t]*\\([a-zA-Z_][a-zA-Z0-9_]*\\)"
+        ) 3)
     ;; Getters
     ("Getters"
      ,(concat
@@ -39,20 +40,21 @@
        ) 3)
 
     ;; Class definitions
-    (nil 
+    ("class" 
      ,(concat
-         "^"                                  ; beginning of line is required
+         "^"                           ; beginning of line is required
          "\\(\\(public\\|protected\\|mx_internal\\|private\\)[ \t]+\\)?"
          "\\(class\\|interface\\)[ \t]+"
-         "\\("                                ; the string we want to get
-         "[a-zA-Z0-9_]+"                      ; class name
+         "\\([a-zA-Z0-9_\\]+\\.\\)*" ; maybe the class name has prefix
+         "\\("                       ; the string we want to get
+         "[a-zA-Z0-9_]+"             ; class name
          "\\)"
          "[ \t\n]*"
          "\\(extends [ \t\n]*[a-zA-Z0-9_]+\\)?"
          "[ \t\n]*";;[:{]"
          "\\(implements [ \t\n]*\\([a-zA-Z0-9_]+[,][ \t\n]*\\)*[a-zA-Z0-9_]\\)?"
          "[ \t\n]*";;[:{]"
-         ) 4)
+         ) 5)
 
     ;; General function name regexp
     (nil
