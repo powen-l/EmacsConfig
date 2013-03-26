@@ -5,29 +5,57 @@
 ;;   emacs -Q -l cedet-build.el -f cedet-build
 
 ;; Don't need to call these explicitly, cedet.el will handle all
-;(wttr/plugin:prepend-to-load-path "cedet/common")
-;(wttr/plugin:prepend-to-load-path "cedet/eieio")
-;(wttr/plugin:prepend-to-load-path "cedet/semantic")
-;(wttr/plugin:prepend-to-load-path "cedet/speedbar")
-;(require 'cedet)
-(load (wttr/plugin:expand-file-name "cedet/common/cedet.el"))
+(require 'cedet)
+(require 'cedet-global)
+(add-to-list 'semantic-default-submodes 'global-semanticdb-minor-mode)
+(add-to-list 'semantic-default-submodes 'global-semantic-mru-bookmark-mode)
+(add-to-list 'semantic-default-submodes 'global-semantic-idle-scheduler-mode)
+(add-to-list 'semantic-default-submodes 'global-semantic-highlight-func-mode)
+
+;; Activate semantic
+(semantic-mode 1)
 
 
-;; use gnu global for semantic
-(require 'semanticdb-global)
-(semanticdb-enable-gnu-global-databases 'c-mode)
-(semanticdb-enable-gnu-global-databases 'c++-mode)
-(semantic-load-enable-primary-exuberent-ctags-support)
+(require 'semantic/bovine/c)
+(require 'semantic/bovine/el)
+(require 'semantic/ia)
 
-;; which mode is prefer? min -> max
-;(semantic-load-enable-minimum-features)
-(semantic-load-enable-code-helpers)
-;(semantic-load-enable-gaudy-code-helpers)
-;(semantic-load-enable-excessive-code-helpers)
-;(semantic-load-enable-semantic-debugging-helpers)
+(require 'cedet-files)
+
+(defun wttr/cedet:init ()
+  (local-set-key [(control return)] 'semantic-ia-complete-symbol-menu)
+  (local-set-key "\C-c?" 'semantic-ia-complete-symbol)
+  (local-set-key "\C-c=" 'semantic-decoration-include-visit)
+
+  (local-set-key "\C-cj" 'semantic-ia-fast-jump)
+  (local-set-key "\C-cq" 'semantic-ia-show-doc)
+  (local-set-key "\C-cs" 'semantic-ia-show-summary)
+  (local-set-key "\C-cp" 'semantic-analyze-proto-impl-toggle)
+
+  (add-to-list 'ac-sources 'ac-source-semantic)
+
+  )
+
+
+(add-hook 'c-mode-common-hook 'wttr/cedet:init)
+(add-hook 'actionscript-mode-hook 'wttr/cedet:init)
+(add-hook 'lisp-mode-hook 'wttr/cedet:init)
+(add-hook 'emacs-lisp-mode-hook 'wttr/cedet:init)
+
+
+(when (cedet-gnu-global-version-check t)
+  (semanticdb-enable-gnu-global-databases 'c-mode t)
+  (semanticdb-enable-gnu-global-databases 'c++mode t))
+
+
+(require 'srecode/mode)
+(global-srecode-minor-mode 1)
 
 ;; Enable EDE(Emacs Develpment Enviroment) mode
 (global-ede-mode t)
+(ede-enable-generic-projects)
+
+
 
 ;;; EDE example
 ;(ede-cpp-root-project "CedetTest"
@@ -45,7 +73,7 @@
 
 
 ;; the function can be folded
-(global-semantic-tag-folding-mode 1)
+;(global-semantic-tag-folding-mode 1)
 
 
 ;; 
@@ -74,59 +102,6 @@
 ;          (semantic-add-system-include x 'c-mode))
 ;        c++-include-path-list))
 ;; 
-;; 
-;; 
-;; (setq-mode-local c-mode semanticdb-find-default-throttle
-;;                  '(project unloaded system recursive))
-;; (setq-mode-local c++-mode semanticdb-find-default-throttle
-;;                  '(project unloaded system recursive))
-;; 
-;; (require 'eassist)
-;; 
-;; 
-;; (require 'semanticdb-global)
-;; (semanticdb-enable-gnu-global-databases 'c-mode)
-;; (semanticdb-enable-gnu-global-databases 'c++-mode)
-;; (semantic-load-enable-primary-exuberent-ctags-support)
-;; 
-;; 
-;(defun wttr/cedet-hook ()
-;  (local-set-key [(control return)] 'semantic-ia-complete-symbol-menu)
-;  (local-set-key "\C-c?" 'semantic-ia-complete-symbol)
-;  ;;
-;  (local-set-key "\C-c>" 'semantic-complete-analyze-inline)
-;  (local-set-key "\C-c=" 'semantic-decoration-include-visit)
-;
-;  (local-set-key "\C-cj" 'semantic-ia-fast-jump)
-;  (local-set-key "\C-cq" 'semantic-ia-show-doc)
-;  (local-set-key "\C-cs" 'semantic-ia-show-summary)
-;  (local-set-key "\C-cp" 'semantic-analyze-proto-impl-toggle))
-;
-;(add-hook 'c-mode-common-hook 'wttr/cedet-hook)
-;(add-hook 'c++-mode-hook 'wttr/cedet-hook)
-;(add-hook 'emacs-lisp-mode-hook 'wttr/cedet-hook)
-;(add-hook 'lisp-mode-hook 'wttr/cedet-hook)
-;; 
-;; 
-;(defun wttr/c-mode-cedet-hook ()
-;  ;(local-set-key "." 'semantic-complete-self-insert)
-;  ;(local-set-key ">" 'semantic-complete-self-insert)
-;  (local-set-key "\C-ct" 'eassist-switch-h-cpp)
-;  (local-set-key "\C-xt" 'eassist-switch-h-cpp)
-;  (local-set-key "\C-ce" 'eassist-list-methods)
-;  (local-set-key "\C-c\C-r" 'semantic-symref))
-;
-;(add-hook 'c-mode-common-hook 'wttr/c-mode-cedet-hook)
-;(add-hook 'c++-mode-hook 'wttr/c-mode-cedet-hook)
-;
-;;; Always use C++ mode for file
-;(add-to-list 'auto-mode-alist '("\\.[hc]$" . c++-mode))
-;; 
-;; 
-;; (require 'semantic-lex-spp)
-;; (ede-enable-generic-projects)
-;
-;
 ;;;Getting information about tags
 ;
 ;;;The semantic-ia package implements several commands, that allows to
@@ -154,65 +129,66 @@
 ;;semantic-ia-fast-jump
 ;;semantic-mrub-switch-tag
 ;
+
 ;
 ;; ============================
 ;;         ecb mode
 ;; ============================
-(wttr/plugin:prepend-to-load-path "ecb-2.40")
-(require 'ecb-autoloads)
+;(wttr/plugin:prepend-to-load-path "ecb")
+;; (require 'ecb)
 
-;;error reports if i do not set this var
-(setq stack-trace-on-error t)           
-;;disable tips, kinda noisy
-(setq ecb-tip-of-the-day nil)
-;;use 'image style, i like this than 'ascii-guide
-(setq ecb-tree-buffer-style 'image)
-;;do not remove record in history when kill-buffer
-(setq ecb-kill-buffer-clears-history nil)
-;;bucket the history by major-mode
-(setq ecb-history-make-buckets 'mode)
-;use manually update, c-c . r
-;(setq ecb-analyse-buffer-sync nil)
-;; start ecb in a new frame
-(setq ecb-new-ecb-frame nil)
-;; use mouse 1 instead of mouse 2
-(setq ecb-primary-secondary-mouse-buttons 'mouse-1--C-mouse-1)
-;; compile window
-;(setq ecb-compile-window-height nil)
-;; whether show file in directory-buffer
-;(setq ecb-show-sources-in-directories-buffer 'always)
-(setq ecb-show-sources-in-directories-buffer
-      (list "left7" "left13" "left14" "left15"))
+;; ;;error reports if i do not set this var
+;; (setq stack-trace-on-error t)           
+;; ;;disable tips, kinda noisy
+;; (setq ecb-tip-of-the-day nil)
+;; ;;use 'image style, i like this than 'ascii-guide
+;; (setq ecb-tree-buffer-style 'image)
+;; ;;do not remove record in history when kill-buffer
+;; (setq ecb-kill-buffer-clears-history nil)
+;; ;;bucket the history by major-mode
+;; (setq ecb-history-make-buckets 'mode)
+;; ;use manually update, c-c . r
+;; ;(setq ecb-analyse-buffer-sync nil)
+;; ;; start ecb in a new frame
+;; (setq ecb-new-ecb-frame nil)
+;; ;; use mouse 1 instead of mouse 2
+;; (setq ecb-primary-secondary-mouse-buttons 'mouse-1--C-mouse-1)
+;; ;; compile window
+;; ;(setq ecb-compile-window-height nil)
+;; ;; whether show file in directory-buffer
+;; ;(setq ecb-show-sources-in-directories-buffer 'always)
+;; (setq ecb-show-sources-in-directories-buffer
+;;       (list "left7" "left13" "left14" "left15"))
 
 
-(defun wttr/ecb:smart-switch-layout (layout-name)
-  "If the layout name is not current layout, open/swtich to it.
-Other close current ecb layout."
-  (if (and (boundp 'ecb-minor-mode) ecb-minor-mode)
-      (if (string-equal ecb-layout-name layout-name)
-          (ecb-deactivate)
-        (ecb-layout-switch layout-name))
-    (progn
-      (setq ecb-layout-name layout-name)
-      (ecb-activate))))
+;; (defun wttr/ecb:smart-switch-layout (layout-name)
+;;   "If the layout name is not current layout, open/swtich to it.
+;; Other close current ecb layout."
+;;   (if (and (boundp 'ecb-minor-mode) ecb-minor-mode)
+;;       (if (string-equal ecb-layout-name layout-name)
+;;           (ecb-deactivate)
+;;         (ecb-layout-switch layout-name))
+;;     (progn
+;;       (setq ecb-layout-name layout-name)
+;;       (ecb-activate))))
 
-(defun wttr/ecb:left-method-layout ()
-  (interactive)
-  (wttr/ecb:smart-switch-layout "left9"))
+;; (defun wttr/ecb:left-method-layout ()
+;;   (interactive)
+;;   (wttr/ecb:smart-switch-layout "left9"))
   
 
-(defun wttr/ecb:left-directory-layout ()
-  (interactive)
-  (wttr/ecb:smart-switch-layout "left13"))
+;; (defun wttr/ecb:left-directory-layout ()
+;;   (interactive)
+;;   (wttr/ecb:smart-switch-layout "left13"))
 
     
-(defun wttr/ecb:left-directory-method-layout ()
-  "Open left directory window, default to left15 layout"
-  (interactive)
-  (wttr/ecb:smart-switch-layout "left15"))
+;; (defun wttr/ecb:left-directory-method-layout ()
+;;   "Open left directory window, default to left15 layout"
+;;   (interactive)
+;;   (wttr/ecb:smart-switch-layout "left15"))
 
-(global-set-key (kbd "<f11>") 'wttr/ecb:left-directory-layout)
-(global-set-key (kbd "<f12>") 'wttr/ecb:left-method-layout)
+;; (global-set-key (kbd "<f11>") 'wttr/ecb:left-directory-layout)
+;; (global-set-key (kbd "<f12>") 'wttr/ecb:left-method-layout)
 
 
 
