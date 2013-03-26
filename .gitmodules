@@ -21,49 +21,26 @@
 	path = .emacs.d/plugins/smex
 	url = https://github.com/nonsequitur/smex.git
 [submodule ".emacs.d/plugins/actionscript-mode"]
-
 	path = .emacs.d/plugins/actionscript-mode
-
 	url = https://github.com/austinhaas/actionscript-mode.git
-
 [submodule ".emacs.d/plugins/org-mode"]
-
 	path = .emacs.d/plugins/org-mode
-
 	url = git://orgmode.org/org-mode.git
-
 [submodule ".emacs.d/plugins/yasnippet"]
-
 	path = .emacs.d/plugins/yasnippet
-
 	url = https://github.com/capitaomorte/yasnippet.git
-
 [submodule ".emacs.d/plugins/multiple-cursors"]
-
 	path = .emacs.d/plugins/multiple-cursors
-
 	url = https://github.com/magnars/multiple-cursors.el.git
-
 [submodule ".emacs.d/plugins/jedi-suite/deferred"]
-
 	path = .emacs.d/plugins/jedi-suite/deferred
-
 	url = https://github.com/kiwanami/emacs-deferred.git
-
 [submodule ".emacs.d/plugins/jedi-suite/epc"]
-
 	path = .emacs.d/plugins/jedi-suite/epc
-
 	url = https://github.com/kiwanami/emacs-epc.git
-
 [submodule ".emacs.d/plugins/jedi-suite/jedi"]
-
 	path = .emacs.d/plugins/jedi-suite/jedi
-
 	url = https://github.com/tkf/emacs-jedi.git
-
 [submodule ".emacs.d/plugins/jedi-suite/ctable"]
-
 	path = .emacs.d/plugins/jedi-suite/ctable
-
 	url = https://github.com/kiwanami/emacs-ctable.git
