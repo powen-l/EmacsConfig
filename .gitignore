@@ -10,6 +10,9 @@
 /.emacs.d/eshell/lastdir
 /.emacs.d/.emacs-places
 /.emacs.d/history
+/.emacs.d/ede-projects.el
+/.emacs.d/semanticdb
+/.emacs.d/srecode-map.el
 /.ido.last
 /.slime-history.eld
 /.eshell/

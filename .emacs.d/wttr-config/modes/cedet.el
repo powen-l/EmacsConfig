@@ -4,23 +4,24 @@
 ;; compile command:
 ;;   emacs -Q -l cedet-build.el -f cedet-build
 
-;; Don't need to call these explicitly, cedet.el will handle all
 (require 'cedet)
-(require 'cedet-global)
 (add-to-list 'semantic-default-submodes 'global-semanticdb-minor-mode)
 (add-to-list 'semantic-default-submodes 'global-semantic-mru-bookmark-mode)
 (add-to-list 'semantic-default-submodes 'global-semantic-idle-scheduler-mode)
 (add-to-list 'semantic-default-submodes 'global-semantic-highlight-func-mode)
+(add-to-list 'semantic-default-submodes 'global-semantic-decoration-mode)
+(add-to-list 'semantic-default-submodes 'global-semantic-idle-local-symbol-highlight-mode)
+
 
 ;; Activate semantic
+(require 'semantic)
 (semantic-mode 1)
 
 
+(require 'semantic/ia)
 (require 'semantic/bovine/c)
 (require 'semantic/bovine/el)
-(require 'semantic/ia)
 
-(require 'cedet-files)
 
 (defun wttr/cedet:init ()
   (local-set-key [(control return)] 'semantic-ia-complete-symbol-menu)
@@ -43,6 +44,7 @@
 (add-hook 'emacs-lisp-mode-hook 'wttr/cedet:init)
 
 
+(require 'cedet-global)
 (when (cedet-gnu-global-version-check t)
   (semanticdb-enable-gnu-global-databases 'c-mode t)
   (semanticdb-enable-gnu-global-databases 'c++mode t))
