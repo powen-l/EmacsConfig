@@ -88,6 +88,7 @@
 ;; clipboard,so we need to save it to kill ring, here is the setting
 ;; used to control that
 (setq save-interprogram-paste-before-kill t)
+(setq x-select-enable-clipboard t)
 
 ;; set default mode to text-mode, seems useless.
 ;(setq-default major-mode 'text-mode)
