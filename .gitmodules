@@ -53,3 +53,6 @@
 [submodule ".emacs.d/plugins/auto-complete-suite/fuzzy-el"]
 	path = .emacs.d/plugins/auto-complete-suite/fuzzy-el
 	url = https://github.com/auto-complete/fuzzy-el
+[submodule ".emacs.d/plugins/nyan-mode"]
+	path = .emacs.d/plugins/nyan-mode
+	url = https://github.com/TeMPOraL/nyan-mode.git
