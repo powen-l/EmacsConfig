@@ -53,12 +53,14 @@
 
 (defun wttr/w32:copy-current-file-name (&optional prefix)
   (interactive "p")
-  (cond
-   ((equal prefix 1)
-    (kill-new (buffer-name)))
-   ((equal prefix 4)
-    (kill-new (or (buffer-file-name)
-                  (buffer-name))))))
+  (let ((bn (cond
+             ((equal prefix 1) (buffer-name))
+             ((equal prefix 4) (or (buffer-file-name) (buffer-name)))
+             ((equal prefix 16) (if (buffer-file-name)
+                                    (file-name-directory (buffer-file-name))
+                                  default-directory)))))
+    (kill-new bn)
+    (message "Buffer name copied: %s" bn)))
 (global-set-key (kbd "<M-f5>") 'wttr/w32:copy-current-file-name)
 
 

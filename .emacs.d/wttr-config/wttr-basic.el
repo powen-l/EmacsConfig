@@ -55,6 +55,7 @@
 ;===================================
 ;; don't ring at error
 (setq ring-bell-function 'ignore)
+(setq visible-bell 'top-bottom)
 
 ;; can use the narrow to region
 (put 'narrow-to-region 'disabled nil)

@@ -78,3 +78,9 @@
 ;; export settings
 ;;;; prevent the _ to become a sub title
 (setq org-export-with-sub-superscripts nil)
+
+
+;; Mobile org
+(setq org-directory "E:/Dropbox/Material/Org")
+(setq org-mobile-inbox-for-pull "E:/Dropbox/Material/Org/flagged.org")
+(setq org-mobile-directory "E:/Dropbox/Apps/MobileOrg")
