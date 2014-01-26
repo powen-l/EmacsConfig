@@ -77,6 +77,8 @@
         ("J" . dired-jump-other-window )
         ("i" . ispell-buffer)
         ("m" . magit-status)
+        ("c" . codesearch-search)
+        ("x" . codesearch-search-at-point)
       ))
 
 (define-key evil-normal-state-map (kbd "SPC") 'ace-jump-mode)
