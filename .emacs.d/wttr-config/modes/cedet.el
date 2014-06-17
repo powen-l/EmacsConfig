@@ -5,9 +5,9 @@
 ;;   emacs -Q -l cedet-build.el -f cedet-build
 
 (require 'cedet)
-(add-to-list 'semantic-default-submodes 'global-semanticdb-minor-mode)
-(add-to-list 'semantic-default-submodes 'global-semantic-mru-bookmark-mode)
-(add-to-list 'semantic-default-submodes 'global-semantic-idle-scheduler-mode)
+;; (add-to-list 'semantic-default-submodes 'global-semanticdb-minor-mode)
+;; (add-to-list 'semantic-default-submodes 'global-semantic-mru-bookmark-mode)
+;; (add-to-list 'semantic-default-submodes 'global-semantic-idle-scheduler-mode)
 (add-to-list 'semantic-default-submodes 'global-semantic-highlight-func-mode)
 (add-to-list 'semantic-default-submodes 'global-semantic-decoration-mode)
 (add-to-list 'semantic-default-submodes 'global-semantic-idle-local-symbol-highlight-mode)
@@ -33,7 +33,7 @@
   (local-set-key "\C-cs" 'semantic-ia-show-summary)
   (local-set-key "\C-cp" 'semantic-analyze-proto-impl-toggle)
 
-  (add-to-list 'ac-sources 'ac-source-semantic)
+  ;; (add-to-list 'ac-sources 'ac-source-semantic)
 
   )
 
@@ -44,18 +44,18 @@
 (add-hook 'emacs-lisp-mode-hook 'wttr/cedet:init)
 
 
-(require 'cedet-global)
-(when (cedet-gnu-global-version-check t)
-  (semanticdb-enable-gnu-global-databases 'c-mode t)
-  (semanticdb-enable-gnu-global-databases 'c++mode t))
+;; (require 'cedet-global)
+;; (when (cedet-gnu-global-version-check t)
+;;   (semanticdb-enable-gnu-global-databases 'c-mode t)
+;;   (semanticdb-enable-gnu-global-databases 'c++mode t))
 
 
-(require 'srecode/mode)
-(global-srecode-minor-mode 1)
+;; (require 'srecode/mode)
+;; (global-srecode-minor-mode 1)
 
 ;; Enable EDE(Emacs Develpment Enviroment) mode
-(global-ede-mode t)
-(ede-enable-generic-projects)
+;; (global-ede-mode t)
+;; (ede-enable-generic-projects)
 
 
 

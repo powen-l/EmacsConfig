@@ -37,10 +37,14 @@
 (ac-set-trigger-key "<C-return>")
 
 ;; make del also trigger the ac
-(setq ac-trigger-commands (cons 'backward-delete-char-untabify ac-trigger-commands))
+; (setq ac-trigger-commands (cons 'backward-delete-char-untabify ac-trigger-commands))
 
 ;; use fuzzy mode, its interesting
 (setq ac-fuzzy-enable t)
+
+
+;; by default we use 3 to start ac
+(setq ac-auto-start 3)
 
 ;; auto complete clang
 (if wttr/os:windowsp 
@@ -52,8 +56,8 @@
   (make-local-variable 'ac-auto-start)
   (setq ac-auto-start nil)              ;auto complete using clang is CPU sensitive
   (setq ac-sources (append '(ac-source-yasnippet ac-source-clang) ac-sources)))
-(add-hook 'c-mode-hook 'wttr/cc-mode:auto-complete-setup)
-(add-hook 'c++-mode-hook 'wttr/cc-mode:auto-complete-setup)
+;; (add-hook 'c-mode-hook 'wttr/cc-mode:auto-complete-setup)
+;; (add-hook 'c++-mode-hook 'wttr/cc-mode:auto-complete-setup)
 
 ;; system specific setting
 (let ((extra-clang-flags (cond
