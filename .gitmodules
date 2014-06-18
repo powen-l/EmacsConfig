@@ -14,9 +14,6 @@
 [submodule ".emacs.d/plugins/auto-complete-suite/auto-complete-clang"]
 	path = .emacs.d/plugins/auto-complete-suite/auto-complete-clang
 	url = https://github.com/brianjcj/auto-complete-clang.git
-[submodule ".emacs.d/plugins/magit"]
-	path = .emacs.d/plugins/magit
-	url = https://github.com/magit/magit.git
 [submodule ".emacs.d/plugins/smex"]
 	path = .emacs.d/plugins/smex
 	url = https://github.com/nonsequitur/smex.git
@@ -59,3 +56,12 @@
 [submodule ".emacs.d/plugins/codesearch"]
 	path = .emacs.d/plugins/codesearch
 	url = https://github.com/abingham/codesearch.el
+[submodule ".emacs.d/plugins/dash"]
+	path = .emacs.d/plugins/dash
+	url = https://github.com/magnars/dash.el.git
+[submodule ".emacs.d/plugins/magit-suite/git-modes"]
+	path = .emacs.d/plugins/magit-suite/git-modes
+	url = https://github.com/magit/git-modes
+[submodule ".emacs.d/plugins/magit-suite/magit"]
+	path = .emacs.d/plugins/magit-suite/magit
+	url = https://github.com/magit/magit.git

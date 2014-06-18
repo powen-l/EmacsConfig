@@ -2,6 +2,7 @@
 
 ;; wrap-region
 (wttr/plugin:prepend-to-load-path "wrap-region")
+(wttr/plugin:prepend-to-load-path "dash")
 (require 'wrap-region)
 (wrap-region-global-mode t)
 ; (wrap-region-add-wrappers

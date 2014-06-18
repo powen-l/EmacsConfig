@@ -60,22 +60,22 @@
 ;; (add-hook 'c++-mode-hook 'wttr/cc-mode:auto-complete-setup)
 
 ;; system specific setting
-(let ((extra-clang-flags (cond
-                          (wttr/host:MSWSp
-                           (list "-IC:/MinGW/include"
-                                 "-IC:/MinGW/lib/gcc/mingw32/4.6.1/include"
-                                 "-IC:/MinGW/lib/gcc/mingw32/4.6.1/include/c++"
-                                 "-IC:/MinGW/lib/gcc/mingw32/4.6.1/include/c++/mingw32"
-                                 "-D__MSVCRT__="))
-                          (wttr/host:HOMEp
-                           (list "-IC:/MinGW/include"
-                                 "-IC:/MinGW/include/c++/3.4.5"
-                                 "-IC:/MinGW/lib/gcc/mingw32/3.4.5/include"
-                                 "-IC:/MinGW/include/c++/3.4.5/mingw32"
-                                 "-D__MSVCRT__"))
-                          (t
-                           nil))))
-  (setq ac-clang-flags extra-clang-flags))
+;(let ((extra-clang-flags (cond
+;                          (wttr/host:MSWSp
+;                           (list "-IC:/MinGW/include"
+;                                 "-IC:/MinGW/lib/gcc/mingw32/4.6.1/include"
+;                                 "-IC:/MinGW/lib/gcc/mingw32/4.6.1/include/c++"
+;                                 "-IC:/MinGW/lib/gcc/mingw32/4.6.1/include/c++/mingw32"
+;                                 "-D__MSVCRT__="))
+;                          (wttr/host:HOMEp
+;                           (list "-IC:/MinGW/include"
+;                                 "-IC:/MinGW/include/c++/3.4.5"
+;                                 "-IC:/MinGW/lib/gcc/mingw32/3.4.5/include"
+;                                 "-IC:/MinGW/include/c++/3.4.5/mingw32"
+;                                 "-D__MSVCRT__"))
+;                          (t
+;                           nil))))
+;  (setq ac-clang-flags extra-clang-flags))
 ;(when (string-equal (system-name) "WINTERTTR-WS")
 ;  (setq ac-clang-flags (mapcar (lambda (x) (concat "-I" x)) 
 ;                               (list "D:/src/zephyr/perf/OTHERS/STDCPP/INCLUDE"
