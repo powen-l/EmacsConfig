@@ -11,6 +11,8 @@
 ;; some useful key binding
 (global-set-key (kbd "M-1") 'delete-other-windows)
 (global-set-key (kbd "M-0") 'delete-window)
+(global-set-key (kbd "M-w") 'clipboard-kill-ring-save)
+(global-set-key (kbd "<S-insert>") 'clipboard-yank)
 
 ;; quick open internal shell
 (defun kid-switch-to-shell ()

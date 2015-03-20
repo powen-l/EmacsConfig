@@ -16,4 +16,4 @@
 ;; (require 'tramp)
 (when wttr/os:windowsp
   (wttr/prepend-to-exec-path "~/.emacs.d/extra-bin/PuTTY")
-  (setq default-tramp-method "plink"))
+  (setq tramp-default-method "plink"))
