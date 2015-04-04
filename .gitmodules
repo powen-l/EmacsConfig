@@ -22,7 +22,7 @@
 	url = https://github.com/austinhaas/actionscript-mode.git
 [submodule ".emacs.d/plugins/org-mode"]
 	path = .emacs.d/plugins/org-mode
-	url = https://orgmode.org/org-mode.git
+	url = git://orgmode.org/org-mode.git
 [submodule ".emacs.d/plugins/yasnippet"]
 	path = .emacs.d/plugins/yasnippet
 	url = https://github.com/capitaomorte/yasnippet.git
