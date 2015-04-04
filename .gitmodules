@@ -4,7 +4,7 @@
 	pushurl = git@github.com:winterTTr/ace-jump-mode.git
 [submodule ".emacs.d/plugins/evil"]
 	path = .emacs.d/plugins/evil
-	url = git://gitorious.org/evil/evil.git
+	url = https://gitorious.org/evil/evil.git
 [submodule ".emacs.d/plugins/expand-region"]
 	path = .emacs.d/plugins/expand-region
 	url = https://github.com/magnars/expand-region.el.git
@@ -22,7 +22,7 @@
 	url = https://github.com/austinhaas/actionscript-mode.git
 [submodule ".emacs.d/plugins/org-mode"]
 	path = .emacs.d/plugins/org-mode
-	url = git://orgmode.org/org-mode.git
+	url = https://orgmode.org/org-mode.git
 [submodule ".emacs.d/plugins/yasnippet"]
 	path = .emacs.d/plugins/yasnippet
 	url = https://github.com/capitaomorte/yasnippet.git
